@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
-    interface test
+    internal class Administrator : User 
     {
+        public override User Login(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
