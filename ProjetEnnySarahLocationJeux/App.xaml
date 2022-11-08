@@ -29,5 +29,10 @@
             <Setter Property="Background" Value="{StaticResource mediumColor}"/>
             <Setter Property="Button.Content" Value="Black"/>
         </Style>
+        <Style TargetType="TextBlock" x:Key="hyperlink">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="LightBlue"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
     </Application.Resources>
 </Application>

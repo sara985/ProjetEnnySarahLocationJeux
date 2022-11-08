@@ -24,6 +24,6 @@
         <PasswordBox x:Name="passwordBox" Grid.Row="4" Width="200"/>
         <Button x:Name="logInBtn" Grid.Row="5" Width="200" Click="logInClick" Content="Log In" Style="{StaticResource firstBtnType}" Height="30" VerticalAlignment="Bottom"></Button>
         <TextBlock Grid.Row="6" Width="200">No Account Yet ?</TextBlock>
-        <TextBlock Grid.Row="6" Width="200" Margin="220 0 0 0">Sign up</TextBlock>
+        <TextBlock Grid.Row="6" Width="200" Margin="220 0 0 0" Style="{StaticResource hyperlink}">Sign up</TextBlock>
     </Grid>
 </Window>
