@@ -24,5 +24,10 @@ namespace ProjetEnnySarahLocationJeux
         {
             InitializeComponent();
         }
+
+        private void logInClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

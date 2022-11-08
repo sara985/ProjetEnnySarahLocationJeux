@@ -4,6 +4,30 @@
              xmlns:local="clr-namespace:ProjetEnnySarahLocationJeux"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="clrPrimary" Color="#5f5bcc"/>
+        <SolidColorBrush x:Key="clrLight">#ffffff</SolidColorBrush>
+        <SolidColorBrush x:Key="mediumColor">#0a95ff</SolidColorBrush>
+        <Style TargetType="TextBlock" x:Key="Header">
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+        <Style TargetType="Window" x:Key="win">
+            <Setter Property="Background" Value="{StaticResource clrPrimary}"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Title">
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="{StaticResource clrPrimary}"/>
+        </Style>
+        <Style TargetType="Button" x:Key="firstBtnType">
+            <Setter Property="Background" Value="{StaticResource mediumColor}"/>
+            <Setter Property="Button.Content" Value="Black"/>
+        </Style>
     </Application.Resources>
 </Application>
