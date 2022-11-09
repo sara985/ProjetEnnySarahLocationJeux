@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
+    //TODO maybe add user,console and version list in VideoGame
     internal class ConsoleAndVersion
     {
         private int idConsole;
