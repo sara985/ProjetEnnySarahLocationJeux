@@ -1,5 +1,4 @@
-﻿using ProjetEnnySarahLocationJeux.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjetEnnySarahLocationJeux
+namespace ProjetEnnySarahLocationJeux.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour Login.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Login : Page
     {
-        public MainWindow()
+        public Login()
         {
             InitializeComponent();
-            MainFrame.Content = new Login();
+        }
+
+        private void logInClick(object sender, RoutedEventArgs e)
+        {
+            if (loginBox.Text.Trim() == "" || passwordBox.Password.Trim() == "")
+            {
+                MessageBox.Show("Please fill in your email and password");
+            }
         }
     }
 }

@@ -8,22 +8,6 @@
         Title="MainWindow" Height="450" Width="800"
         Style="{StaticResource win}">
     <Grid HorizontalAlignment="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="30"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Welcome to Game Switch" HorizontalAlignment="Center" Style="{StaticResource Title}" VerticalAlignment="Bottom"/>
-        <TextBlock Text="Username/Email" Grid.Row="1" Width="200"/>
-        <TextBox x:Name="loginBox" Grid.Row="2" Width="200"/>
-        <TextBlock Text="Password" Grid.Row="3" Width="200"/>
-        <PasswordBox x:Name="passwordBox" Grid.Row="4" Width="200"/>
-        <Button x:Name="logInBtn" Grid.Row="5" Width="200" Click="logInClick" Content="Log In" Style="{StaticResource firstBtnType}" Height="30" VerticalAlignment="Bottom"></Button>
-        <TextBlock Grid.Row="6" Width="200">No Account Yet ?</TextBlock>
-        <TextBlock Grid.Row="6" Width="200" Margin="220 0 0 0" Style="{StaticResource hyperlink}">Sign up</TextBlock>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

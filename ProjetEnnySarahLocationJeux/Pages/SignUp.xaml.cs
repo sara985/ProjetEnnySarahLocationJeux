@@ -1,5 +1,4 @@
-﻿using ProjetEnnySarahLocationJeux.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjetEnnySarahLocationJeux
+namespace ProjetEnnySarahLocationJeux.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour SignUp.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SignUp : Page
     {
-        public MainWindow()
+        public SignUp()
         {
             InitializeComponent();
-            MainFrame.Content = new Login();
         }
     }
 }
