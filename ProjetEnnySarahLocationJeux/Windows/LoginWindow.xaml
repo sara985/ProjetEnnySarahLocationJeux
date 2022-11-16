@@ -40,6 +40,10 @@
         <TextBlock Grid.Row="5" x:Name="errortxt" Style="{StaticResource Error}" HorizontalAlignment="Center" Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
         <Button x:Name="logInBtn" Command="{Binding LoginCommand}" Grid.Row="5" Width="200" Content="Log In" Style="{StaticResource firstBtnType}" Height="30" VerticalAlignment="Bottom"></Button>
         <TextBlock Grid.Row="6" Width="200">No Account Yet ?</TextBlock>
-        <TextBlock Grid.Row="6" Width="200" Margin="220 0 0 0" Style="{StaticResource hyperlink}">Sign up</TextBlock>
+        <TextBlock Grid.Row="6" Width="200" Margin="220 0 0 0" Style="{StaticResource hyperlink}" Text="Sign up">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding GoToSignupCommand}" MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
+        </TextBlock>
     </Grid>
 </Window>

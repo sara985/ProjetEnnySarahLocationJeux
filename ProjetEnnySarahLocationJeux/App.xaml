@@ -33,6 +33,7 @@
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="Foreground" Value="LightBlue"/>
             <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="Error">
             <Setter Property="FontSize" Value="11"/>

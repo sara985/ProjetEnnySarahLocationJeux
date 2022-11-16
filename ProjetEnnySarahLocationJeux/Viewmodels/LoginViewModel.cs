@@ -33,7 +33,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public ICommand ShowPasswordCommand { get; set; }
         public ICommand RememberPasswordCommand { get; set; }
         public ICommand RecoverPasswordCommand { get; set; }
-        
+        public ICommand GoToSignupCommand { get; set; }
+
 
         public LoginViewModel()
         {
@@ -41,6 +42,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             playerDAO = new PlayerDAO();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));
+            GoToSignupCommand = new ViewModelCommand(ExecuteGoToSignupCommand);
         }
 
         private void ExecuteRecoverPasswordCommand(string username, string email)
@@ -72,6 +74,11 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             else
                 validData = true;
             return validData;
+        }
+
+        private void ExecuteGoToSignupCommand(object obj)
+        {
+            MessageBox.Show("signup");
         }
     }
 }
