@@ -18,6 +18,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private string _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
+        private bool _goToSignup = false;
 
         private PlayerDAO playerDAO;
 
@@ -34,7 +35,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public ICommand RememberPasswordCommand { get; set; }
         public ICommand RecoverPasswordCommand { get; set; }
         public ICommand GoToSignupCommand { get; set; }
-
+        public bool GoToSignup { get => _goToSignup; set { _goToSignup = value; OnPropertyChanged("GoToSignup"); } }
 
         public LoginViewModel()
         {
@@ -78,6 +79,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void ExecuteGoToSignupCommand(object obj)
         {
+            GoToSignup = true;
+            IsViewVisible=false;
             MessageBox.Show("signup");
         }
     }
