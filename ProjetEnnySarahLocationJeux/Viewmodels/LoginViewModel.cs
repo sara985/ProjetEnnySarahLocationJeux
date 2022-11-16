@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
@@ -14,6 +16,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private string _username;
         private string _password;
         private string _errorMessage;
+
+        private PlayerDAO playerDAO;
 
         //properties
         public string Username { get => _username; set { _username = value; OnPropertyChanged("Username"); } }
@@ -29,6 +33,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public LoginViewModel()
         {
             //these methods are delegated to the command
+            playerDAO = new PlayerDAO();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));
         }
@@ -40,9 +45,16 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void ExecuteLoginCommand(object obj)
         {
-            throw new NotImplementedException();
+            var isValidUser = playerDAO.IsUser(Username, Password);
+            if (isValidUser)
+            {
+                MessageBox.Show("valid");
+            }
+            else
+            {
+                ErrorMessage = "invalidUser";
+            }
         }
-
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;

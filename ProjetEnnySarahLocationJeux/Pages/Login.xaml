@@ -29,7 +29,7 @@
         <TextBlock Text="Password" Grid.Row="3" Width="200"/>
         <!--Custom Control créé car on ne peut pas binder le password d'une passwordBox car champ sensible-->
         <customcontrols:BindablePasswordBox Grid.Row="4" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock Grid.Row="5" x:Name="errortxt" Style="{StaticResource Error}" HorizontalAlignment="Center" Text="{Binding ErrorMessage}"/>
+        <TextBlock Grid.Row="5" x:Name="errortxt" Style="{StaticResource Error}" HorizontalAlignment="Center" Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
         <Button x:Name="logInBtn" Command="{Binding LoginCommand}" Grid.Row="5" Width="200" Content="Log In" Style="{StaticResource firstBtnType}" Height="30" VerticalAlignment="Bottom"></Button>
         <TextBlock Grid.Row="6" Width="200">No Account Yet ?</TextBlock>
         <TextBlock Grid.Row="6" Width="200" Margin="220 0 0 0" Style="{StaticResource hyperlink}">Sign up</TextBlock>
