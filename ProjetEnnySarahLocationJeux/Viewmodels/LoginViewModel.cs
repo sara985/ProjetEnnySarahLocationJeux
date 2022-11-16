@@ -24,12 +24,13 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public ICommand LoginCommand { get; set; }
         public ICommand ShowPasswordCommand { get; set; }
         public ICommand RememberPasswordCommand { get; set; }
+        public ICommand RecoverPasswordCommand { get; set; }
 
         public LoginViewModel()
         {
             //these methods are delegated to the command
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            LoginCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("",""));
+            RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));
         }
 
         private void ExecuteRecoverPasswordCommand(string username, string email)
@@ -45,7 +46,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
-            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 ||
+            if (string.IsNullOrWhiteSpace(_username) || Username.Length < 3 ||
                 Password == null || Password.Length < 3)
                 validData = false;
             else
