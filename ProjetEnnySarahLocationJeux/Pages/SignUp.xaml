@@ -9,6 +9,33 @@
       Title="SignUp">
 
     <Grid>
-        <TextBlock>MUUUUUUUUUUUUUUUU</TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource Title}" Text="Sign Up" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+        
+        <StackPanel Grid.Column="0" Grid.Row="1" Width="200" HorizontalAlignment="Right">
+            <TextBlock Text="First Name"/>
+            <TextBox />
+            <TextBlock Text="Username"/>
+            <TextBox />
+            <TextBlock Text="Birth Date"/>
+            <TextBox />
+            
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Last Name"/>
+            <TextBox />
+            <TextBlock Text="Password"/>
+            <TextBox />
+            <TextBlock Text="Email"/>
+            <TextBox />
+            <Button Content="Add"/>
+        </StackPanel>
     </Grid>
 </Page>

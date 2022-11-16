@@ -24,13 +24,5 @@ namespace ProjetEnnySarahLocationJeux.Pages
         {
             InitializeComponent();
         }
-
-        private void logInClick(object sender, RoutedEventArgs e)
-        {
-            if (loginBox.Text.Trim() == "" || passwordBox.Password.Trim() == "")
-            {
-                errortxt.Text = "Please fill in your email and password";
-            }
-        }
     }
 }
