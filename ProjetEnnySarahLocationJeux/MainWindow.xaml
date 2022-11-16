@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800"
         Style="{StaticResource win}">
     <Grid HorizontalAlignment="Center">
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        <!--<Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>-->
+        <TextBlock Text="My Own Menu"/>
     </Grid>
 </Window>
