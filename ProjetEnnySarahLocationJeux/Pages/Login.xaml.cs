@@ -29,7 +29,7 @@ namespace ProjetEnnySarahLocationJeux.Pages
         {
             if (loginBox.Text.Trim() == "" || passwordBox.Password.Trim() == "")
             {
-                MessageBox.Show("Please fill in your email and password");
+                errortxt.Text = "Please fill in your email and password";
             }
         }
     }

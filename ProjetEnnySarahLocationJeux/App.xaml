@@ -34,5 +34,9 @@
             <Setter Property="Foreground" Value="LightBlue"/>
             <Setter Property="TextDecorations" Value="Underline"/>
         </Style>
+        <Style TargetType="TextBlock" x:Key="Error">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="Yellow"/>
+        </Style>
     </Application.Resources>
 </Application>
