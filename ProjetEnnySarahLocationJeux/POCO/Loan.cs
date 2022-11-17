@@ -10,8 +10,8 @@ namespace ProjetEnnySarahLocationJeux.POCO
     {
         private int id;
         //TODO
-        //private User Borrower
-        //private User Loaner
+        //private PLayer Borrower
+        //private Player Loaner
         private Copy game;
         private DateOnly startDate;
         private DateOnly presumedEndDate;

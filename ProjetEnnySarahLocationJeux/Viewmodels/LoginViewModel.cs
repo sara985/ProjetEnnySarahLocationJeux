@@ -81,7 +81,6 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         {
             GoToSignup = true;
             IsViewVisible=false;
-            MessageBox.Show("signup");
         }
     }
 }
