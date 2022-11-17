@@ -1,4 +1,6 @@
-﻿using ProjetEnnySarahLocationJeux.POCO;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using ProjetEnnySarahLocationJeux.Interfaces;
+using ProjetEnnySarahLocationJeux.POCO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private string _errorMessage;
         private bool _isViewVisible;
         private bool _goToLogin;
+        private PlayerDAO PlayerDAO;
 
         public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged("ErrorMessage"); } }
         public bool IsViewVisible { get => _isViewVisible; set { _isViewVisible = value; OnPropertyChanged("IsViewVisible"); } }
@@ -26,6 +29,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         public SignUpViewModel()
         {
+            PlayerDAO = new PlayerDAO();
             _player = new Player();
             VerifyUsernameCommand = new ViewModelCommand(p => VerifyUsername(""));
             AddPlayerCommand = new ViewModelCommand(AddPlayer);
@@ -35,6 +39,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         {
             //first things first encrypt pwd
             //TODO add player to db and maybe redirect or do new command to redirect
+            PlayerDAO.Insert(Player);
         }
 
         private bool VerifyUsername(object obj)

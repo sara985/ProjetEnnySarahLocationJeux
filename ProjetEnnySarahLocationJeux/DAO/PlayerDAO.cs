@@ -59,17 +59,28 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public void Insert(Player t)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings.Get("connString")))
+            {
+                SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,5,GETDATE(),@bdate,@fname,@lname,@email)", connection);
+                cmd.Parameters.AddWithValue("user", t.Username);
+                cmd.Parameters.AddWithValue("pass", t.Password);
+                cmd.Parameters.AddWithValue("bdate", t.BirthDate.ToShortDateString());
+                cmd.Parameters.AddWithValue("fname", t.FirstName);
+                cmd.Parameters.AddWithValue("lname", t.LastName);
+                cmd.Parameters.AddWithValue("email", t.Email);
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
         }
 
-        public List<Player> List()
-        {
-            throw new NotImplementedException();
-        }
+            public List<Player> List()
+            {
+                throw new NotImplementedException();
+            }
 
-        public void Update(Player t)
-        {
-            throw new NotImplementedException();
-        }
+            public void Update(Player t)
+            {
+                throw new NotImplementedException();
+            }
     }
 }

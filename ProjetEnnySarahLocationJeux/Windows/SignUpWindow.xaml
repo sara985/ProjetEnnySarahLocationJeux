@@ -28,9 +28,9 @@
             <TextBlock Text="Username"/>
             <TextBox Text="{Binding Player.Username, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Birth Date"/>
-            <TextBox />
-
+            <DatePicker Text="{Binding Player.BirthDate, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
         </StackPanel>
+        
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="30 0 0 0" Width="200" HorizontalAlignment="Left">
             <TextBlock Text="Last Name"/>
             <TextBox Text="{Binding Player.LastName, UpdateSourceTrigger=PropertyChanged}"/>
@@ -38,7 +38,7 @@
             <TextBox Text="{Binding Player.Password, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Email"/>
             <TextBox Text="{Binding Player.Email, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Content="Add" Style="{StaticResource firstBtnType}"/>
+            <Button Content="Add" Style="{StaticResource firstBtnType}" Margin="0 15 0 0" Command="{Binding AddPlayerCommand}"/>
         </StackPanel>
     </Grid>
 </Window>
