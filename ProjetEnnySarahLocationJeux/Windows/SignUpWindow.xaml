@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetEnnySarahLocationJeux.Windows"
+        xmlns:viewModel="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
         mc:Ignorable="d"
         Title="SignUpWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewModel:SignUpViewModel/>
+    </Window.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,23 +22,23 @@
         </Grid.RowDefinitions>
         <TextBlock Style="{StaticResource Title}" Text="Sign Up" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Width="200" HorizontalAlignment="Right">
+        <StackPanel Grid.Column="0" Grid.Row="1" Width="200" HorizontalAlignment="Right" Margin="0 0 30 0">
             <TextBlock Text="First Name"/>
-            <TextBox />
+            <TextBox Text="{Binding Player.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Username"/>
-            <TextBox />
+            <TextBox Text="{Binding Player.Username, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Birth Date"/>
             <TextBox />
 
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="1">
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="30 0 0 0" Width="200" HorizontalAlignment="Left">
             <TextBlock Text="Last Name"/>
-            <TextBox />
+            <TextBox Text="{Binding Player.LastName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Password"/>
-            <TextBox />
+            <TextBox Text="{Binding Player.Password, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Email"/>
-            <TextBox />
-            <Button Content="Add"/>
+            <TextBox Text="{Binding Player.Email, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Add" Style="{StaticResource firstBtnType}"/>
         </StackPanel>
     </Grid>
 </Window>

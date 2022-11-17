@@ -1,5 +1,4 @@
-﻿using ProjetEnnySarahLocationJeux.Pages;
-using ProjetEnnySarahLocationJeux.Viewmodels;
+﻿using ProjetEnnySarahLocationJeux.Viewmodels;
 using ProjetEnnySarahLocationJeux.Windows;
 using System;
 using System.Collections.Generic;

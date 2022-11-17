@@ -1,6 +1,7 @@
 ﻿using ProjetEnnySarahLocationJeux.DAO;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -56,7 +57,6 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             var isValidUser = playerDAO.IsUser(Username, Password);
             if (isValidUser)
             {
-                MessageBox.Show("valid");
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
                 IsViewVisible = false;
