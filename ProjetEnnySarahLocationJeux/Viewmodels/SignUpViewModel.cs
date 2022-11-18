@@ -15,12 +15,10 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private Player _player;
         private string _errorMessage;
         private bool _isViewVisible;
-        private bool _goToLogin;
         private PlayerDAO PlayerDAO;
 
         public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged("ErrorMessage"); } }
         public bool IsViewVisible { get => _isViewVisible; set { _isViewVisible = value; OnPropertyChanged("IsViewVisible"); } }
-        public bool GotToLogin { get => _goToLogin; set { _goToLogin = value; OnPropertyChanged("GoToLogin");} }
         public Player Player { get => _player; set { _player = value; OnPropertyChanged("Player"); } }
     
         public ICommand VerifyUsernameCommand { get; set; }
@@ -40,6 +38,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             //first things first encrypt pwd
             //TODO add player to db and maybe redirect or do new command to redirect
             PlayerDAO.Insert(Player);
+            IsViewVisible=false;
         }
 
         private bool VerifyUsername(object obj)

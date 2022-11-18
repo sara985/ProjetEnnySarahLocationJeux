@@ -22,6 +22,14 @@ namespace ProjetEnnySarahLocationJeux.Windows
         public SignUpWindow()
         {
             InitializeComponent();
+            this.IsVisibleChanged += (s, ev) =>
+            {
+                if (this.IsLoaded && this.IsVisible==false)
+                {
+                    new LoginWindow().Show();
+                    this.Close();
+                }
+            };
         }
     }
 }

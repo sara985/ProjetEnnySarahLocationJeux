@@ -34,6 +34,8 @@ namespace ProjetEnnySarahLocationJeux
                     loginView.Close();
                 }
             };
+            //if current window = signup or if current datacontext = SignUpViewModel
+            
         }
     }
 }
