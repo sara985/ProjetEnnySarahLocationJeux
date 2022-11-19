@@ -10,28 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
+using System.Xaml.Schema;
 
 namespace ProjetEnnySarahLocationJeux.DAO
 {
     internal class PlayerDAO : IDAOInterface<Player>
     {
-        //TODO return a user or false //this works
-        //public bool IsUser(string username, string pass)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings.Get("connString")))
-        //    {
-        //        SqlCommand cmd = new SqlCommand("Select * from dbo.player", connection);
-        //        connection.Open();
-        //        using (SqlDataReader reader = cmd.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                id = reader.GetInt32(0);
-        //            }
-        //        }
-        //        return true;
-        //    }
-        //}
+        //should return a user or an admin or null
         public bool IsUser(string username, string pass)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings.Get("connString")))
@@ -59,18 +44,21 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public void Insert(Player t)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings.Get("connString")))
-            {
-                SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,5,GETDATE(),@bdate,@fname,@lname,@email)", connection);
-                cmd.Parameters.AddWithValue("user", t.Username);
-                cmd.Parameters.AddWithValue("pass", t.Password);
-                cmd.Parameters.AddWithValue("bdate", t.BirthDate.ToShortDateString());
-                cmd.Parameters.AddWithValue("fname", t.FirstName);
-                cmd.Parameters.AddWithValue("lname", t.LastName);
-                cmd.Parameters.AddWithValue("email", t.Email);
-                connection.Open();
-                cmd.ExecuteNonQuery();
-            }
+            t.CalculateSHA256();
+            MessageBox.Show(t.Password);
+            Console.WriteLine(t.Password);
+            //using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings.Get("connString")))
+            //{
+            //    SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,5,GETDATE(),@bdate,@fname,@lname,@email)", connection);
+            //    cmd.Parameters.AddWithValue("user", t.Username);
+            //    cmd.Parameters.AddWithValue("pass", t.Password);
+            //    cmd.Parameters.AddWithValue("bdate", t.BirthDate.ToShortDateString());
+            //    cmd.Parameters.AddWithValue("fname", t.FirstName);
+            //    cmd.Parameters.AddWithValue("lname", t.LastName);
+            //    cmd.Parameters.AddWithValue("email", t.Email);
+            //    connection.Open();
+            //    cmd.ExecuteNonQuery();
+            //}
         }
 
             public List<Player> List()

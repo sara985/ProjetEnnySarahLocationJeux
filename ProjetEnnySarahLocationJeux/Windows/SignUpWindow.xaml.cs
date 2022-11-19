@@ -21,6 +21,7 @@ namespace ProjetEnnySarahLocationJeux.Windows
     {
         public SignUpWindow()
         {
+            //bug quand ferme windows avec la croix
             InitializeComponent();
             this.IsVisibleChanged += (s, ev) =>
             {

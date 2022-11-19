@@ -38,7 +38,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             //first things first encrypt pwd
             //TODO add player to db and maybe redirect or do new command to redirect
             PlayerDAO.Insert(Player);
-            IsViewVisible=false;
+            IsViewVisible = false;
         }
 
         private bool VerifyUsername(object obj)
