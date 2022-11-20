@@ -35,8 +35,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void AddPlayer(object obj)
         {
-            //first things first encrypt pwd
             //TODO add player to db and maybe redirect or do new command to redirect
+            Player.CalculateSHA256();
             PlayerDAO.Insert(Player);
             IsViewVisible = false;
         }

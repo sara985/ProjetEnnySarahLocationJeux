@@ -25,7 +25,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
             UTF8Encoding objUtf8 = new UTF8Encoding();
             hashValue = sha256.ComputeHash(objUtf8.GetBytes(Password));
             MessageBox.Show(hashValue.ToString());
-            password = Encoding.Default.GetString(hashValue);
+            password = Convert.ToBase64String(hashValue);
         }
 
         public abstract User Login(string email, string password);
