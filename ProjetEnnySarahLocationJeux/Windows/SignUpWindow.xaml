@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ProjetEnnySarahLocationJeux.Windows"
         xmlns:viewModel="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
         xmlns:validationRules="clr-namespace:ProjetEnnySarahLocationJeux.ValidationRules"
+        xmlns:customcontrols="clr-namespace:ProjetEnnySarahLocationJeux.CustomControls"
         mc:Ignorable="d"
         Title="SignUpWindow" Height="450" Width="800">
     <Window.DataContext>
@@ -35,7 +36,7 @@
             <TextBlock Text="First Name"/>
             <TextBox>
                 <TextBox.Text>
-                    <Binding Path="Player.FirstName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Player.FirstName" UpdateSourceTrigger="LostFocus">
                         <Binding.ValidationRules>
                             <validationRules:TextValidationRule/>
                         </Binding.ValidationRules>
@@ -43,7 +44,8 @@
                 </TextBox.Text>
             </TextBox>
             <TextBlock Text="Username"/>
-            <TextBox Text="{Binding Player.Username, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Text="{Binding Player.Username, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
             <TextBlock Text="Birth Date"/>
             <DatePicker Text="{Binding Player.BirthDate, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
         </StackPanel>
@@ -52,7 +54,7 @@
             <TextBlock Text="Last Name"/>
             <TextBox Text="{Binding Player.LastName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Password"/>
-            <TextBox Text="{Binding Player.Password, UpdateSourceTrigger=PropertyChanged}"/>
+            <customcontrols:BindablePasswordBox Password="{Binding Player.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Email"/>
             <TextBox Text="{Binding Player.Email, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Add" Style="{StaticResource firstBtnType}" Margin="0 15 0 0" Command="{Binding AddPlayerCommand}"/>

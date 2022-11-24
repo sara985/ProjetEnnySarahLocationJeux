@@ -8,7 +8,7 @@ namespace ProjetEnnySarahLocationJeux.Interfaces
 {
     internal interface IDAOInterface<T>
     {
-        void Insert(T t);
+        bool Insert(T t);
 
         void Update(T t);
 

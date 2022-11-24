@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
@@ -15,7 +16,6 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private Player _player;
         private string _errorMessage;
         private bool _isViewVisible;
-        private PlayerDAO PlayerDAO;
 
         public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged("ErrorMessage"); } }
         public bool IsViewVisible { get => _isViewVisible; set { _isViewVisible = value; OnPropertyChanged("IsViewVisible"); } }
@@ -27,7 +27,6 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         public SignUpViewModel()
         {
-            PlayerDAO = new PlayerDAO();
             _player = new Player();
             VerifyUsernameCommand = new ViewModelCommand(p => VerifyUsername(""));
             AddPlayerCommand = new ViewModelCommand(AddPlayer);
@@ -36,9 +35,13 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private void AddPlayer(object obj)
         {
             //TODO add player to db and maybe redirect or do new command to redirect
+            //normally no message box in viewModel
             Player.CalculateSHA256();
-            PlayerDAO.Insert(Player);
-            IsViewVisible = false;
+            if (Player.Insert())
+            {
+                MessageBox.Show("Your account was created succesfully. You can now login.");
+                IsViewVisible = false;
+            }
         }
 
         private bool VerifyUsername(object obj)

@@ -51,11 +51,10 @@ namespace ProjetEnnySarahLocationJeux.POCO
         //    //return db.GetMovies();
         //    // return dao.Get ;
         //}
-        //public bool Insert()
-        //{
-        //    PlayerDAO dao = new PlayerDAO();
-        //    //return db.Insert(this);
-        //    //return dao.Insert(this);
-        //}
+        public bool Insert()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.Insert(this);
+        }
     }
 }

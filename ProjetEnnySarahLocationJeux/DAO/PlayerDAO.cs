@@ -68,7 +68,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
             throw new NotImplementedException();
         }
 
-        public void Insert(Player t)
+        public bool Insert(Player t)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -80,7 +80,20 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 cmd.Parameters.AddWithValue("lname", t.LastName);
                 cmd.Parameters.AddWithValue("email", t.Email);
                 connection.Open();
-                cmd.ExecuteNonQuery();
+                int i = 0;
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1)
+                {
+                    return true;
+                }
+                return false;
             }
         }
 
