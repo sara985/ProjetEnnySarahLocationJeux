@@ -12,6 +12,8 @@ namespace ProjetEnnySarahLocationJeux.POCO
 {
     abstract class User
     {
+        //Question ou mettre calculate SHA256
+
         private string username;
         private string password;
 
@@ -24,7 +26,6 @@ namespace ProjetEnnySarahLocationJeux.POCO
             byte[] hashValue;
             UTF8Encoding objUtf8 = new UTF8Encoding();
             hashValue = sha256.ComputeHash(objUtf8.GetBytes(Password));
-            MessageBox.Show(hashValue.ToString());
             password = Convert.ToBase64String(hashValue);
         }
 

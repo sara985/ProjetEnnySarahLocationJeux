@@ -24,7 +24,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
         }
 
         //should return a user or an admin or null
-        public bool IsUser(string username, string pass)
+        public Player IsPlayer(string username, string pass)
         {
             //stack FIFO
             //static quand get
@@ -47,9 +47,14 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         p.Password = string.Empty;
                         p.Balance = reader.GetInt32(3);
                         //p.SignUpDate = reader.GetDateTime(4);
+                        //p.BirthDate = 
+                        p.FirstName = reader.GetString(6);
+                        p.LastName = reader.GetString(7);
+                        p.Email = reader.GetString(8);
+                        return p;
                     }
-                }
-                return true;
+                    return null;
+                }              
             }
         }
 

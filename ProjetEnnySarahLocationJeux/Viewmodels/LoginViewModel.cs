@@ -56,8 +56,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private void ExecuteLoginCommand(object obj)
         {
             Player p = new Player(Username,Password);
-            var isValidUser = playerDAO.IsUser(p.Username, p.Password);
-            if (isValidUser)
+            p = playerDAO.IsPlayer(p.Username, p.Password);
+            if (p!=null)
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
@@ -65,7 +65,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             }
             else
             {
-                ErrorMessage = "invalidUser";
+                ErrorMessage = "Invalid User";
             }
         }
         private bool CanExecuteLoginCommand(object obj)
