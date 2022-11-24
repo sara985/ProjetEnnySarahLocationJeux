@@ -1,14 +1,17 @@
-﻿using System;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
     internal class Player : User
     {
+        //Question peut-on ajouter une instance de DAO afin de ne pas avoir à l'instancier à chaque fois ?
         private int id;
         private string firstName;
         private string lastName;
@@ -32,16 +35,27 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public int Id { get => id; set => id = value; }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
-        //public string Username { get => base.Username; set => base.Username = value; }
         public DateOnly BirthDate { get => birthDate; set => birthDate = value; }
         public DateOnly SignUpDate { get => signUpDate; set => signUpDate = value; }
         public string Email { get => email; set => email = value; }
-        //public string Password { get => base.Password; set => base.Password = value; }
         public int Balance { get => balance; set => balance = value; }
 
         public override User Login(string email, string password)
         {
             throw new NotImplementedException();
         }
+
+        //public static List<Player> GetPlayers()
+        //{
+        //    PlayerDAO dao = new PlayerDAO();
+        //    //return db.GetMovies();
+        //    // return dao.Get ;
+        //}
+        //public bool Insert()
+        //{
+        //    PlayerDAO dao = new PlayerDAO();
+        //    //return db.Insert(this);
+        //    //return dao.Insert(this);
+        //}
     }
 }
