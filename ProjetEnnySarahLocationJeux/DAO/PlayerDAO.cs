@@ -16,10 +16,22 @@ namespace ProjetEnnySarahLocationJeux.DAO
 {
     internal class PlayerDAO : IDAOInterface<Player>
     {
+        private string connectionString;
+
+        public PlayerDAO()
+        {
+            this.connectionString = ConfigurationManager.ConnectionStrings["GameSwitchDB"].ConnectionString;
+        }
+
         //should return a user or an admin or null
         public bool IsUser(string username, string pass)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings.Get("connString")))
+            //stack FIFO
+            //static quand get
+            //Insert(this) pour inserer, delete et update
+            //pas besoin de updatesourcetrigger quand donnée ne change pas !
+            //IOC Inversion of Control
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("Select * from dbo.player where username=@user and password=@pass", connection);
                 cmd.Parameters.AddWithValue("user", username);
@@ -30,7 +42,11 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     while (reader.Read())
                     {
                         Player p = new Player();
-                        reader.GetInt32(0);
+                        p.Id = reader.GetInt32(0);
+                        p.Username = reader.GetString(1);
+                        p.Password = string.Empty;
+                        p.Balance = reader.GetInt32(3);
+                        //p.SignUpDate = reader.GetDateTime(4);
                     }
                 }
                 return true;
@@ -42,9 +58,14 @@ namespace ProjetEnnySarahLocationJeux.DAO
             throw new NotImplementedException();
         }
 
+        public Player GetByUsername(string username)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Insert(Player t)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings.Get("connString")))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,5,GETDATE(),@bdate,@fname,@lname,@email)", connection);
                 cmd.Parameters.AddWithValue("user", t.Username);

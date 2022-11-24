@@ -9,6 +9,6 @@
         Style="{StaticResource win}">
     <Grid HorizontalAlignment="Center">
         <!--<Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>-->
-        <TextBlock Text="My Own Menu"/>
+        <TextBlock x:Name="test" Text="My Own Menu"/>
     </Grid>
 </Window>

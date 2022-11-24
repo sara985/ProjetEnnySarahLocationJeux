@@ -1,4 +1,5 @@
 ﻿using ProjetEnnySarahLocationJeux.DAO;
+using ProjetEnnySarahLocationJeux.POCO;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -54,7 +55,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void ExecuteLoginCommand(object obj)
         {
-            var isValidUser = playerDAO.IsUser(Username, Password);
+            Player p = new Player(Username,Password);
+            var isValidUser = playerDAO.IsUser(p.Username, p.Password);
             if (isValidUser)
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(

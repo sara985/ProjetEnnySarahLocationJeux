@@ -17,6 +17,18 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private string email;
         private int balance;
 
+        //TODO ask question to teacher
+        public Player(string username, string password)
+        {
+            base.Password = password;
+            base.Username = username;
+            base.CalculateSHA256();
+        }
+
+        public Player()
+        {
+        }
+
         public int Id { get => id; set => id = value; }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
