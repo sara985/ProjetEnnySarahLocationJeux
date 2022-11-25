@@ -1,4 +1,5 @@
 ﻿using ProjetEnnySarahLocationJeux.Viewmodels;
+using ProjetEnnySarahLocationJeux.Views;
 using ProjetEnnySarahLocationJeux.Windows;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace ProjetEnnySarahLocationJeux
                 bool signup = ((LoginViewModel)loginView.DataContext).GoToSignup;
                 if (loginView.IsVisible == false && loginView.IsLoaded && signup==false)
                 {
-                    var mainView = new MainWindow();
+                    var mainView = new PlayerMainWindow();
                     mainView.Show();
                     loginView.Close();
                 }else if (loginView.IsVisible == false && loginView.IsLoaded && signup == true)

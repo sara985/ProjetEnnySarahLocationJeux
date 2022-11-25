@@ -46,8 +46,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         p.Username = reader.GetString(1);
                         p.Password = string.Empty;
                         p.Balance = reader.GetInt32(3);
-                        //p.SignUpDate = reader.GetDateTime(4);
-                        //p.BirthDate = 
+                        p.SignUpDate = DateOnly.FromDateTime(reader.GetDateTime(4));
+                        p.BirthDate = DateOnly.FromDateTime(reader.GetDateTime(5)); 
                         p.FirstName = reader.GetString(6);
                         p.LastName = reader.GetString(7);
                         p.Email = reader.GetString(8);
@@ -65,14 +65,37 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public Player GetByUsername(string username)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Select * from dbo.player where username=@user", connection);
+                cmd.Parameters.AddWithValue("user", username);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Player p = new Player();
+                        p.Id = reader.GetInt32(0);
+                        p.Username = reader.GetString(1);
+                        p.Password = string.Empty;
+                        p.Balance = reader.GetInt32(3);
+                        p.SignUpDate = DateOnly.FromDateTime(reader.GetDateTime(4));
+                        p.BirthDate = DateOnly.FromDateTime(reader.GetDateTime(5));
+                        p.FirstName = reader.GetString(6);
+                        p.LastName = reader.GetString(7);
+                        p.Email = reader.GetString(8);
+                        return p;
+                    }
+                    return null;
+                }
+            }
         }
 
         public bool Insert(Player t)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,5,GETDATE(),@bdate,@fname,@lname,@email)", connection);
+                SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,10,GETDATE(),@bdate,@fname,@lname,@email)", connection);
                 cmd.Parameters.AddWithValue("user", t.Username);
                 cmd.Parameters.AddWithValue("pass", t.Password);
                 cmd.Parameters.AddWithValue("bdate", t.BirthDate.ToShortDateString());
