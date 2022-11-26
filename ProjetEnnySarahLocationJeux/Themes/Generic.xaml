@@ -14,15 +14,15 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             x:Name="back">
-                        <TextBlock Text="{TemplateBinding ItemName}"/>
+                        <TextBlock Text="{TemplateBinding ItemName}" Foreground="Blue" HorizontalAlignment="Center"/>
                     </Border>
                     <!-- sets the appearance when certain triggers are on -->
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="back" Value="Grey"/>
+                            <Setter Property="Background" TargetName="back" Value="Blue"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" TargetName="back" Value="Grey"/>
+                            <Setter Property="Background" TargetName="back" Value="Pink"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

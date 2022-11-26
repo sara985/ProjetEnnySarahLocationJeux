@@ -19,13 +19,11 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
-        <ListBox x:Name="sidebar"  SelectionMode="Single" BorderThickness="0">
-            <!-- need to add uri, 18 min 13 in video-->
-            <!--<customControls:NavButton ItemName="My account" />-->
+
+        <ListBox x:Name="sidebar" SelectionChanged="sidebar_SelectionChanged" SelectionMode="Single" BorderThickness="0">
+            <customControls:NavButton ItemName="My Account" NavLink="/Views/MyAccountPage.xaml" Cursor="Hand" Width="98"/>
         </ListBox>
-        <Frame Grid.Column="1" x:Name="navFrame" />
+        <Frame Grid.Column="1" x:Name="navFrame" NavigationUIVisibility="Hidden"/>
         <TextBlock Text="{Binding CurrentPlayer.Username}" Background="White" Foreground="{StaticResource clrPrimary}" HorizontalAlignment="Right" FontSize="24" Height="30"/>
-        <Frame/>
     </Grid>
 </Window>
