@@ -62,5 +62,12 @@ namespace ProjetEnnySarahLocationJeux.POCO
             PlayerDAO dao = new PlayerDAO();
             return dao.GetByUsername(username);
         }
+
+        public static Player GetPlayerById(int id)
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.GetById(id);
+        }
+
     }
 }

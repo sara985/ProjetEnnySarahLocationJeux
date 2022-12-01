@@ -61,6 +61,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
+                //Create an App property to hold the Id value throughout the whole application
+                App.Current.Properties["UserId"] = p.Id;
                 IsViewVisible = false;
             }
             else

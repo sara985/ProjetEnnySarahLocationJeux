@@ -60,7 +60,30 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public Player GetById(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Select * from dbo.player where id=@id", connection);
+                cmd.Parameters.AddWithValue("id", id);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Player p = new Player();
+                        p.Id = reader.GetInt32(0);
+                        p.Username = reader.GetString(1);
+                        p.Password = string.Empty;
+                        p.Balance = reader.GetInt32(3);
+                        p.SignUpDate = DateOnly.FromDateTime(reader.GetDateTime(4));
+                        p.BirthDate = DateOnly.FromDateTime(reader.GetDateTime(5));
+                        p.FirstName = reader.GetString(6);
+                        p.LastName = reader.GetString(7);
+                        p.Email = reader.GetString(8);
+                        return p;
+                    }
+                    return null;
+                }
+            }
         }
 
         public Player GetByUsername(string username)

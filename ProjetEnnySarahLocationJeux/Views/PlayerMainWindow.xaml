@@ -21,9 +21,13 @@
         </Grid.ColumnDefinitions>
 
         <ListBox x:Name="sidebar" SelectionChanged="sidebar_SelectionChanged" SelectionMode="Single" BorderThickness="0">
-            <customControls:NavButton ItemName="My Account" NavLink="/Views/MyAccountPage.xaml" Cursor="Hand" Width="98"/>
+            <customControls:NavButton ItemName="My Account" NavLink="/Views/MyAccountPage.xaml" Width="98" Cursor="Hand"/>
+            <customControls:NavButton ItemName="Catalog" NavLink="/Views/MyAccountPage.xaml" Width="98"/>
         </ListBox>
-        <Frame Grid.Column="1" x:Name="navFrame" NavigationUIVisibility="Hidden"/>
-        <TextBlock Text="{Binding CurrentPlayer.Username}" Background="White" Foreground="{StaticResource clrPrimary}" HorizontalAlignment="Right" FontSize="24" Height="30"/>
+        <StackPanel Grid.Column="1">
+            <!-- Question -->
+            <TextBlock Text="{Binding CurrentPlayer.FirstName}" Background="White" Foreground="{StaticResource clrPrimary}" HorizontalAlignment="Right" FontSize="24" Height="30" VerticalAlignment="Top"/>
+            <Frame x:Name="navFrame" NavigationUIVisibility="Hidden"/>
+        </StackPanel>
     </Grid>
 </Window>
