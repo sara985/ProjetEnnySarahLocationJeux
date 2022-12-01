@@ -1,4 +1,5 @@
-﻿using ProjetEnnySarahLocationJeux.Interfaces;
+﻿using ProjetEnnySarahLocationJeux.Functions;
+using ProjetEnnySarahLocationJeux.Interfaces;
 using ProjetEnnySarahLocationJeux.POCO;
 using System;
 using System.Collections.Generic;
@@ -116,9 +117,12 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public bool Insert(Player t)
         {
+            //make sure first and last name are "initcap" before submitting values since initcap function is not available on sql server
+            t.FirstName = GlobalFunction.InitCap(t.FirstName);
+            t.LastName = GlobalFunction.InitCap(t.LastName);
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,10,GETDATE(),@bdate,@fname,@lname,@email)", connection);
+                SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,10,GETDATE(),@bdate,@fname,@lname,LOWER(@email))", connection);
                 cmd.Parameters.AddWithValue("user", t.Username);
                 cmd.Parameters.AddWithValue("pass", t.Password);
                 cmd.Parameters.AddWithValue("bdate", t.BirthDate.ToShortDateString());
