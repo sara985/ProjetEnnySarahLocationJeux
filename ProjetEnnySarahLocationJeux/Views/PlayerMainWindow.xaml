@@ -13,6 +13,11 @@
     <Window.DataContext>
         <viewmodel:MainPlayerViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="50"/>
+        </Style>
+    </Window.Resources>
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,11 +29,8 @@
             <customControls:NavButton ItemName="My Account" NavLink="/Views/MyAccountPage.xaml" Width="98" Cursor="Hand"/>
             <customControls:NavButton ItemName="Catalog" NavLink="/Views/MyAccountPage.xaml" Width="98"/>
         </ListBox>
-        <StackPanel Grid.Column="1">
-            <WrapPanel HorizontalAlignment="Right">
-                <TextBlock Text="Bienvenue " FontSize="24" Height="30"/>
-                <TextBlock Text="{Binding CurrentPlayer.FirstName}" FontSize="24" Height="30"/>
-            </WrapPanel>
+        <StackPanel Grid.Column="1" Margin="20 5 15 5">
+            <TextBlock Text="{Binding CurrentPlayer.FirstName, StringFormat={}Hello {0}}" FontSize="24" Height="30" HorizontalAlignment="Right"/>
             <Frame x:Name="navFrame" NavigationUIVisibility="Hidden"/>
         </StackPanel>
     </Grid>

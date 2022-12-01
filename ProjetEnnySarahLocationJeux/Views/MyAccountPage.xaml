@@ -13,8 +13,15 @@
         <viewModel:MyAccountViewModel/>
     </Page.DataContext>
 
-    <StackPanel>
-        <TextBlock Text="My Account"/>
-        <TextBlock Text="{Binding Player.FirstName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+    <StackPanel >
+        <TextBlock Text="{Binding Player.Balance, StringFormat={}You currently have {0} credits on your account.}"/>
+        <TextBlock Text="You are curently renting x games."/>
+        <TextBlock Text="X people are renting your games."/>
+        <TextBlock Text="Your email :"/>
+        <TextBlock Text="{Binding Player.Email}"/>
+        <TextBlock Text="Your Username : "/>
+        <TextBlock Text="{Binding Player.Username}"/>
+        <Button Content="Change Password" Width="150"/>
+
     </StackPanel>
 </Page>
