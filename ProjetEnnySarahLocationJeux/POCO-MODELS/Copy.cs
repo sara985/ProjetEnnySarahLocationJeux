@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,9 @@ namespace ProjetEnnySarahLocationJeux.POCO
     {
         private int id;
         private VideoGame game;
-        // private USer owner;
+        private Player owner;
         private bool isAvailable;
+        private Stream image;
 
         public Copy(int id, VideoGame game, bool isAvailable)
         {

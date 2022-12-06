@@ -13,6 +13,10 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private string console;
         private List<string> versions;
 
+        public ConsoleAndVersion()
+        {
+        }
+
         public ConsoleAndVersion(int idConsole, string console, List<string> versions)
         {
             this.idConsole = idConsole;

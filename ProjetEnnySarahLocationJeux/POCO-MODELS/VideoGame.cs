@@ -9,31 +9,35 @@ namespace ProjetEnnySarahLocationJeux.POCO
 {
     internal class VideoGame : INotifyPropertyChanged
     {
-        private int id;
-        private string name;
-        private int cost;
-        private List<ConsoleAndVersion> versionsAvailable;
+        private int _id;
+        private int _year;
+        private string _name;
+        private int _cost;
+        private ConsoleAndVersion _consoleAndVersion;
+        //private List<ConsoleAndVersion> versionsAvailable;
         //mieux vaut mettre une taille dans une liste quand on la créé => plus efficace
 
         public VideoGame()
         {
         }
 
-        public VideoGame(string name, int cost, string console, string version)
+        public VideoGame(int id, int year, string name, int cost, ConsoleAndVersion consoleAndVersion)
         {
-            this.name = name;
-            this.cost = cost;
-            this.versionsAvailable = new List<ConsoleAndVersion>();
+            _id = id;
+            _year = year;
+            _name = name;
+            _cost = cost;
+            _consoleAndVersion = consoleAndVersion;
         }
 
-        public string Name { get => name; set => name = value; }
+        public string Name { get => _name; set => _name = value; }
 
         public int Cost
         {
-            get => cost;
+            get => _cost;
             set
             {
-                cost = value;
+                _cost = value;
                 OnPropertyChanged("cost");
             }
         }
