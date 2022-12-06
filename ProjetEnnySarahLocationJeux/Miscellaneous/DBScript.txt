@@ -3,6 +3,14 @@ GO
 /****** Object:  Database [GameSwitch]    Script Date: 06-12-22 12:44:51 ******/
 CREATE DATABASE [GameSwitch]
  CONTAINMENT = NONE
+<<<<<<< HEAD
+=======
+ ON  PRIMARY 
+( NAME = N'GameSwitch', FILENAME = N'C:\Users\sarah\GameSwitch.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'GameSwitchtch_log', FILENAME = N'C:\Users\sarah\GameSwitch_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+>>>>>>> 43aee92dd750c7c1993b072af3d41f3ce344a1c2
 GO
 USE [GameSwitch]
 GO
