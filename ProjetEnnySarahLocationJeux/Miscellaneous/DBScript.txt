@@ -1,0 +1,50 @@
+﻿USE [master]
+GO
+/****** Object:  Database [GameSwitch]    Script Date: 06-12-22 12:44:51 ******/
+CREATE DATABASE [GameSwitch]
+ CONTAINMENT = NONE
+GO
+USE [GameSwitch]
+GO
+/****** Object:  Table [dbo].[Admin]    Script Date: 06-12-22 12:44:51 ******/
+CREATE TABLE [dbo].[Admin](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[username] [varchar](50) NULL,
+	[email] [varchar](300) NULL,
+	[password] [varchar](80) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Player]    Script Date: 06-12-22 12:44:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Player](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[username] [varchar](50) NOT NULL,
+	[password] [varchar](50) NULL,
+	[balance] [int] NULL,
+	[signUpDate] [date] NULL,
+	[birthDate] [date] NULL,
+	[firstName] [varchar](50) NULL,
+	[lastName] [varchar](50) NULL,
+	[email] [varchar](250) NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_Player]    Script Date: 06-12-22 12:44:51 ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Player] ON [dbo].[Player]
+(
+	[email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_Player_1]    Script Date: 06-12-22 12:44:51 ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Player_1] ON [dbo].[Player]
+(
+	[username] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+
