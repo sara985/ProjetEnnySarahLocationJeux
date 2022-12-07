@@ -2,14 +2,45 @@
 using ProjetEnnySarahLocationJeux.POCO;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjetEnnySarahLocationJeux.DAO
 {
+    
     internal class AdminDao : IDAOInterface<Administrator>
     {
+
+        private string connectionString;
+
+
+        public AdminDao()
+        {
+            this.connectionString = ConfigurationManager.ConnectionStrings["GameSwitchDB"].ConnectionString;
+        }
+
+        public Administrator isAdmin(string username, string pass)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("select * from dbo.Admin where username=@user and password=@pass", connection);
+                cmd.Parameters.AddWithValue("username", username);
+                cmd.Parameters.AddWithValue("password", pass);
+                connection.Open();
+                using(SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Administrator a = new Administrator();
+                        return a;
+                    }
+                    return null;
+                }
+            }
+        }
         public Administrator GetById(int id)
         {
             throw new NotImplementedException();
