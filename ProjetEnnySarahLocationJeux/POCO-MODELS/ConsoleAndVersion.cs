@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
     {
         private int idConsole;
         private string console;
+        private int versionId;
         private string version;
 
         public ConsoleAndVersion()
@@ -34,6 +36,23 @@ namespace ProjetEnnySarahLocationJeux.POCO
 
         public string Version { get { return version; }
             set { version = value; }
+        }
+
+        public int VersionId { get => versionId; set => versionId = value; }
+
+        public static List<ConsoleAndVersion> GetAllConsoles()
+        {
+            return new ConsoleAndVersionDAO().List();
+        }
+
+        public static List<ConsoleAndVersion> GetVersionsByConsole(int consoleId)
+        {
+            return new ConsoleAndVersionDAO().GetVersionsByConsole(consoleId);
+        }
+
+        public override string? ToString()
+        {
+            return console;
         }
     }
 }

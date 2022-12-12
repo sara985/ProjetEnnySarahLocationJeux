@@ -23,6 +23,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
 
         public VideoGame()
         {
+            RentGameCommand = new ViewModelCommand(ExecuteRentGame);
         }
 
         public VideoGame(int id, int year, string name, int cost, ConsoleAndVersion consoleAndVersion)
@@ -59,7 +60,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public static List<VideoGame> GetAll()
         {
             VideoGameDAO dao = new VideoGameDAO();
-            return dao.List();
+            return dao.List(); 
         }
     }
 
