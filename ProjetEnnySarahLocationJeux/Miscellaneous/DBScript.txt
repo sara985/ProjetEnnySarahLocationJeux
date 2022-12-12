@@ -11,10 +11,76 @@ CREATE TABLE [dbo].[Admin](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[username] [varchar](50) NULL,
 	[email] [varchar](300) NULL,
-	[password] [varchar](80) NULL
+	[password] [varchar](80) NULL,
+ CONSTRAINT [PK_Admin] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Player]    Script Date: 06-12-22 12:44:51 ******/
+/****** Object:  Table [dbo].[Console]    Script Date: 12-12-22 03:27:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Console](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Console] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Copy]    Script Date: 12-12-22 03:27:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Copy](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[ownerId] [int] NOT NULL,
+	[isAvailable] [bit] NOT NULL,
+	[imageId] [int] NULL,
+	[gameId] [int] NULL,
+ CONSTRAINT [PK_Copy] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Game]    Script Date: 12-12-22 03:27:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Game](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+	[year] [int] NULL,
+	[creditsValued] [int] NOT NULL,
+	[versionId] [int] NULL,
+ CONSTRAINT [PK_Game] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Image]    Script Date: 12-12-22 03:27:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Image](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[image] [varbinary](max) NOT NULL,
+ CONSTRAINT [PK_Image] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Player]    Script Date: 12-12-22 03:27:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -28,12 +94,31 @@ CREATE TABLE [dbo].[Player](
 	[birthDate] [date] NULL,
 	[firstName] [varchar](50) NULL,
 	[lastName] [varchar](50) NULL,
-	[email] [varchar](250) NULL
+	[email] [varchar](250) NULL,
+ CONSTRAINT [PK_Player] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Version]    Script Date: 12-12-22 03:27:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Version](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[consoleId] [int] NOT NULL,
+	[version] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Version] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Player]    Script Date: 06-12-22 12:44:51 ******/
+/****** Object:  Index [IX_Player]    Script Date: 12-12-22 03:27:51 ******/
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Player] ON [dbo].[Player]
 (
 	[email] ASC
@@ -41,10 +126,19 @@ CREATE UNIQUE NONCLUSTERED INDEX [IX_Player] ON [dbo].[Player]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Player_1]    Script Date: 06-12-22 12:44:51 ******/
+/****** Object:  Index [IX_Player_1]    Script Date: 12-12-22 03:27:51 ******/
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Player_1] ON [dbo].[Player]
 (
 	[username] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-
+ALTER TABLE [dbo].[Game]  WITH CHECK ADD  CONSTRAINT [FK_Game_Version] FOREIGN KEY([versionId])
+REFERENCES [dbo].[Version] ([id])
+GO
+ALTER TABLE [dbo].[Game] CHECK CONSTRAINT [FK_Game_Version]
+GO
+ALTER TABLE [dbo].[Version]  WITH CHECK ADD  CONSTRAINT [FK_Version_Console] FOREIGN KEY([consoleId])
+REFERENCES [dbo].[Console] ([id])
+GO
+ALTER TABLE [dbo].[Version] CHECK CONSTRAINT [FK_Version_Console]
+GO
