@@ -1,4 +1,5 @@
-﻿using ProjetEnnySarahLocationJeux.Viewmodels;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using ProjetEnnySarahLocationJeux.Viewmodels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,6 +54,12 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             //actually rent the game for the user in here; for now it seems good
             MessageBox.Show(Name);
+        }
+
+        public static List<VideoGame> GetAll()
+        {
+            VideoGameDAO dao = new VideoGameDAO();
+            return dao.List();
         }
     }
 
