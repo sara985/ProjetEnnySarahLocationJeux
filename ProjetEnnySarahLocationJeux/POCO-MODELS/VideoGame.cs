@@ -1,9 +1,12 @@
-﻿using System;
+﻿using ProjetEnnySarahLocationJeux.Viewmodels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
@@ -23,12 +26,14 @@ namespace ProjetEnnySarahLocationJeux.POCO
 
         public VideoGame(int id, int year, string name, int cost, ConsoleAndVersion consoleAndVersion)
         {
+            RentGameCommand = new ViewModelCommand(ExecuteRentGame);
             Id = id;
             Year = year;
             _name = name;
             Cost = cost;
             ConsoleAndVersion = consoleAndVersion;
         }
+        public ICommand RentGameCommand { get; set; }
 
         public int Id { get => _id; set => _id = value; }
         public int Year { get => _year; set => _year = value; }
@@ -42,6 +47,12 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             var handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(info));
+        }
+
+        private void ExecuteRentGame(object obj)
+        {
+            //actually rent the game for the user in here; for now it seems good
+            MessageBox.Show(Name);
         }
     }
 

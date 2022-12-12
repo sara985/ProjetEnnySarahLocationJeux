@@ -7,7 +7,7 @@
         xmlns:viewmodel="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
         xmlns:customControls="clr-namespace:ProjetEnnySarahLocationJeux.CustomControls"
         mc:Ignorable="d"
-        Title="PlayerMainWindow" Height="450" Width="800">
+        Title="PlayerMainWindow" Height="450" Width="1000">
     
 
     <Window.DataContext>
