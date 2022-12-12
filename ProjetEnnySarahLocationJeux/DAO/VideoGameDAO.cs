@@ -33,7 +33,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("select * from dbo.Game g join dbo.Version v on g.versionId=v.id", connection);
+                SqlCommand cmd = new SqlCommand("select * from dbo.Game g join dbo.Version v on g.versionId=v.id join dbo.Console c on c.id = v.consoleId", connection);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -45,7 +45,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         v.Name = reader.GetString(1);
                         v.Year = reader.GetInt32(2);
                         v.Cost = reader.GetInt32(3);
-                        v.ConsoleAndVersion = new ConsoleAndVersion(reader.GetInt32(5), "eeee",reader.GetString(7));
+                        v.ConsoleAndVersion = new ConsoleAndVersion(reader.GetInt32(5), reader.GetString(9), reader.GetString(7));
                         list.Add(v);
                     }
                     return list;
