@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 namespace ProjetEnnySarahLocationJeux.POCO
 {
     //TODO maybe add user,console and version list in VideoGame
-    internal class ConsoleAndVersion
+    public class ConsoleAndVersion
     {
         private int idConsole;
         private string console;
-        private List<string> versions;
+        private string version;
 
         public ConsoleAndVersion()
         {
         }
 
-        public ConsoleAndVersion(int idConsole, string console, List<string> versions)
+        public ConsoleAndVersion(int idConsole, string console, string version)
         {
             this.idConsole = idConsole;
             this.console = console;
-            this.versions = versions;
+            this.version = version;
         }
 
         public int IdConsole { get { return idConsole; }
@@ -32,8 +32,8 @@ namespace ProjetEnnySarahLocationJeux.POCO
             set { console = value; }
         }
 
-        public List<string> Versions { get { return versions; }
-            set { versions = value; }
+        public string Version { get { return version; }
+            set { version = value; }
         }
     }
 }

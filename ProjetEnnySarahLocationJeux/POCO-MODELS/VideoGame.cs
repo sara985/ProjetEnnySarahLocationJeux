@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
-    internal class VideoGame : INotifyPropertyChanged
+    public class VideoGame
     {
         private int _id;
         private int _year;
@@ -23,24 +23,18 @@ namespace ProjetEnnySarahLocationJeux.POCO
 
         public VideoGame(int id, int year, string name, int cost, ConsoleAndVersion consoleAndVersion)
         {
-            _id = id;
-            _year = year;
+            Id = id;
+            Year = year;
             _name = name;
-            _cost = cost;
-            _consoleAndVersion = consoleAndVersion;
+            Cost = cost;
+            ConsoleAndVersion = consoleAndVersion;
         }
 
+        public int Id { get => _id; set => _id = value; }
+        public int Year { get => _year; set => _year = value; }
         public string Name { get => _name; set => _name = value; }
-
-        public int Cost
-        {
-            get => _cost;
-            set
-            {
-                _cost = value;
-                OnPropertyChanged("cost");
-            }
-        }
+        public int Cost { get => _cost; set => _cost = value; }
+        public ConsoleAndVersion ConsoleAndVersion { get => _consoleAndVersion; set => _consoleAndVersion = value; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

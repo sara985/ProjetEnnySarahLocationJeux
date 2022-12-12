@@ -7,17 +7,14 @@
              xmlns:viewmodels="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <viewmodels:CatalogViewModel/>
-    </UserControl.DataContext>
-    
+
     <Grid Height="100" Width="100">
         <!--Maybe change border color depending wether it's available or not-->
         <!--<TextBlock Text="5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <TextBlock Text="Nintendo Wii" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
         <TextBlock Text="Wii Sports" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
-        <TextBlock Text="{Binding VideoGames[0].Cost, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <!--<TextBlock Text="{Binding VideoGames[0].Cost, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <TextBlock Text="Nintendo Wii" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-        <TextBlock Text="{Binding VideoGames[0].Name}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding VideoGames[0].Name}" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
     </Grid>
 </UserControl>
