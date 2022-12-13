@@ -13,9 +13,32 @@
         <viewmodels:CatalogViewModel/>
     </Page.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <!--Quand release copy, automatiquement regarder si réservation pour cette copie, elle doit commencer automatiquement s'il y en a une-->
         <!--<customcontrols:GameCard/>-->
-        <ListBox ItemsSource="{Binding VideoGames}" Background="Pink" AlternationCount="3">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Text="Console" Margin="5 5 0 5"/>
+            <ComboBox Grid.Row="1" ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole}" Width="150" Foreground="Black" HorizontalAlignment="Left" Margin="5 5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Console}" Foreground="Black"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="Version" Margin="5 5 0 5"/>
+            <ComboBox ItemsSource="{Binding Versions}" Width="150" HorizontalAlignment="Left" Margin="5 5" SelectedItem="{Binding SelectedVersion}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Version}" Foreground="Black"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="Reset" Width="60" Margin="10 4" Command="{Binding ResetGamesCommand}"/>
+        </StackPanel>
+        <ListBox ItemsSource="{Binding VideoGames}" Background="Pink" AlternationCount="3" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <!--Make grid an image background of videogame-->
@@ -25,12 +48,13 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <!--<Grid.RowDefinitions>
-                            <RowDefinition Height="140" />
-                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>-->
                         <!--Soit mettre chemin des images ds bdd, soit mettre les images directement ds bdd, soit mettre directement dans projet mais alors peut pas en ajouter plus
                         <Image Source="ProjetEnnySarahLocationJeux\Images\wiisport.jpg" Width="200"/>
                         Maybe change background color based on game availability-->
+                        
                         <TextBlock Width="150" Background="{StaticResource clrPrimary}" Height="150"/>
                         <StackPanel Grid.Column="1" Margin="5">
                             <TextBlock Text="{Binding Name, StringFormat={}{0}}" FontWeight="Bold" Grid.Column="2" FontSize="20" Height="40"/>

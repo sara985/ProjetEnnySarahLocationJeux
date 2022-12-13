@@ -62,6 +62,11 @@ namespace ProjetEnnySarahLocationJeux.POCO
             VideoGameDAO dao = new VideoGameDAO();
             return dao.List(); 
         }
+
+        public static List<VideoGame> GetGamesByConsoleVersion(int versionId)
+        {
+            return new VideoGameDAO().GetGamesByConsoleVersion(versionId);
+        }
     }
 
 }

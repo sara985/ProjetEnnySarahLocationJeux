@@ -63,6 +63,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     {
                         ConsoleAndVersion result = new ConsoleAndVersion();
                         result.VersionId = reader.GetInt32(0);
+                        result.IdConsole = reader.GetInt32(1);
                         result.Version = reader.GetString(2);
                         list.Add(result);
                     }
