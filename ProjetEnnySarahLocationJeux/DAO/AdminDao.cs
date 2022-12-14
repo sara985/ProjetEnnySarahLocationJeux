@@ -1,4 +1,5 @@
-﻿using ProjetEnnySarahLocationJeux.Interfaces;
+﻿using ProjetEnnySarahLocationJeux.Functions;
+using ProjetEnnySarahLocationJeux.Interfaces;
 using ProjetEnnySarahLocationJeux.POCO;
 using System;
 using System.Collections.Generic;
@@ -7,15 +8,16 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection.PortableExecutable;
+using System.Windows;
+using System.Windows.Documents;
+using System.Xaml.Schema;
 
 namespace ProjetEnnySarahLocationJeux.DAO
-{
-    
+{  
     internal class AdminDao : IDAOInterface<Administrator>
     {
-
         private string connectionString;
-
 
         public AdminDao()
         {
@@ -27,8 +29,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("select * from dbo.Admin where username=@user and password=@pass", connection);
-                cmd.Parameters.AddWithValue("username", username);
-                cmd.Parameters.AddWithValue("password", pass);
+                cmd.Parameters.AddWithValue("user", username);
+                cmd.Parameters.AddWithValue("pass", pass);
                 connection.Open();
                 using(SqlDataReader reader = cmd.ExecuteReader())
                 {
