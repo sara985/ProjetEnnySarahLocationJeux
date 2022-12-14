@@ -17,7 +17,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private int _year;
         private string _name;
         private int _cost;
-        private ConsoleAndVersion _consoleAndVersion;
+        private string _consoleAndVersion;
         //private List<ConsoleAndVersion> versionsAvailable;
         //mieux vaut mettre une taille dans une liste quand on la créé => plus efficace
 
@@ -26,7 +26,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
             RentGameCommand = new ViewModelCommand(ExecuteRentGame);
         }
 
-        public VideoGame(int id, int year, string name, int cost, ConsoleAndVersion consoleAndVersion)
+        public VideoGame(int id, int year, string name, int cost, string consoleAndVersion)
         {
             RentGameCommand = new ViewModelCommand(ExecuteRentGame);
             Id = id;
@@ -41,7 +41,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public int Year { get => _year; set => _year = value; }
         public string Name { get => _name; set => _name = value; }
         public int Cost { get => _cost; set => _cost = value; }
-        public ConsoleAndVersion ConsoleAndVersion { get => _consoleAndVersion; set => _consoleAndVersion = value; }
+        public string ConsoleAndVersion { get => _consoleAndVersion; set => _consoleAndVersion = value; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

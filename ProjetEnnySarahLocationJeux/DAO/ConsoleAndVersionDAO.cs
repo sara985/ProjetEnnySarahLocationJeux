@@ -49,29 +49,6 @@ namespace ProjetEnnySarahLocationJeux.DAO
             }
         }
 
-        public List<ConsoleAndVersion> GetVersionsByConsole(int consoleId)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("select * from dbo.version where consoleId = @id", connection);
-                cmd.Parameters.AddWithValue("id", consoleId);
-                connection.Open();
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    List<ConsoleAndVersion> list = new List<ConsoleAndVersion>();
-                    while (reader.Read())
-                    {
-                        ConsoleAndVersion result = new ConsoleAndVersion();
-                        result.VersionId = reader.GetInt32(0);
-                        result.IdConsole = reader.GetInt32(1);
-                        result.Version = reader.GetString(2);
-                        list.Add(result);
-                    }
-                    return list;
-                }
-            }
-        }
-
         public void Update(ConsoleAndVersion t)
         {
             throw new NotImplementedException();

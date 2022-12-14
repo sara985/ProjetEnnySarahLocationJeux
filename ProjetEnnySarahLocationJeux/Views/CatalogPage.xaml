@@ -38,7 +38,7 @@
             </ComboBox>
             <Button Content="Reset" Width="60" Margin="10 4" Command="{Binding ResetGamesCommand}"/>
         </StackPanel>
-        <ListBox ItemsSource="{Binding VideoGames}" Background="Pink" AlternationCount="3" Grid.Row="1">
+        <ListBox ItemsSource="{Binding FilteredList}" Background="Pink" AlternationCount="3" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <!--Make grid an image background of videogame-->
@@ -57,14 +57,14 @@
                         
                         <TextBlock Width="150" Background="{StaticResource clrPrimary}" Height="150"/>
                         <StackPanel Grid.Column="1" Margin="5">
-                            <TextBlock Text="{Binding Name, StringFormat={}{0}}" FontWeight="Bold" Grid.Column="2" FontSize="20" Height="40"/>
+                            <TextBlock Text="{Binding Name, StringFormat={}{0}}" FontWeight="Bold" Grid.Column="2" FontSize="20"/>
                             <TextBlock Text="{Binding Cost}" FontSize="20"/>
                             <TextBlock Text="{Binding Year}" FontSize="20"/>
                             <DockPanel>
-                                <TextBlock Text="{Binding ConsoleAndVersion.Console, StringFormat={}{0}}" FontSize="20"/>
-                                <TextBlock Text="{Binding ConsoleAndVersion.Version}" FontSize="20" Margin="5 0 0 0"/>
+                                <TextBlock Text="{Binding ConsoleAndVersion}" FontSize="20"/>
                             </DockPanel>
                             <Button Height="35" Command="{Binding RentGameCommand}">Rent Me</Button>
+                            <Button Content="I own this game" Margin="0 5"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

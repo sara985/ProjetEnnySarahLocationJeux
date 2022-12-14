@@ -11,23 +11,23 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
     public class CatalogViewModel : ViewModelBase
     {
-        private List<VideoGame> _videoGames;
+        private List<VideoGame> _allVideoGames;
+        private List<VideoGame> _filteredList;
         private List<ConsoleAndVersion> _consoles;
         private ConsoleAndVersion _selectedConsole;
         private List<ConsoleAndVersion> _versions;
         private ConsoleAndVersion _selectedVersion;
 
-        public List<VideoGame> VideoGames
-        {
-            get => _videoGames;
+        public List<VideoGame> AllVideoGames { 
+            get => _allVideoGames;
             set
             {
-                _videoGames = value;
-                OnPropertyChanged(nameof(VideoGames));
+                _allVideoGames = value;
+                OnPropertyChanged(nameof(AllVideoGames));
             }
         }
 
-        public List<ConsoleAndVersion> Consoles
+    public List<ConsoleAndVersion> Consoles
         {
             get => _consoles;
             set
@@ -62,25 +62,42 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             {
                 _selectedVersion = value;
                 OnPropertyChanged(nameof(SelectedVersion));
-                if(SelectedVersion!=null)
-                VideoGames = VideoGame.GetGamesByConsoleVersion(SelectedVersion.VersionId);
+                string console = getComboBoxesConsoleName();
+                if (SelectedVersion != null)
+                {
+                    FilteredList = AllVideoGames.Where(x => x.ConsoleAndVersion.Equals(console)).ToList();
+                    //AllVideoGames = AllVideoGames.Where(x => x.Name.Equals(console)).ToList();
+                }
             }
+                    
         }
 
         public ICommand RentGameCommand { get; set; }
         public ICommand ResetGamesCommand { get; set; }
-
+        public List<VideoGame> FilteredList { get => _filteredList; 
+            set
+            {
+                _filteredList = value;
+                OnPropertyChanged("FilteredList");
+            }
+        } 
 
         public CatalogViewModel()
         {       
-            VideoGames = VideoGame.GetAll();
+            AllVideoGames = VideoGame.GetAll();
+            _filteredList = AllVideoGames;
             Consoles = ConsoleAndVersion.GetAllConsoles();
             ResetGamesCommand = new ViewModelCommand(ExecuteResetGames);
         }
 
         private void ExecuteResetGames(object obj)
         {
-            VideoGames = VideoGame.GetAll();
+            _filteredList = AllVideoGames;
+        }
+
+        public string getComboBoxesConsoleName()
+        {
+            return SelectedConsole.Console + " " + SelectedVersion.Version;
         }
     }
 }
