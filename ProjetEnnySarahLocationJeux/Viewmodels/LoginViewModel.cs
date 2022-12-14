@@ -16,15 +16,14 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private string _username = "sss";
+        private string _username = "user name";
         private string _password = "condorcet";
         private string _errorMessage;
         private bool _isViewVisible = true;
         private bool _goToSignup = false;
-        private bool _isAdmin = false;
+        //private bool _isAdmin = false;
 
         private PlayerDAO playerDAO;
-
         private AdminDao adminDAO;
 
         //properties
@@ -33,7 +32,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged("ErrorMessage"); } }
         public bool IsViewVisible { get => _isViewVisible; set { _isViewVisible = value; 
                 OnPropertyChanged(nameof(IsViewVisible)); } }
-        public bool IsAdmin { get => _isAdmin; set { _isAdmin = value; OnPropertyChanged(nameof(IsAdmin)); } }
+        //public bool IsAdmin { get => _isAdmin; set { _isAdmin = value; OnPropertyChanged(nameof(IsAdmin)); } }
 
         // -> Commands
         public ICommand LoginCommand { get; set; }
@@ -46,6 +45,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public LoginViewModel()
         {
             //these methods are delegated to the command
+            adminDAO = new AdminDao();
             playerDAO = new PlayerDAO();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));

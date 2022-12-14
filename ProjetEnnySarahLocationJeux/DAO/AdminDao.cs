@@ -41,6 +41,30 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 }
             }
         }
+
+        public Administrator GetByUsername(string username)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Select * from dbo.Admin where username=@user", connection);
+                cmd.Parameters.AddWithValue("user", username);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Administrator a = new Administrator();
+                        a.Id = reader.GetInt32(0);
+                        a.Username = reader.GetString(1);
+                        a.Password = string.Empty;
+                        a.Email = reader.GetString(8);
+                        return a;
+                    }
+                    return null;
+                }
+            }
+        }
+
         public Administrator GetById(int id)
         {
             throw new NotImplementedException();

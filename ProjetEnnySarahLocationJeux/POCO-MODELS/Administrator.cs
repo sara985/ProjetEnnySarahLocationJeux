@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,12 @@ namespace ProjetEnnySarahLocationJeux.POCO
             throw new NotImplementedException();
         }
 
-        
+        public static Administrator GetAdminByUsername(string username)
+        {
+            AdminDao dao = new AdminDao();
+            return dao.GetByUsername(username);
+        }
+
+
     }
 }
