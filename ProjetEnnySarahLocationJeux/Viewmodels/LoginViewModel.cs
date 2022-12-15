@@ -22,6 +22,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private bool _isViewVisible = true;
         private bool _goToSignup = false;
         //private bool _isAdmin = false;
+        private bool _isLoginasAdmin = false;
 
         private PlayerDAO playerDAO;
         private AdminDao adminDAO;
@@ -30,8 +31,10 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public string Username { get => _username; set { _username = value; OnPropertyChanged("Username"); } }
         public string Password { get => _password; set { _password = value; OnPropertyChanged(nameof(Password)); } }
         public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged("ErrorMessage"); } }
-        public bool IsViewVisible { get => _isViewVisible; set { _isViewVisible = value; 
-                OnPropertyChanged(nameof(IsViewVisible)); } }
+        public bool IsViewVisible { get => _isViewVisible; set { _isViewVisible = value; OnPropertyChanged(nameof(IsViewVisible)); }}
+        public bool IsLoginasAdmin { get => _isLoginasAdmin; set { _isLoginasAdmin = value; OnPropertyChanged(nameof(IsLoginasAdmin)); }}
+        public bool GoToSignup { get => _goToSignup; set { _goToSignup = value; OnPropertyChanged("GoToSignup"); } }
+        
         //public bool IsAdmin { get => _isAdmin; set { _isAdmin = value; OnPropertyChanged(nameof(IsAdmin)); } }
 
         // -> Commands
@@ -40,7 +43,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public ICommand RememberPasswordCommand { get; set; }
         public ICommand RecoverPasswordCommand { get; set; }
         public ICommand GoToSignupCommand { get; set; }
-        public bool GoToSignup { get => _goToSignup; set { _goToSignup = value; OnPropertyChanged("GoToSignup"); } }
+        
 
         public LoginViewModel()
         {
@@ -65,6 +68,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             a = adminDAO.isAdmin(a.Username, a.Password);
             if (a != null)
             {
+                IsLoginasAdmin = true;
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
                 //Create an App property to hold the Id value throughout the whole application

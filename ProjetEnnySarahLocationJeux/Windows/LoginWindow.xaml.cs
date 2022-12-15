@@ -23,5 +23,10 @@ namespace ProjetEnnySarahLocationJeux.Windows
         {
             InitializeComponent();
         }
+
+        private void logInBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
