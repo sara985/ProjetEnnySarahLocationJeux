@@ -59,7 +59,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         a.Id = reader.GetInt32(0);
                         a.Username = reader.GetString(1);
                         a.Password = string.Empty;
-                        a.Email = reader.GetString(8);
+                        a.Email = reader.GetString(2);
                         return a;
                     }
                     return null;
