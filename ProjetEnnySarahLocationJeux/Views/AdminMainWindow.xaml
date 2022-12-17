@@ -24,7 +24,8 @@
         </Grid.ColumnDefinitions>
 
         <ListBox x:Name="adminsidebar" SelectionChanged="sidebar_SelectionChanged" SelectionMode="Single" BorderThickness="0" >
-            <customControls:NavButton ItemName="Add Games" Width="98"/>
+            <customControls:NavButton ItemName="Add a Game" Width="98" NavLink="/Views/AdminAddGamePage.xaml"/>
+            <customControls:NavButton ItemName="Add a Console" Width="98" NavLink="/Views/AdminAddConsolePage.xaml"/>
             <customControls:NavButton ItemName="Update Credits" Width="98"/>
             <customControls:NavButton ItemName="Delete Games" Width="98"/>
             <customControls:NavButton ItemName="Sign Out" Width="98"/>
