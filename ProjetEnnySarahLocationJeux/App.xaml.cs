@@ -23,7 +23,16 @@ namespace ProjetEnnySarahLocationJeux
             loginView.IsVisibleChanged += (s, ev) =>
             {
                 bool signup = ((LoginViewModel)loginView.DataContext).GoToSignup;
-                if (loginView.IsVisible == false && loginView.IsLoaded && signup==false)
+                bool admin = ((LoginViewModel)loginView.DataContext).IsLoginasAdmin;
+
+
+               if (loginView.IsVisible == false && loginView.IsLoaded && signup == false && admin)
+                {
+                    var mainView = new AdminMainWindow();
+                    mainView.Show();
+                    loginView.Close();
+                }
+               else if (loginView.IsVisible == false && loginView.IsLoaded && signup==false)
                 {
                     var mainView = new PlayerMainWindow();
                     mainView.Show();

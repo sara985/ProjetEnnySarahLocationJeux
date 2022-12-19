@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjetEnnySarahLocationJeux.Windows
+namespace ProjetEnnySarahLocationJeux.Views
 {
     /// <summary>
-    /// Logique d'interaction pour LoginWindow.xaml
+    /// Interaction logic for AdminAddGamePage.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class AdminAddGamePage : Page
     {
-        public LoginWindow()
+        public AdminAddGamePage()
         {
             InitializeComponent();
-        }
-
-        private void logInBtn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
