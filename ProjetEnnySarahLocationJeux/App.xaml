@@ -39,5 +39,16 @@
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="Foreground" Value="Yellow"/>
         </Style>
+        <!--<Style TargetType="ComboBox">
+        </Style>-->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource mediumColor}"/>
+            <Setter Property="Button.Content" Value="Black"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </Style.Resources>
+        </Style>
     </Application.Resources>
 </Application>

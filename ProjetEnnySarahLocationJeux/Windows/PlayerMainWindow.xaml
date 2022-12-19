@@ -7,7 +7,7 @@
         xmlns:viewmodel="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
         xmlns:customControls="clr-namespace:ProjetEnnySarahLocationJeux.CustomControls"
         mc:Ignorable="d"
-        Title="PlayerMainWindow" Height="450" Width="800">
+        Title="PlayerMainWindow" Height="450" Width="1000">
     
 
     <Window.DataContext>
@@ -27,7 +27,9 @@
 
         <ListBox x:Name="sidebar" SelectionChanged="sidebar_SelectionChanged" SelectionMode="Single" BorderThickness="0">
             <customControls:NavButton ItemName="My Account" NavLink="/Views/MyAccountPage.xaml" Width="98" Cursor="Hand"/>
-            <customControls:NavButton ItemName="Catalog" NavLink="/Views/MyAccountPage.xaml" Width="98"/>
+            <customControls:NavButton ItemName="Catalog" NavLink="/Views/CatalogPage.xaml" Width="98"/>
+            <customControls:NavButton ItemName="My Games" NavLink="/Views/CatalogPage.xaml" Width="98"/>
+            <customControls:NavButton ItemName="Add Game" NavLink="\Pages\AddGamePage.xaml" Width="98" Cursor="Hand"/>
         </ListBox>
         <StackPanel Grid.Column="1" Margin="20 5 15 5">
             <TextBlock Text="{Binding CurrentPlayer.FirstName, StringFormat={}Hello {0}}" FontSize="24" Height="30" HorizontalAlignment="Right"/>

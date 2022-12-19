@@ -30,6 +30,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged("ErrorMessage"); } }
         public bool IsViewVisible { get => _isViewVisible; set { _isViewVisible = value; 
                 OnPropertyChanged(nameof(IsViewVisible)); } }
+        public bool GoToSignup { get => _goToSignup; set { _goToSignup = value; OnPropertyChanged("GoToSignup"); } }
 
         // -> Commands
         public ICommand LoginCommand { get; set; }
@@ -37,7 +38,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public ICommand RememberPasswordCommand { get; set; }
         public ICommand RecoverPasswordCommand { get; set; }
         public ICommand GoToSignupCommand { get; set; }
-        public bool GoToSignup { get => _goToSignup; set { _goToSignup = value; OnPropertyChanged("GoToSignup"); } }
+        
 
         public LoginViewModel()
         {
