@@ -15,6 +15,10 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private bool isAvailable;
         private Stream image;
 
+        public Copy()
+        {
+        }
+
         public Copy(int id, VideoGame game, bool isAvailable)
         {
             this.id = id;

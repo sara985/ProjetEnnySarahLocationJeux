@@ -18,6 +18,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private string _name;
         private int _cost;
         private string _consoleAndVersion;
+        List<Copy> copies;
         //private List<ConsoleAndVersion> versionsAvailable;
         //mieux vaut mettre une taille dans une liste quand on la créé => plus efficace
 
@@ -42,6 +43,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public string Name { get => _name; set => _name = value; }
         public int Cost { get => _cost; set => _cost = value; }
         public string ConsoleAndVersion { get => _consoleAndVersion; set => _consoleAndVersion = value; }
+        internal List<Copy> Copies { get => copies; set => copies = value; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

@@ -62,9 +62,9 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             {
                 _selectedVersion = value;
                 OnPropertyChanged(nameof(SelectedVersion));
-                string console = getComboBoxesConsoleName();
                 if (SelectedVersion != null)
                 {
+                    string console = getComboBoxesConsoleName();
                     FilteredList = AllVideoGames.Where(x => x.ConsoleAndVersion.Equals(console)).ToList();
                     //AllVideoGames = AllVideoGames.Where(x => x.Name.Equals(console)).ToList();
                 }
@@ -95,7 +95,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             _filteredList = AllVideoGames;
         }
 
-        public string getComboBoxesConsoleName()
+        private string getComboBoxesConsoleName()
         {
             return SelectedConsole.Console + " " + SelectedVersion.Version;
         }

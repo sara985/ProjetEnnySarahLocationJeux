@@ -33,7 +33,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("select * from dbo.Game", connection);
+                CopyDAO copyDAO = new CopyDAO();
+                SqlCommand cmd = new SqlCommand("select * from dbo.Game g", connection);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -46,6 +47,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         v.Year = reader.GetInt32(2);
                         v.Cost = reader.GetInt32(3);
                         v.ConsoleAndVersion = reader.GetString(4);
+                        v.Copies = copyDAO.GetByGameId(reader.GetInt32(0));
                         list.Add(v);
                     }
                     return list;
