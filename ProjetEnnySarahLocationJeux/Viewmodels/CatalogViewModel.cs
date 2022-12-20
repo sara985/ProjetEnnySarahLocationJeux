@@ -17,13 +17,14 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private ConsoleAndVersion _selectedConsole;
         private List<ConsoleAndVersion> _versions;
         private ConsoleAndVersion _selectedVersion;
+        private bool isTest;
 
         public List<VideoGame> AllVideoGames { 
             get => _allVideoGames;
             set
             {
                 _allVideoGames = value;
-                OnPropertyChanged(nameof(AllVideoGames));
+                OnPropertyChanged("AllVideoGames");
             }
         }
 
@@ -62,9 +63,9 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             {
                 _selectedVersion = value;
                 OnPropertyChanged(nameof(SelectedVersion));
-                string console = getComboBoxesConsoleName();
                 if (SelectedVersion != null)
                 {
+                    string console = getComboBoxesConsoleName();
                     FilteredList = AllVideoGames.Where(x => x.ConsoleAndVersion.Equals(console)).ToList();
                     //AllVideoGames = AllVideoGames.Where(x => x.Name.Equals(console)).ToList();
                 }
@@ -74,28 +75,31 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         public ICommand RentGameCommand { get; set; }
         public ICommand ResetGamesCommand { get; set; }
-        public List<VideoGame> FilteredList { get => _filteredList; 
+        public List<VideoGame> FilteredList { 
+            get => _filteredList; 
             set
             {
                 _filteredList = value;
                 OnPropertyChanged("FilteredList");
             }
-        } 
+        }
+
+        public bool IsTest { get => isTest; set => isTest = value; }
 
         public CatalogViewModel()
         {       
             AllVideoGames = VideoGame.GetAll();
-            _filteredList = AllVideoGames;
+            FilteredList = AllVideoGames;
             Consoles = ConsoleAndVersion.GetAllConsoles();
             ResetGamesCommand = new ViewModelCommand(ExecuteResetGames);
         }
 
         private void ExecuteResetGames(object obj)
         {
-            _filteredList = AllVideoGames;
+            FilteredList = AllVideoGames;
         }
 
-        public string getComboBoxesConsoleName()
+        private string getComboBoxesConsoleName()
         {
             return SelectedConsole.Console + " " + SelectedVersion.Version;
         }

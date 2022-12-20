@@ -24,10 +24,5 @@ namespace ProjetEnnySarahLocationJeux.Views
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(sender.ToString());
-        }
     }
 }

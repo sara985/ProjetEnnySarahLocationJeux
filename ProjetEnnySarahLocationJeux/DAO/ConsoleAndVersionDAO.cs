@@ -32,7 +32,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("select * from dbo.console", connection);
+                SqlCommand cmd = new SqlCommand("select * from dbo.console c join dbo.version v on c.Id = v.consoleId", connection);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -42,6 +42,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         ConsoleAndVersion result = new ConsoleAndVersion();
                         result.IdConsole = reader.GetInt32(0);
                         result.Console = reader.GetString(1);
+                        result.Version = reader.GetString(4);
+                        result.VersionId = reader.GetInt32(2);
                         list.Add(result);
                     }
                     return list;

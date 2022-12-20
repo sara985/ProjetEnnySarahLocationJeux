@@ -42,12 +42,26 @@ namespace ProjetEnnySarahLocationJeux.POCO
 
         public static List<ConsoleAndVersion> GetAllConsoles()
         {
-            return new ConsoleAndVersionDAO().List();
+            var list = new ConsoleAndVersionDAO().List().GroupBy(c => c.IdConsole);
+            var finalList = new List<ConsoleAndVersion>();
+            foreach (var item in list)
+            {
+                string consoleName="";
+                System.Console.WriteLine(item.Key);
+                foreach(ConsoleAndVersion c in item)
+                {
+                    consoleName = c.Console;
+                }
+                finalList.Add(new ConsoleAndVersion(item.Key,consoleName, null));
+
+            }
+            return finalList;
         }
 
         public static List<ConsoleAndVersion> GetVersionsByConsole(int consoleId)
         {
-            return new ConsoleAndVersionDAO().GetVersionsByConsole(consoleId);
+            return new ConsoleAndVersionDAO().List().Where(x => x.IdConsole == consoleId).ToList();
+            
         }
 
         public override string? ToString()
