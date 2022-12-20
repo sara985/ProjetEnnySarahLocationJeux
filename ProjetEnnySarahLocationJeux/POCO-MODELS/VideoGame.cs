@@ -19,6 +19,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private int _cost;
         private string _consoleAndVersion;
         List<Copy> copies;
+        bool hasCopiesAvailable;
         //private List<ConsoleAndVersion> versionsAvailable;
         //mieux vaut mettre une taille dans une liste quand on la créé => plus efficace
 
@@ -27,7 +28,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
             RentGameCommand = new ViewModelCommand(ExecuteRentGame);
         }
 
-        public VideoGame(int id, int year, string name, int cost, string consoleAndVersion)
+        public VideoGame(int id, int year, string name, int cost, string consoleAndVersion, List<Copy> copies)
         {
             RentGameCommand = new ViewModelCommand(ExecuteRentGame);
             Id = id;
@@ -35,6 +36,8 @@ namespace ProjetEnnySarahLocationJeux.POCO
             _name = name;
             Cost = cost;
             ConsoleAndVersion = consoleAndVersion;
+            Copies = copies;
+            hasCopiesAvailable = HasCopyAvailable();
         }
         public ICommand RentGameCommand { get; set; }
 
@@ -43,20 +46,20 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public string Name { get => _name; set => _name = value; }
         public int Cost { get => _cost; set => _cost = value; }
         public string ConsoleAndVersion { get => _consoleAndVersion; set => _consoleAndVersion = value; }
-        internal List<Copy> Copies { get => copies; set => copies = value; }
+        public List<Copy> Copies { get => copies;
+            set { 
+                copies = value;
+                hasCopiesAvailable = HasCopyAvailable();
+            }
+        }
+        public bool HasCopiesAvailable { get => hasCopiesAvailable; set => hasCopiesAvailable = value; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged(string info)
-        {
-            var handler = PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(info));
-        }
 
         private void ExecuteRentGame(object obj)
         {
             //actually rent the game for the user in here; for now it seems good
-            MessageBox.Show(Name);
+            MessageBox.Show(HasCopyAvailable().ToString());
         }
 
         public static List<VideoGame> GetAll()
@@ -68,6 +71,18 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public static List<VideoGame> GetGamesByConsoleVersion(int versionId)
         {
             return new VideoGameDAO().GetGamesByConsoleVersion(versionId);
+        }
+
+        public bool HasCopyAvailable()
+        {
+            foreach(Copy copy in Copies)
+            {
+                if (copy.IsAvailable)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 

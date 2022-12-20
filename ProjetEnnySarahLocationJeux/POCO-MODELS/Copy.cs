@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
-    internal class Copy
+    public class Copy
     {
         private int id;
         private VideoGame game;
