@@ -23,7 +23,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!--Quand release copy, automatiquement regarder si réservation pour cette copie, elle doit commencer automatiquement s'il y en a une-->
-        <!--<customcontrols:GameCard/>-->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Console" Margin="5 5 0 5"/>
             <ComboBox Grid.Row="1" ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole}" Width="150" Foreground="Black" HorizontalAlignment="Left" Margin="5 5">
@@ -77,7 +76,6 @@
             </ListBox.ItemTemplate>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <!--<VirtualizingStackPanel Orientation="Vertical" />-->
                     <UniformGrid Columns="3"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>

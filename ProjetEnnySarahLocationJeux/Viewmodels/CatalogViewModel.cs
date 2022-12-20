@@ -91,12 +91,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             AllVideoGames = VideoGame.GetAll();
             FilteredList = AllVideoGames;
             Consoles = ConsoleAndVersion.GetAllConsoles();
-            ResetGamesCommand = new ViewModelCommand(ExecuteResetGames, CanExecuteResetGames);
-        }
-
-        private bool CanExecuteResetGames(object obj)
-        {
-            return false;
+            ResetGamesCommand = new ViewModelCommand(ExecuteResetGames);
         }
 
         private void ExecuteResetGames(object obj)
