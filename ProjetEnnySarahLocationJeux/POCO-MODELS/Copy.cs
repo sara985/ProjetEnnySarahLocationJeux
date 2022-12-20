@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
-    internal class Copy
+    public class Copy
     {
         private int id;
         private VideoGame game;
         private Player owner;
         private bool isAvailable;
         private Stream image;
+
+        public Copy()
+        {
+        }
 
         public Copy(int id, VideoGame game, bool isAvailable)
         {

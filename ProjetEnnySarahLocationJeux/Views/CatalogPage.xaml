@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:ProjetEnnySarahLocationJeux.Views"
       xmlns:viewmodels="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
       xmlns:customcontrols="clr-namespace:ProjetEnnySarahLocationJeux.CustomControls"
+      xmlns:converters="clr-namespace:ProjetEnnySarahLocationJeux.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="700"
       Title="CatalogPage">
@@ -13,12 +14,15 @@
         <viewmodels:CatalogViewModel/>
     </Page.DataContext>
     <Grid>
+        <Grid.Resources>
+            <converters:BoolToVisibilityConverter x:Key="converter"/>
+            <converters:BoolToNoVisibilityConverter x:Key="converter2"/>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!--Quand release copy, automatiquement regarder si réservation pour cette copie, elle doit commencer automatiquement s'il y en a une-->
-        <!--<customcontrols:GameCard/>-->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Console" Margin="5 5 0 5"/>
             <ComboBox Grid.Row="1" ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole}" Width="150" Foreground="Black" HorizontalAlignment="Left" Margin="5 5">
@@ -47,14 +51,10 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <!--<Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>-->
                         <!--Soit mettre chemin des images ds bdd, soit mettre les images directement ds bdd, soit mettre directement dans projet mais alors peut pas en ajouter plus
                         <Image Source="ProjetEnnySarahLocationJeux\Images\wiisport.jpg" Width="200"/>
                         Maybe change background color based on game availability-->
-                        
+
                         <TextBlock Width="150" Background="{StaticResource clrPrimary}" Height="150"/>
                         <StackPanel Grid.Column="1" Margin="5">
                             <TextBlock Text="{Binding Name, StringFormat={}{0}}" FontWeight="Bold" Grid.Column="2" FontSize="20"/>
@@ -63,19 +63,24 @@
                             <DockPanel>
                                 <TextBlock Text="{Binding ConsoleAndVersion}" FontSize="20"/>
                             </DockPanel>
-                            <Button Height="35" Command="{Binding RentGameCommand}">Rent Me</Button>
-                            <Button Content="I own this game" Margin="0 5"/>
+                            <Button x:Name="rentme" Height="35" Command="{Binding RentGameCommand}" Content="Rent Me" 
+                                    Visibility="{Binding Path=HasCopiesAvailable, Converter={StaticResource converter}}">
+                            </Button>
+                            <Button Content="Book Me" Margin="0 5"
+                                    Visibility="{Binding Path=HasCopiesAvailable, Converter={StaticResource converter2}}"/>
+                            <Button Content="I own this game" />
+
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <!--<VirtualizingStackPanel Orientation="Vertical" />-->
                     <UniformGrid Columns="3"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ListBox>
     </Grid>
+
 
 </Page>

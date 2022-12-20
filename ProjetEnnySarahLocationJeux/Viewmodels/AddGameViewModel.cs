@@ -10,7 +10,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
     internal class AddGameViewModel : ViewModelBase
     {
-        private Copy _game = new Copy(1, new VideoGame(1,2000,"Wii Sports",5,""),true);
+        private Copy _game = new Copy(1, new VideoGame(1,2000,"Wii Sports",5,"", new List<Copy>()),true);
         private List<ConsoleAndVersion> _consoles;
         private ConsoleAndVersion _selectedConsole;
         private List<ConsoleAndVersion> _versions;
