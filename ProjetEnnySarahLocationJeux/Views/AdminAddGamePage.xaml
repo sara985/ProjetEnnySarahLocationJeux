@@ -9,7 +9,36 @@
       Title="AdminAddGamePage">
 
     <Grid>
-        <Label> Admin add-Game Page</Label>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            
+            
+        </Grid.RowDefinitions>
+
+        <Label Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Style="{StaticResource TitleLable}" Content="Admin add-Game Page"/>
+        <TextBlock Text="Game's name" Grid.Row="1" Margin="20,10,10,10" HorizontalAlignment="Right"/>
+        <TextBox x:Name="gameName" Grid.Row="1" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left"/>
+        <TextBlock Text="Year" Grid.Row="2" Margin="20,10,10,10" HorizontalAlignment="Right"/>
+        <TextBox x:Name="year" Grid.Row="2" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left"/>
+        <TextBlock Text="Cost (amount of credit)" Grid.Row="3" Margin="20,10,10,10" HorizontalAlignment="Right"/>
+        <TextBox x:Name="creditcost" Grid.Row="3" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left"/>
+        <TextBlock Text="Console" Grid.Row="4" Margin="20,10,10,10" HorizontalAlignment="Right"/>
+        <TextBox x:Name="console" Grid.Row="4" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left"/>
+        <TextBlock Text="Version" Grid.Row="5" Margin="20,10,10,10" HorizontalAlignment="Right"/>
+        <TextBox x:Name="version" Grid.Row="5" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left"/>
+        <Button x:Name="addNewGameBtn" Grid.Row="6" Grid.Column="1" Width="200" Content="Add New Game" Style="{StaticResource firstBtnType}" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10"></Button>
+
+
     </Grid>
 </Page>

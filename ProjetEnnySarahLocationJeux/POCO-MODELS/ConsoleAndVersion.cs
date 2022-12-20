@@ -44,7 +44,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             return new ConsoleAndVersionDAO().List();
         }
-
+        //todo: uncomment -> comment just to make the programme work
         public static List<ConsoleAndVersion> GetVersionsByConsole(int consoleId)
         {
             return new ConsoleAndVersionDAO().GetVersionsByConsole(consoleId);

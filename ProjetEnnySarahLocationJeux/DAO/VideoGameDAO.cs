@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjetEnnySarahLocationJeux.DAO
 {
@@ -26,7 +27,29 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public bool Insert(VideoGame t)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Insert into dbo.Game values (@name,@year,@creditsValued,@consoleAndVersion)", connection);
+                cmd.Parameters.AddWithValue("name", t.Name);
+                cmd.Parameters.AddWithValue("year", t.Year);
+                cmd.Parameters.AddWithValue("creditsValued", t.Cost);
+                cmd.Parameters.AddWithValue("type", t.ConsoleAndVersion);
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }catch(Exception e) 
+                {
+                    MessageBox.Show(e.Message); 
+                    return false;
+                }
+                if(i == 1) { return true; }
+                
+                return false;
+            }
+
         }
 
         public List<VideoGame> List()

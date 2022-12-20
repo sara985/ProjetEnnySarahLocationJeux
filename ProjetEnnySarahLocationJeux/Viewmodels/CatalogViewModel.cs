@@ -54,6 +54,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             {
                 _selectedConsole = value;
                 OnPropertyChanged(nameof(SelectedConsole));
+                //todo: uncomment -> add comment just to make progrdamme work
                 Versions = ConsoleAndVersion.GetVersionsByConsole(SelectedConsole.IdConsole);
             }
         }
