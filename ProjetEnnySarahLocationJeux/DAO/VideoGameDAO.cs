@@ -33,7 +33,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 cmd.Parameters.AddWithValue("name", t.Name);
                 cmd.Parameters.AddWithValue("year", t.Year);
                 cmd.Parameters.AddWithValue("creditsValued", t.Cost);
-                cmd.Parameters.AddWithValue("type", t.ConsoleAndVersion);
+                cmd.Parameters.AddWithValue("consoleAndVersion", t.ConsoleAndVersion);
                 connection.Open();
                 int i = 0;
 
