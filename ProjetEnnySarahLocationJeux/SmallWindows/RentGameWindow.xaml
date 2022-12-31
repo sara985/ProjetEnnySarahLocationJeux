@@ -1,0 +1,26 @@
+﻿<Window x:Class="ProjetEnnySarahLocationJeux.SmallWindows.RentGameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjetEnnySarahLocationJeux.SmallWindows"
+        xmlns:viewmodel="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
+        mc:Ignorable="d"
+        Title="RentGameWindow" Height="150" Width="350" ResizeMode="NoResize">
+    <Window.DataContext>
+        <viewmodel:RentGameViewModel/>
+    </Window.DataContext>
+    <StackPanel Margin="5">
+        <TextBlock Text="For how many weeks would you like to rent name ?" Foreground="Black"/>
+        <ComboBox Foreground="Black">
+            <ComboBoxItem Foreground="Black">1</ComboBoxItem>
+            <ComboBoxItem>2</ComboBoxItem>
+            <ComboBoxItem>3</ComboBoxItem>
+            <ComboBoxItem>4</ComboBoxItem>
+        </ComboBox>
+        <UniformGrid Rows="1" Columns="2">
+            <Button Content="Rent" Margin="5"/>
+            <Button Content="Cancel" Margin="5"/>
+        </UniformGrid>
+    </StackPanel>
+</Window>

@@ -59,7 +59,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private void ExecuteRentGame(object obj)
         {
             //actually rent the game for the user in here; for now it seems good
-            MessageBox.Show(HasCopyAvailable().ToString());
+             MessageBox.Show(this.Name);
         }
 
         public static List<VideoGame> GetAll()
