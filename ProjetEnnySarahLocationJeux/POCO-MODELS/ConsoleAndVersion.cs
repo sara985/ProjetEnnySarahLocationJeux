@@ -19,6 +19,17 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
         }
 
+        public ConsoleAndVersion(string console)
+        {
+            this.console = console;
+        }
+
+        public ConsoleAndVersion(string version, int idConsole)
+        {
+            this.version=version;
+            this.idConsole = idConsole;
+        }
+
         public ConsoleAndVersion(int idConsole, string console, string version)
         {
             this.idConsole = idConsole;
@@ -37,6 +48,12 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public string Version { get { return version; }
             set { version = value; }
         }
+
+        public override string? ToString()
+        {
+            return console;
+        }
+
 
         public int VersionId { get => versionId; set => versionId = value; }
 
@@ -64,9 +81,21 @@ namespace ProjetEnnySarahLocationJeux.POCO
             
         }
 
-        public override string? ToString()
+        
+        public bool InsertConsole()
         {
-            return console;
+            ConsoleAndVersionDAO dao = new ConsoleAndVersionDAO();
+            return dao.InsertNewConsole(this);
         }
+
+        public bool InsertVersion()
+        {
+            
+            ConsoleAndVersionDAO dao = new ConsoleAndVersionDAO();
+            return dao.InsertNewVersion(this);
+        }
+
+
+        
     }
 }

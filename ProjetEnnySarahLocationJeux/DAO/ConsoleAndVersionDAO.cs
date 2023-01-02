@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjetEnnySarahLocationJeux.DAO
 {
@@ -21,6 +22,55 @@ namespace ProjetEnnySarahLocationJeux.DAO
         public ConsoleAndVersion GetById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public bool InsertNewConsole(ConsoleAndVersion c)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("insert into dbo.Console values (@name)", connection);
+                cmd.Parameters.AddWithValue("name", c.Console);
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+                return false;
+
+            }
+        }
+
+        internal bool InsertNewVersion(ConsoleAndVersion v)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("insert into dbo.Version values ( 2, @version)", connection);
+                
+                //cmd.Parameters.AddWithValue("consoleId", v.IdConsole);
+                cmd.Parameters.AddWithValue("version", v.Version);
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+                return false;
+
+            }
         }
 
         public bool Insert(ConsoleAndVersion t)
@@ -51,9 +101,13 @@ namespace ProjetEnnySarahLocationJeux.DAO
             }
         }
 
+        
+
         public void Update(ConsoleAndVersion t)
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

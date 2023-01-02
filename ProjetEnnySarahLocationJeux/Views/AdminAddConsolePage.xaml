@@ -4,11 +4,37 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjetEnnySarahLocationJeux.Views"
+     xmlns:viewmodel="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminAddConsolePage">
+    
+    <Page.DataContext>
+        <viewmodel:AddNewConsoleViewModel/>
+    </Page.DataContext>
 
     <Grid>
-        <Label>Admin add-Console Page</Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Style="{StaticResource TitleLable}" Content="Admin add-Cosole Page"/>
+        <TextBlock Text="Console's name" Grid.Row="1" Margin="20,10,10,10" HorizontalAlignment="Right"/>
+        <TextBox Text="{Binding Console.Console, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left"/>
+        <Button Grid.Row="3" Grid.Column="1" Width="200" Content="Add New Console" Style="{StaticResource firstBtnType}" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" Command="{Binding AddConsoleCommande}"></Button>
+
     </Grid>
+    
 </Page>
