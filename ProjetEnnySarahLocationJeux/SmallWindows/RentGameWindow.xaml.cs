@@ -1,4 +1,6 @@
-﻿using ProjetEnnySarahLocationJeux.POCO;
+﻿using ProjetEnnySarahLocationJeux.Interfaces;
+using ProjetEnnySarahLocationJeux.POCO;
+using ProjetEnnySarahLocationJeux.Viewmodels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,19 @@ namespace ProjetEnnySarahLocationJeux.SmallWindows
         public RentGameWindow(VideoGame obj)
         {
             InitializeComponent();
+            this.DataContext = new RentGameViewModel(obj);
+            Loaded += WindowLoaded;
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ICloseWindows vm)
+            {
+                vm.Close += () =>
+                {
+                    this.Close();
+                };
+            }
         }
     }
 }

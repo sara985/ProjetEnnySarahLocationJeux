@@ -10,7 +10,6 @@ namespace ProjetEnnySarahLocationJeux.POCO
     public class Copy
     {
         private int id;
-        private VideoGame game;
         private Player owner;
         private bool isAvailable;
         private Stream image;
@@ -19,18 +18,15 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
         }
 
-        public Copy(int id, VideoGame game, bool isAvailable)
+        public Copy(int id, bool isAvailable)
         {
             this.id = id;
-            this.game = game;
             this.isAvailable = isAvailable;
         }
 
 
         public int Id { get => id; set => id = value; }
         public bool IsAvailable { get => isAvailable; set => isAvailable = value; }
-
-        //TODO owner encapsulation
-        public VideoGame Game { get => game; set => game = value; }
+        public Player Owner { get => owner; set => owner = value; }
     }
 }

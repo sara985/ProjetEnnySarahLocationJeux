@@ -1,4 +1,5 @@
-﻿using ProjetEnnySarahLocationJeux.POCO;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using ProjetEnnySarahLocationJeux.POCO;
 using ProjetEnnySarahLocationJeux.SmallWindows;
 using System;
 using System.Collections.Generic;
@@ -96,6 +97,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         }
 
         public ICommand RentGameCommand { get; set; }
+        public ICommand BookGameCommand { get; set; }
         public ICommand ResetGamesCommand { get; set; }
         public ICommand OwnTheGameCommand { get; set; }
         
@@ -107,14 +109,28 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             Consoles = ConsoleAndVersion.GetAllConsoles();
             ResetGamesCommand = new ViewModelCommand(ExecuteResetGames);
             OwnTheGameCommand = new ViewModelCommand(ExecuteOwnThisGame);
-            RentGameCommand = new ViewModelCommand(ExecuteRentThisGame);
+            RentGameCommand = new ViewModelCommand(ExecuteRentThisGame, CanExecuteRentThisGame);
+            BookGameCommand = new ViewModelCommand(ExecuteBookThisGame, CanExecuteRentThisGame);
+        }
+
+        private void ExecuteBookThisGame(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanExecuteRentThisGame(object obj)
+        {
+            if(SelectedVideoGame!=null && SelectedVideoGame.Copies.Count ==0 ) return false;
+            return true;
         }
 
         private void ExecuteRentThisGame(object obj)
         {
-            MessageBox.Show(SelectedVideoGame.Name);
-            new RentGameWindow(SelectedVideoGame).Show();
-            //SelectedVideoGame.RentGameCommand;
+            Window window = new RentGameWindow(SelectedVideoGame);
+            window.Show();            
+            //refresh sel videogame
+            //MessageBox.Show("work");
+            SelectedVideoGame = new VideoGameDAO().GetById(SelectedVideoGame.Id);
         }
 
         private void ExecuteOwnThisGame(object obj)
@@ -125,7 +141,6 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private void ExecuteResetGames(object obj)
         {
             FilteredList = AllVideoGames;
-            //MessageBox.Show(SelectedVideoGame.Name);
         }
 
         private string getComboBoxesConsoleName()

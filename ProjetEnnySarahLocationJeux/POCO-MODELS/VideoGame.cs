@@ -25,12 +25,10 @@ namespace ProjetEnnySarahLocationJeux.POCO
 
         public VideoGame()
         {
-            RentGameCommand = new ViewModelCommand(ExecuteRentGame);
         }
 
         public VideoGame(int id, int year, string name, int cost, string consoleAndVersion, List<Copy> copies)
         {
-            RentGameCommand = new ViewModelCommand(ExecuteRentGame);
             Id = id;
             Year = year;
             _name = name;
@@ -39,7 +37,6 @@ namespace ProjetEnnySarahLocationJeux.POCO
             Copies = copies;
             hasCopiesAvailable = HasCopyAvailable();
         }
-        public ICommand RentGameCommand { get; set; }
 
         public int Id { get => _id; set => _id = value; }
         public int Year { get => _year; set => _year = value; }
@@ -53,14 +50,6 @@ namespace ProjetEnnySarahLocationJeux.POCO
             }
         }
         public bool HasCopiesAvailable { get => hasCopiesAvailable; set => hasCopiesAvailable = value; }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void ExecuteRentGame(object obj)
-        {
-            //actually rent the game for the user in here; for now it seems good
-             MessageBox.Show(this.Name);
-        }
 
         public static List<VideoGame> GetAll()
         {

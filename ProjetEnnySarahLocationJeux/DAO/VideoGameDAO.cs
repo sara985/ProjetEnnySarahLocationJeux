@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProjetEnnySarahLocationJeux.DAO
 {
-    internal class VideoGameDAO : IDAOInterface<VideoGame>
+    public class VideoGameDAO : IDAOInterface<VideoGame>
     {
         private string connectionString;
 
@@ -21,7 +21,27 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public VideoGame GetById(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                CopyDAO copyDAO = new CopyDAO();
+                SqlCommand cmd = new SqlCommand("select * from dbo.Game where id=@id", connection);
+                cmd.Parameters.AddWithValue("id", id);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    VideoGame v = new VideoGame();
+                    while (reader.Read())
+                    {
+                        v.Id = reader.GetInt32(0);
+                        v.Name = reader.GetString(1);
+                        v.Year = reader.GetInt32(2);
+                        v.Cost = reader.GetInt32(3);
+                        v.ConsoleAndVersion = reader.GetString(4);
+                        v.Copies = copyDAO.GetByGameId(reader.GetInt32(0));
+                    }
+                    return v;
+                }
+            }
         }
 
         public bool Insert(VideoGame t)

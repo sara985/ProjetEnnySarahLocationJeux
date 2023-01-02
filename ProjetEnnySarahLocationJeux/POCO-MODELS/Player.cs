@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
-    internal class Player : User
+    public class Player : User
     {
         //Question peut-on ajouter une instance de DAO afin de ne pas avoir à l'instancier à chaque fois ?
         private int id;
