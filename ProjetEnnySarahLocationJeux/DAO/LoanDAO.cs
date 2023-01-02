@@ -35,21 +35,16 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 cmd.Parameters.AddWithValue("enddate", t.PresumedEndDate.ToShortDateString());
                 cmd.Parameters.AddWithValue("credits", t.VideoGame.Cost);
                 connection.Open();
-                int i = 0;
                 try
                 {
-                    i = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
                     return false;
                 }
-                if (i == 1)
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
         }
 
