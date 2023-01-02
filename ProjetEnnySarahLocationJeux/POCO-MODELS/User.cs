@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
-    abstract class User
+    public abstract class User
     {
         //Question ou mettre calculate SHA256
 
