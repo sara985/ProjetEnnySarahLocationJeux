@@ -1,5 +1,6 @@
 ﻿using ProjetEnnySarahLocationJeux.Interfaces;
 using ProjetEnnySarahLocationJeux.POCO;
+using ProjetEnnySarahLocationJeux.POCO_MODELS;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace ProjetEnnySarahLocationJeux.DAO
 {
@@ -44,6 +46,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public List<Copy> GetByGameId(int gameId)
         {
+            PlayerDAO play = new PlayerDAO();
+            BookingDAO booking = new BookingDAO(); 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("Select * from dbo.copy where gameid=@id", connection);
@@ -58,10 +62,33 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         c.Id = reader.GetInt32(0);
                         c.Owner = new PlayerDAO().GetById(reader.GetInt32(1));
                         c.IsAvailable = reader.GetBoolean(2);
+                        c.Bookings = booking.GetBookingsByCopyId(c.Id);
                         list.Add(c);
-                    }
+                    }                            
                 }
                 return list;
+            }
+        }
+
+        public Copy GetCopyWithLeastBookings(int gameid)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Select c.id, count(*) as NumberOfBookings from dbo.copy c join dbo.booking b on b.copyId = c.id " +
+                    "where c.gameId = @gameid and b.status='Waiting'" +
+                    " group by c.id " +
+                    "order by NumberOfBookings", connection);
+                cmd.Parameters.AddWithValue("gameid", gameid);
+                connection.Open();
+                Copy c = new();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if(reader.Read())
+                    {
+                        c = GetById(reader.GetInt32(0));
+                    }
+                }
+                return c;
             }
         }
 

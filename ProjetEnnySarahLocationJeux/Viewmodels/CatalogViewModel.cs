@@ -115,7 +115,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void ExecuteBookThisGame(object obj)
         {
-            throw new NotImplementedException();
+            Window window = new BookGameWindow(SelectedVideoGame);
+            window.Show();
         }
 
         private bool CanExecuteRentThisGame(object obj)

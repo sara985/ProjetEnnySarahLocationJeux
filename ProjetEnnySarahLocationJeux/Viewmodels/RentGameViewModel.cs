@@ -52,6 +52,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             RentedVideoGame = rentedVideoGame;
             NumberOfWeeks = new List<int> {1,2,3,4};
             RentGameCommand = new ViewModelCommand(ExecuteRentGameCommand);
+            SelectedNumberOfWeeks = 1;
         }
 
         private void ExecuteRentGameCommand(object obj)
