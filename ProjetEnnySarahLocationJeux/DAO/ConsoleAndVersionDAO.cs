@@ -101,7 +101,26 @@ namespace ProjetEnnySarahLocationJeux.DAO
             }
         }
 
-        
+        public List<ConsoleAndVersion> ListConsole()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("select * from dbo.console", connection);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    List<ConsoleAndVersion> listConsole = new List<ConsoleAndVersion>();
+                    while (reader.Read())
+                    {
+                        ConsoleAndVersion result = new ConsoleAndVersion();
+                        result.IdConsole = reader.GetInt32(0);
+                        result.Console = reader.GetString(1);
+                        listConsole.Add(result);
+                    }
+                    return listConsole;
+                }
+            }
+        }
 
         public void Update(ConsoleAndVersion t)
         {

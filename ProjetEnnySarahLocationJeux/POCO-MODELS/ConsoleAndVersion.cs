@@ -81,6 +81,11 @@ namespace ProjetEnnySarahLocationJeux.POCO
             
         }
 
+        public static List<ConsoleAndVersion> GetOnlyConsoles()
+        {
+            return new ConsoleAndVersionDAO().ListConsole();                     
+        }
+
         
         public bool InsertConsole()
         {

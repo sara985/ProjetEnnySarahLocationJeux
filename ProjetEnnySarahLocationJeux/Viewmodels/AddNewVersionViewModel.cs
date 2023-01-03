@@ -19,19 +19,23 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
       
         
 
-        public ICommand addVersionCommand { get; set; }
+        public ICommand AddVersionCommand { get; set; }
 
         public AddNewVersionViewModel() 
         {
             _version = new ConsoleAndVersion();
-            Consoles = ConsoleAndVersion.GetAllConsoles();
+            AddVersionCommand = new ViewModelCommand(AddVersion);
+            Consoles = ConsoleAndVersion.GetOnlyConsoles();
             
-            addVersionCommand = new ViewModelCommand(AddVersion);
+            
+           
             
         }
 
         private void AddVersion(object obj)
         {
+            int idc = getidcons();
+            Version.IdConsole = idc;
             if (Version.InsertVersion())
             {
                 MessageBox.Show("New Version has been created");
@@ -60,14 +64,11 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                 OnPropertyChanged(nameof(Consoles));
             }
         }
-        public ConsoleAndVersion SelectedConsole
+        public ConsoleAndVersion SelectedConsole{get => _selectedConsole;set{_selectedConsole = value; OnPropertyChanged(nameof(SelectedConsole));}}
+
+        private int getidcons()
         {
-            get => _selectedConsole;
-            set
-            {
-                _selectedConsole = value;
-                OnPropertyChanged(nameof(SelectedConsole));
-            }
+            return SelectedConsole.IdConsole;
         }
  
     }
