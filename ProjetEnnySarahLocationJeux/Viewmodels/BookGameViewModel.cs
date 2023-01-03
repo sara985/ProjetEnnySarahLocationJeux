@@ -9,10 +9,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using ProjetEnnySarahLocationJeux.Interfaces;
+using ProjetEnnySarahLocationJeux.POCO_MODELS;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
-    public class BookGameViewModel : ViewModelBase
+    public class BookGameViewModel : ViewModelBase, ICloseWindows
     {
         List<int> _numberOfWeeks;
         VideoGame _bookedVideoGame;
@@ -28,7 +30,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public int SelectedNumberOfWeeks
         {
             get => selectedNumberOfWeeks;
-            set { selectedNumberOfWeeks = value; OnPropertyChanged("SelectedNumberOfWeeks"); }
+            set { selectedNumberOfWeeks = value; 
+                OnPropertyChanged("SelectedNumberOfWeeks"); }
         }
 
         public ICommand CancelCommand { get; set; }
@@ -46,7 +49,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         {
             get => _numberOfWeeks; set
             {
-                _numberOfWeeks = value; OnPropertyChanged("NumberOfWeeks");
+                _numberOfWeeks = value; 
+                OnPropertyChanged("NumberOfWeeks");
             }
         }
 
@@ -55,19 +59,27 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             BookedVideoGame = bookedVideoGame;
             NumberOfWeeks = new List<int> { 1, 2, 3, 4 };
             BookGameCommand = new ViewModelCommand(ExecuteBookGameCommand);
+            SelectedNumberOfWeeks = 1;
         }
 
         private void ExecuteBookGameCommand(object obj)
         {
-            bool succes = Loan.StartLoan(BookedVideoGame, new PlayerDAO().GetByUsername(Thread.CurrentPrincipal.Identity.Name),
-                SelectedNumberOfWeeks);
+            Booking b = new();
+            b.Status = Status.Waiting;
+            b.Duration = SelectedNumberOfWeeks;
+            b.BookingDate = DateOnly.FromDateTime(DateTime.Now);
+            b.Booker = new PlayerDAO().GetByUsername(Thread.CurrentPrincipal.Identity.Name);
+            //order the copies by the minimum amount of bookings
+            b.Copy = BookedVideoGame.Copies.OrderBy(c => c.Bookings.Count).First();
+
+            bool succes = b.Insert();
             string message;
             if (succes)
             {
-                //message = "You have succesfully rented " + RentedVideoGame.Name;
+                message = "You have succesfully booked " + BookedVideoGame.Name + ". You can now see it under My Games section.";
             }
             else message = "Error";
-            //MessageBox.Show(message);
+            MessageBox.Show(message);
             Close();
         }
     }

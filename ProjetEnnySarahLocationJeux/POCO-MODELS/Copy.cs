@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetEnnySarahLocationJeux.POCO_MODELS;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private Player owner;
         private bool isAvailable;
         private Stream image;
+        List<Booking> _bookings;
 
         public Copy()
         {
@@ -28,5 +30,6 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public int Id { get => id; set => id = value; }
         public bool IsAvailable { get => isAvailable; set => isAvailable = value; }
         public Player Owner { get => owner; set => owner = value; }
+        public List<Booking> Bookings { get => _bookings; set => _bookings = value; }
     }
 }

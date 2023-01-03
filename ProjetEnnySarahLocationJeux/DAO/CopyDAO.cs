@@ -1,5 +1,6 @@
 ﻿using ProjetEnnySarahLocationJeux.Interfaces;
 using ProjetEnnySarahLocationJeux.POCO;
+using ProjetEnnySarahLocationJeux.POCO_MODELS;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -44,6 +45,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public List<Copy> GetByGameId(int gameId)
         {
+            PlayerDAO play = new PlayerDAO();
+            BookingDAO booking = new BookingDAO(); 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("Select * from dbo.copy where gameid=@id", connection);
@@ -58,8 +61,9 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         c.Id = reader.GetInt32(0);
                         c.Owner = new PlayerDAO().GetById(reader.GetInt32(1));
                         c.IsAvailable = reader.GetBoolean(2);
+                        c.Bookings = booking.GetBookingsByCopyId(c.Id);
                         list.Add(c);
-                    }
+                    }                            
                 }
                 return list;
             }

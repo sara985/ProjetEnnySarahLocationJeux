@@ -1,4 +1,5 @@
-﻿using ProjetEnnySarahLocationJeux.POCO;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using ProjetEnnySarahLocationJeux.POCO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace ProjetEnnySarahLocationJeux.POCO_MODELS
         int _id;
         Player _booker;
         Copy _copy;
-        string status;
+        Status status;
         int duration;
         DateOnly _bookingDate;
 
@@ -21,8 +22,13 @@ namespace ProjetEnnySarahLocationJeux.POCO_MODELS
         public int Id { get => _id; set => _id = value; }
         public Player Booker { get => _booker; set => _booker = value; }
         public Copy Copy { get => _copy; set => _copy = value; }
-        public string Status { get => status; set => status = value; }
+        public Status Status { get => status; set => status = value; }
         public int Duration { get => duration; set => duration = value; }
         public DateOnly BookingDate { get => _bookingDate; set => _bookingDate = value; }
+
+        public bool Insert()
+        {
+            return new BookingDAO().Insert(this);
+        }
     }
 }
