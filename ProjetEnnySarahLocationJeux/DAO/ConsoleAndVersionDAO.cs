@@ -51,9 +51,9 @@ namespace ProjetEnnySarahLocationJeux.DAO
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("insert into dbo.Version values ( 2, @version)", connection);
+                SqlCommand cmd = new SqlCommand("insert into dbo.Version values ( @consoleID, @version)", connection);
                 
-                //cmd.Parameters.AddWithValue("consoleId", v.IdConsole);
+                cmd.Parameters.AddWithValue("consoleId", v.IdConsole);
                 cmd.Parameters.AddWithValue("version", v.Version);
                 connection.Open();
                 int i = 0;

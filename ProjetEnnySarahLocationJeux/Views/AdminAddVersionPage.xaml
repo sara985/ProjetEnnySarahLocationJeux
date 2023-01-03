@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
         <Label Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Style="{StaticResource TitleLable}" Content="Admin add-Version Page"/>
         <TextBlock Text="Console" Grid.Row="1" Margin="20,10,10,10" HorizontalAlignment="Right"/>
-        <ComboBox ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole.IdConsole}" Grid.Row="1" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left">
+        <ComboBox ItemsSource="{Binding Consoles, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedConsole.IdConsole, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Console}" Foreground="Black"/>

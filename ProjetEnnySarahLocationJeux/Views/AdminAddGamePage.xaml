@@ -4,12 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjetEnnySarahLocationJeux.Views"
-      xmlns:viewmodel="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
+      xmlns:viewmodels="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminAddGamePage">
     <Page.DataContext>
-        <viewmodel:AddNewGameViewModel/>
+        <viewmodels:AddNewGameViewModel/>
     </Page.DataContext>
     
     <Grid>
@@ -35,18 +35,18 @@
         <TextBlock Text="Cost (amount of credit)" Grid.Row="3" Margin="20,10,10,10" HorizontalAlignment="Right"/>
         <TextBox Text="{Binding VideoGame.Cost, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left"/>
         <TextBlock Text="Console" Grid.Row="4" Margin="20,10,10,10" HorizontalAlignment="Right"/>
-        <ComboBox ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole}" Grid.Row="4" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left">
+        <ComboBox ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Console}" Foreground="Black"/>
+                    <TextBlock Text="{Binding Console, UpdateSourceTrigger=PropertyChanged}" Foreground="Black"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBlock Text="Version" Grid.Row="5" Margin="20,10,10,10" HorizontalAlignment="Right"/>
-        <ComboBox ItemsSource="{Binding Versions}" SelectedItem="{Binding SelectedVersion}" Grid.Row="5" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left">
+        <ComboBox ItemsSource="{Binding Versions, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedVersion}" Grid.Row="5" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Version}" Foreground="Black"/>
+                    <TextBlock Text="{Binding Version, UpdateSourceTrigger=PropertyChanged}" Foreground="Black"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

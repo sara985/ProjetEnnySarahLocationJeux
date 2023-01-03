@@ -15,44 +15,13 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private ConsoleAndVersion _selectedConsole;
         private List<ConsoleAndVersion> _versions;
 
-        public Copy Game { get { return _game; } 
-            set { 
-                _game = value; 
-                OnPropertyChanged(nameof(Game));
-            }
-        }
-
         public ICommand AddGameCommand { get; set; }
-        public List<ConsoleAndVersion> Consoles
-        {
-            get => _consoles;
-            set
-            {
-                _consoles = value;
-                OnPropertyChanged(nameof(Consoles));
-            }
-        }
 
-        public List<ConsoleAndVersion> Versions
-        {
-            get => _versions;
-            set
-            {
-                _versions = value;
-                OnPropertyChanged(nameof(Versions));
-            }
-        }
-
-        public ConsoleAndVersion SelectedConsole { 
-            get => _selectedConsole;
-            set
-            {
-                _selectedConsole = value;
-                OnPropertyChanged(nameof(SelectedConsole));
-                //todo : uncomment -> comment just so that's work
-                Versions = ConsoleAndVersion.GetVersionsByConsole(SelectedConsole.IdConsole);
-            }
-        }
+        public Copy Game { get { return _game; } set{ _game = value; OnPropertyChanged(nameof(Game));}}     
+        public List<ConsoleAndVersion> Consoles { get => _consoles; set{_consoles = value; OnPropertyChanged(nameof(Consoles));}}
+        public List<ConsoleAndVersion> Versions {get => _versions; set{_versions = value;OnPropertyChanged(nameof(Versions));}}
+        public ConsoleAndVersion SelectedConsole { get => _selectedConsole;set{_selectedConsole = value;OnPropertyChanged(nameof(SelectedConsole));                
+                Versions = ConsoleAndVersion.GetVersionsByConsole(SelectedConsole.IdConsole);}}
 
         public AddGameViewModel()
         {

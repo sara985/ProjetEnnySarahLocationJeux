@@ -38,8 +38,12 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             }
         }
 
-        public VideoGame VideoGame { get => _videoGame; set => _videoGame = value; }
-        public string ErrorMessage { get => _errorMessage; set => _errorMessage = value; }
+        public VideoGame VideoGame
+        {
+            get => _videoGame;
+            set { _videoGame = value; OnPropertyChanged(nameof(VideoGame)); }
+        }
+        public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); } }
         public List<ConsoleAndVersion> Consoles 
         { 
             get => _consoles; 
