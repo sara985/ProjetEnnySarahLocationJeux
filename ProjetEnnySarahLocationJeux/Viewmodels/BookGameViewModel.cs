@@ -69,9 +69,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             b.Duration = SelectedNumberOfWeeks;
             b.BookingDate = DateOnly.FromDateTime(DateTime.Now);
             b.Booker = new PlayerDAO().GetByUsername(Thread.CurrentPrincipal.Identity.Name);
-            //order the copies by the minimum amount of bookings
-            b.Copy = BookedVideoGame.Copies.OrderBy(c => c.Bookings.Count).First();
-
+            //order the copies by the minimum amount of bookings so the user potentially waits less time
+            b.Copy = Copy.getCopyOfAGameWithLeastActiveBookings(BookedVideoGame.Id);
             bool succes = b.Insert();
             string message;
             if (succes)

@@ -1,4 +1,5 @@
-﻿using ProjetEnnySarahLocationJeux.POCO_MODELS;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using ProjetEnnySarahLocationJeux.POCO_MODELS;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,5 +32,10 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public bool IsAvailable { get => isAvailable; set => isAvailable = value; }
         public Player Owner { get => owner; set => owner = value; }
         public List<Booking> Bookings { get => _bookings; set => _bookings = value; }
+
+        public static Copy getCopyOfAGameWithLeastActiveBookings(int gameId)
+        {
+            return new CopyDAO().GetCopyWithLeastBookings(gameId);
+        }
     }
 }

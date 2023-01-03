@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace ProjetEnnySarahLocationJeux.DAO
 {
@@ -66,6 +67,28 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     }                            
                 }
                 return list;
+            }
+        }
+
+        public Copy GetCopyWithLeastBookings(int gameid)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Select c.id, count(*) as NumberOfBookings from dbo.copy c join dbo.booking b on b.copyId = c.id " +
+                    "where c.gameId = @gameid and b.status='Waiting'" +
+                    " group by c.id " +
+                    "order by NumberOfBookings", connection);
+                cmd.Parameters.AddWithValue("gameid", gameid);
+                connection.Open();
+                Copy c = new();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if(reader.Read())
+                    {
+                        c = GetById(reader.GetInt32(0));
+                    }
+                }
+                return c;
             }
         }
 
