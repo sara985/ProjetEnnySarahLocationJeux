@@ -92,6 +92,12 @@ namespace ProjetEnnySarahLocationJeux.POCO
             VideoGameDAO dao = new VideoGameDAO();
             return dao.Insert(this);
         }
+
+        public bool UpdateCredit()
+        {
+            VideoGameDAO dao = new VideoGameDAO();
+            return dao.UpdateCredit(this);
+        }
     }
 
 }

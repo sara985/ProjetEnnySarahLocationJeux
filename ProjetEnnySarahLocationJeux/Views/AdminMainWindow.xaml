@@ -15,11 +15,11 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="67*"/>
+            <RowDefinition Height="80*"/>
             <RowDefinition Height="150*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="115"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
@@ -27,7 +27,7 @@
             <customControls:NavButton ItemName="Add a Game" Width="98" NavLink="/Views/AdminAddGamePage.xaml"/>
             <customControls:NavButton ItemName="Add a Console" Width="98" NavLink="/Views/AdminAddConsolePage.xaml"/>
             <customControls:NavButton ItemName="Add a Version" Width="98" NavLink="/Views/AdminAddVersionPage.xaml"/>
-            <customControls:NavButton ItemName="Update Credits" Width="98"/>
+            <customControls:NavButton ItemName="Update Credits" Width="98" NavLink="/Views/AdminEditCreditPage.xaml"/>
             <customControls:NavButton ItemName="Delete Games" Width="98"/>
             <customControls:NavButton ItemName="Sign Out" Width="98"/>
         </ListBox>

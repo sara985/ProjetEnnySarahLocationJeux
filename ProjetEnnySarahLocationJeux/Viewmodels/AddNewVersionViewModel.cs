@@ -27,8 +27,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             AddVersionCommand = new ViewModelCommand(AddVersion);
             Consoles = ConsoleAndVersion.GetOnlyConsoles();
             
-            
-           
+                     
             
         }
 

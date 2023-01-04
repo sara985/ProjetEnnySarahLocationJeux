@@ -103,6 +103,35 @@ namespace ProjetEnnySarahLocationJeux.DAO
             }
         }
 
+        public bool UpdateCredit(VideoGame g)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                SqlCommand cmd = new SqlCommand("update dbo.Game set creditsValued=@cost where id=@id", connection);
+                cmd.Parameters.AddWithValue("cost", g.Cost);
+                cmd.Parameters.AddWithValue("id",g.Id);
+
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+
+                return false;
+            }
+        }
+
+
         public void Update(VideoGame t)
         {
             throw new NotImplementedException();
