@@ -1,10 +1,13 @@
-﻿using ProjetEnnySarahLocationJeux.POCO;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using ProjetEnnySarahLocationJeux.POCO;
+using ProjetEnnySarahLocationJeux.SmallWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
@@ -13,11 +16,11 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
     {
         private List<VideoGame> _allVideoGames;
         private List<VideoGame> _filteredList;
+        private VideoGame _selectedVideoGame;
         private List<ConsoleAndVersion> _consoles;
         private ConsoleAndVersion _selectedConsole;
         private List<ConsoleAndVersion> _versions;
         private ConsoleAndVersion _selectedVersion;
-        private bool isTest;
 
         public List<VideoGame> AllVideoGames { 
             get => _allVideoGames;
@@ -68,16 +71,15 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                 {
                     string console = getComboBoxesConsoleName();
                     FilteredList = AllVideoGames.Where(x => x.ConsoleAndVersion.Equals(console)).ToList();
+                    SelectedVideoGame = FilteredList.FirstOrDefault();
                     //AllVideoGames = AllVideoGames.Where(x => x.Name.Equals(console)).ToList();
                 }
             }
                     
         }
-
-        public ICommand RentGameCommand { get; set; }
-        public ICommand ResetGamesCommand { get; set; }
-        public List<VideoGame> FilteredList { 
-            get => _filteredList; 
+        public List<VideoGame> FilteredList
+        {
+            get => _filteredList;
             set
             {
                 _filteredList = value;
@@ -85,7 +87,21 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             }
         }
 
-        public bool IsTest { get => isTest; set => isTest = value; }
+        public VideoGame SelectedVideoGame
+        {
+            get => _selectedVideoGame;
+            set
+            {
+                _selectedVideoGame = value;
+                OnPropertyChanged(nameof(SelectedVideoGame));
+            }
+        }
+
+        public ICommand RentGameCommand { get; set; }
+        public ICommand BookGameCommand { get; set; }
+        public ICommand ResetGamesCommand { get; set; }
+        public ICommand OwnTheGameCommand { get; set; }
+        
 
         public CatalogViewModel()
         {       
@@ -93,6 +109,35 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             FilteredList = AllVideoGames;
             Consoles = ConsoleAndVersion.GetAllConsoles();
             ResetGamesCommand = new ViewModelCommand(ExecuteResetGames);
+            OwnTheGameCommand = new ViewModelCommand(ExecuteOwnThisGame);
+            RentGameCommand = new ViewModelCommand(ExecuteRentThisGame, CanExecuteRentThisGame);
+            BookGameCommand = new ViewModelCommand(ExecuteBookThisGame, CanExecuteRentThisGame);
+        }
+
+        private void ExecuteBookThisGame(object obj)
+        {
+            Window window = new BookGameWindow(SelectedVideoGame);
+            window.Show();
+        }
+
+        private bool CanExecuteRentThisGame(object obj)
+        {
+            if(SelectedVideoGame!=null && SelectedVideoGame.Copies.Count ==0 ) return false;
+            return true;
+        }
+
+        private void ExecuteRentThisGame(object obj)
+        {
+            Window window = new RentGameWindow(SelectedVideoGame);
+            window.Show();            
+            //refresh sel videogame
+            //MessageBox.Show("work");
+            SelectedVideoGame = new VideoGameDAO().GetById(SelectedVideoGame.Id);
+        }
+
+        private void ExecuteOwnThisGame(object obj)
+        {
+            MessageBox.Show(obj.ToString());
         }
 
         private void ExecuteResetGames(object obj)

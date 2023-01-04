@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjetEnnySarahLocationJeux.DAO;
+using ProjetEnnySarahLocationJeux.POCO_MODELS;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,27 +12,30 @@ namespace ProjetEnnySarahLocationJeux.POCO
     public class Copy
     {
         private int id;
-        private VideoGame game;
         private Player owner;
         private bool isAvailable;
         private Stream image;
+        List<Booking> _bookings;
 
         public Copy()
         {
         }
 
-        public Copy(int id, VideoGame game, bool isAvailable)
+        public Copy(int id, bool isAvailable)
         {
             this.id = id;
-            this.game = game;
             this.isAvailable = isAvailable;
         }
 
 
         public int Id { get => id; set => id = value; }
         public bool IsAvailable { get => isAvailable; set => isAvailable = value; }
+        public Player Owner { get => owner; set => owner = value; }
+        public List<Booking> Bookings { get => _bookings; set => _bookings = value; }
 
-        //TODO owner encapsulation
-        public VideoGame Game { get => game; set => game = value; }
+        public static Copy getCopyOfAGameWithLeastActiveBookings(int gameId)
+        {
+            return new CopyDAO().GetCopyWithLeastBookings(gameId);
+        }
     }
 }

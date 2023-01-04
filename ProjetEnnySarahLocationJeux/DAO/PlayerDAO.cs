@@ -24,7 +24,6 @@ namespace ProjetEnnySarahLocationJeux.DAO
             this.connectionString = ConfigurationManager.ConnectionStrings["GameSwitchDB"].ConnectionString;
         }
 
-        //should return a user or an admin or null
         public Player IsPlayer(string username, string pass)
         {
             //stack FIFO

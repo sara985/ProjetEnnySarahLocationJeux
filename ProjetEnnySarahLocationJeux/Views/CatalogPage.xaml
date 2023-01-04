@@ -21,8 +21,17 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <!--Quand release copy, automatiquement regarder si réservation pour cette copie, elle doit commencer automatiquement s'il y en a une-->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button x:Name="rentme" Height="35" Command="{Binding RentGameCommand}" Content="Rent Me" Margin="5" Padding="10 0 10 0"
+                                    Visibility="{Binding Path=SelectedVideoGame.HasCopiesAvailable, Converter={StaticResource converter}}">
+            </Button>
+            <Button Content="Book Me" Margin="5" Padding="7" Command="{Binding BookGameCommand}"
+                                    Visibility="{Binding Path=SelectedVideoGame.HasCopiesAvailable, Converter={StaticResource converter2}}"/>
+            <Button Content="I own this game" Margin="5"/>
+        </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Console" Margin="5 5 0 5"/>
             <ComboBox Grid.Row="1" ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole}" Width="150" Foreground="Black" HorizontalAlignment="Left" Margin="5 5">
@@ -42,7 +51,10 @@
             </ComboBox>
             <Button Content="Reset" Width="60" Margin="10 4" Command="{Binding ResetGamesCommand}"/>
         </StackPanel>
-        <ListBox ItemsSource="{Binding FilteredList}" Background="Pink" AlternationCount="3" Grid.Row="1">
+        <StackPanel Grid.Row="1"  Width="130" HorizontalAlignment="Left" Margin="5">
+            
+        </StackPanel>
+        <ListBox ItemsSource="{Binding FilteredList}" Background="Pink" AlternationCount="3" Grid.Row="2" SelectedItem="{Binding SelectedVideoGame,Mode=TwoWay}" SelectedIndex="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <!--Make grid an image background of videogame-->
@@ -58,18 +70,12 @@
                         <TextBlock Width="150" Background="{StaticResource clrPrimary}" Height="150"/>
                         <StackPanel Grid.Column="1" Margin="5">
                             <TextBlock Text="{Binding Name, StringFormat={}{0}}" FontWeight="Bold" Grid.Column="2" FontSize="20"/>
-                            <TextBlock Text="{Binding Cost}" FontSize="20"/>
+                            <TextBlock Text="{Binding Cost, StringFormat= {}{0} Credits}" FontSize="20"/>
                             <TextBlock Text="{Binding Year}" FontSize="20"/>
                             <DockPanel>
                                 <TextBlock Text="{Binding ConsoleAndVersion}" FontSize="20"/>
                             </DockPanel>
-                            <Button x:Name="rentme" Height="35" Command="{Binding RentGameCommand}" Content="Rent Me" 
-                                    Visibility="{Binding Path=HasCopiesAvailable, Converter={StaticResource converter}}">
-                            </Button>
-                            <Button Content="Book Me" Margin="0 5"
-                                    Visibility="{Binding Path=HasCopiesAvailable, Converter={StaticResource converter2}}"/>
-                            <Button Content="I own this game" />
-
+                            
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
