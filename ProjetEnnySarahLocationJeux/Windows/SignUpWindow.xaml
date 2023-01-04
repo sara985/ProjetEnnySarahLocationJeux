@@ -47,7 +47,7 @@
             <TextBox Text="{Binding Player.Username, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
             <TextBlock Text="Birth Date"/>
-            <DatePicker Text="{Binding Player.BirthDate, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
+            <DatePicker Text="{Binding Player.BirthDate, UpdateSourceTrigger=PropertyChanged}" Foreground="White" SelectedDate="{Binding SelectedDate,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="30 0 0 0" Width="200" HorizontalAlignment="Left">

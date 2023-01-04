@@ -16,11 +16,15 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private Player _player;
         private string _errorMessage;
         private bool _isViewVisible;
+        private DateTime _selectedDate;
 
         public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged("ErrorMessage"); } }
         public bool IsViewVisible { get => _isViewVisible; set { _isViewVisible = value; OnPropertyChanged("IsViewVisible"); } }
-        public Player Player { get => _player; set { _player = value; OnPropertyChanged("Player"); } }
+        public Player Player { get => _player; 
+            set { _player = value; 
+                OnPropertyChanged("Player"); } }
     
+        public DateTime SelectedDate { get => _selectedDate; set => _selectedDate = value; }
         public ICommand VerifyUsernameCommand { get; set; }
         public ICommand VerifyPasswordCommand { get; set; }
         public ICommand AddPlayerCommand { get; set; }
@@ -30,13 +34,16 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             _player = new Player();
             VerifyUsernameCommand = new ViewModelCommand(p => VerifyUsername(""));
             AddPlayerCommand = new ViewModelCommand(AddPlayer);
+            SelectedDate = new DateTime(2000, 01, 01);
         }
 
         private void AddPlayer(object obj)
         {
             //TODO add player to db and maybe redirect or do new command to redirect
-            //normally no message box in viewModel
+            Player.BirthDate = DateOnly.FromDateTime(SelectedDate);
             Player.CalculateSHA256();
+            MessageBox.Show("box "+DateOnly.FromDateTime(SelectedDate).ToShortDateString());
+
             if (Player.Insert())
             {
                 MessageBox.Show("Your account was created succesfully. You can now login.");

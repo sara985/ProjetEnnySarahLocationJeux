@@ -31,8 +31,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 SqlCommand cmd = new SqlCommand("Insert into dbo.loan values (@copyid,@borrowerid,@startdate,@enddate,NULL,@credits,NULL)", connection);
                 cmd.Parameters.AddWithValue("copyid", t.Copy.Id);
                 cmd.Parameters.AddWithValue("borrowerid", t.Borrower.Id);
-                cmd.Parameters.AddWithValue("startdate", t.StartDate.ToShortDateString());
-                cmd.Parameters.AddWithValue("enddate", t.PresumedEndDate.ToShortDateString());
+                cmd.Parameters.AddWithValue("startdate", t.StartDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("enddate", t.PresumedEndDate.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("credits", t.VideoGame.Cost);
                 connection.Open();
                 try

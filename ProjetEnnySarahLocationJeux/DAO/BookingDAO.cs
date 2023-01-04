@@ -62,7 +62,29 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public List<Booking> List()
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                PlayerDAO play = new PlayerDAO();
+                CopyDAO copyDAO = new CopyDAO();
+                SqlCommand cmd = new SqlCommand("select * from dbo.Booking", connection);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    List<Booking> list = new List<Booking>();
+                    while (reader.Read())
+                    {
+                        Booking b = new Booking();
+                        b.Id = reader.GetInt32(0);
+                        b.Booker = play.GetById(reader.GetInt32(1));
+                        b.Copy = copyDAO.GetById(reader.GetInt32(2));
+                        b.Status = (Status)Enum.Parse(typeof(Status), reader.GetString(3));
+                        b.Duration = reader.GetInt32(4);
+                        b.BookingDate = DateOnly.FromDateTime(reader.GetDateTime(5));
+                        list.Add(b);
+                    }
+                    return list;
+                }
+            }
         }
 
         public List<Booking> GetBookingsByCopyId(int copyid)

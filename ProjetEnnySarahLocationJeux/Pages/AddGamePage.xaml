@@ -27,9 +27,9 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Background="HotPink" Height="140" Width="140"/>
                 <StackPanel Margin="10">
-                    <TextBlock Text="{Binding Game.Game.Name}"/>
+                    <!--<TextBlock Text="{Binding Game.Game.Name}"/>
                     <TextBlock Text="{Binding Game.Game.Year}"/>
-                    <TextBlock Text="{Binding Game.Game.Cost, StringFormat= {}{0} credits}"/>
+                    <TextBlock Text="{Binding Game.Game.Cost, StringFormat= {}{0} credits}"/>-->
                 </StackPanel>
             </StackPanel>
             <TextBlock Text="What console is the game for ?" Margin="0 5"/>

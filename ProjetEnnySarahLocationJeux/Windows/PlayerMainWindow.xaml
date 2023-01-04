@@ -28,7 +28,7 @@
         <ListBox x:Name="sidebar" SelectionChanged="sidebar_SelectionChanged" SelectionMode="Single" BorderThickness="0">
             <customControls:NavButton ItemName="My Account" NavLink="/Views/MyAccountPage.xaml" Width="98" Cursor="Hand"/>
             <customControls:NavButton ItemName="Catalog" NavLink="/Views/CatalogPage.xaml" Width="98"/>
-            <customControls:NavButton ItemName="My Games" NavLink="/Views/CatalogPage.xaml" Width="98"/>
+            <customControls:NavButton ItemName="My Games" NavLink="/Pages/MyGamesPage.xaml" Width="98"/>
             <customControls:NavButton ItemName="Add Game" NavLink="\Pages\AddGamePage.xaml" Width="98" Cursor="Hand"/>
         </ListBox>
         <StackPanel Grid.Column="1" Margin="20 5 15 5">

@@ -124,7 +124,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,10,GETDATE(),@bdate,@fname,@lname,LOWER(@email))", connection);
                 cmd.Parameters.AddWithValue("user", t.Username);
                 cmd.Parameters.AddWithValue("pass", t.Password);
-                cmd.Parameters.AddWithValue("bdate", t.BirthDate.ToShortDateString());
+                cmd.Parameters.AddWithValue("bdate", t.BirthDate.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("fname", t.FirstName);
                 cmd.Parameters.AddWithValue("lname", t.LastName);
                 cmd.Parameters.AddWithValue("email", t.Email);
