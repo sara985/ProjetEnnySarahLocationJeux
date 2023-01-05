@@ -30,5 +30,20 @@ namespace ProjetEnnySarahLocationJeux.POCO_MODELS
         {
             return new BookingDAO().Insert(this);
         }
+
+        public static List<Booking> GetBookedCopiesForUser(int id)
+        {
+            return new BookingDAO().List().Where(b => b.Booker.Id == id).ToList();
+        }
+
+        public static List<Booking> GetBookingsByStatusAndUser(Status s, string username)
+        {
+            return new BookingDAO().List().Where(b => b.Booker.Username.Equals(username) && b.Status.Equals(s)).ToList();
+        }
+
+        public void UpdateStatus()
+        {
+            new BookingDAO().Update(this);
+        }
     }
 }

@@ -116,7 +116,21 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public void Update(Booking t)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Update dbo.booking set status=@status where id=@id", connection);
+                cmd.Parameters.AddWithValue("status", t.Status.ToString());
+                cmd.Parameters.AddWithValue("id", t.Id);
+                connection.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
         }
     }
 }

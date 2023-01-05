@@ -153,7 +153,21 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
             public void Update(Player t)
             {
-                throw new NotImplementedException();
-            }
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("Update dbo.player set balance=@balance where id=@id", connection);
+                    cmd.Parameters.AddWithValue("balance", t.Balance);
+                    cmd.Parameters.AddWithValue("id", t.Id);
+                    connection.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
+                }
+        }
     }
 }

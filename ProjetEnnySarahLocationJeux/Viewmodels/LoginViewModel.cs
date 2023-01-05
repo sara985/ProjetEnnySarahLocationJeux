@@ -16,7 +16,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private string _username = "user name";
+        private string _username = "sss";
         private string _password = "condorcet";
         private string _errorMessage;
         private bool _isViewVisible = true;

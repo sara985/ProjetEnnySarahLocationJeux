@@ -3,6 +3,7 @@ using ProjetEnnySarahLocationJeux.Viewmodels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private string _consoleAndVersion;
         List<Copy> copies;
         bool hasCopiesAvailable;
+        private Stream _image;
         //private List<ConsoleAndVersion> versionsAvailable;
         //mieux vaut mettre une taille dans une liste quand on la créé => plus efficace
 
@@ -55,11 +57,6 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             VideoGameDAO dao = new VideoGameDAO();
             return dao.List(); 
-        }
-
-        public static List<VideoGame> GetGamesByConsoleVersion(int versionId)
-        {
-            return new VideoGameDAO().GetGamesByConsoleVersion(versionId);
         }
 
         public bool HasCopyAvailable()

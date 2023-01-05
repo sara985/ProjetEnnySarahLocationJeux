@@ -45,12 +45,6 @@ namespace ProjetEnnySarahLocationJeux.POCO
             throw new NotImplementedException();
         }
 
-        //public static List<Player> GetPlayers()
-        //{
-        //    PlayerDAO dao = new PlayerDAO();
-        //    //return db.GetMovies();
-        //    // return dao.Get ;
-        //}
         public bool Insert()
         {
             PlayerDAO dao = new PlayerDAO();
@@ -67,6 +61,11 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             PlayerDAO dao = new PlayerDAO();
             return dao.GetById(id);
+        }
+
+        public void Update()
+        {
+            new PlayerDAO().Update(this);
         }
 
     }

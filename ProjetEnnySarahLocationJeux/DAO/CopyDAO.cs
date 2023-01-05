@@ -37,6 +37,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         c.Id = reader.GetInt32(0);
                         c.Owner = new PlayerDAO().GetById(reader.GetInt32(1));
                         c.IsAvailable = reader.GetBoolean(2);
+                        c.Game = new VideoGameDAO().GetById(reader.GetInt32(3));
                         //optional image, should go in videogame not copy
                     }
                 }
