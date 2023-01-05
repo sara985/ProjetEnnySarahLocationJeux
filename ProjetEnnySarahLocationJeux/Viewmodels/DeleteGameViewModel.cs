@@ -9,7 +9,7 @@ using ProjetEnnySarahLocationJeux.POCO;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
-    internal class DeleteGameViewModel: ViewModelBase
+    public class DeleteGameViewModel: ViewModelBase
     {
         private VideoGame _game;
         private string _errorMessage;

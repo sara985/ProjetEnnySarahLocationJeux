@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using ProjetEnnySarahLocationJeux.POCO;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
@@ -12,13 +15,25 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
     {
         private Administrator _currentAdmin;
 
+        public ICommand SignOutCommand { get; set; }
+        public AdminViewModel() 
+        { 
+            LoadCurrentUserData();
+            SignOutCommand = new ViewModelCommand(SignOut);
+        }
+
+        private void SignOut(object obj)
+        {
+            MessageBox.Show("SignOut");
+        }
+
         public Administrator CurrentAdmin
         {
             get { return _currentAdmin; }
             set { _currentAdmin = value; OnPropertyChanged("CurrentAdmin"); }
         }
 
-        public AdminViewModel() { LoadCurrentUserData(); }
+        
 
         private void LoadCurrentUserData()
         {
