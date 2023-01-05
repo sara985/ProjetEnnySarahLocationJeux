@@ -39,7 +39,7 @@
             </WrapPanel>
             <Frame x:Name="navFrame" NavigationUIVisibility="Hidden"/>
         </StackPanel>
-        <Button HorizontalAlignment="Center" Margin="0,118,0,0" VerticalAlignment="Top" RenderTransformOrigin="-12.79,1.77" Content="SignOut" Command="{Binding SignOutCommand}"/>
+        <Button x:Name="btnLogout" HorizontalAlignment="Center" Command="{Binding SignOutCommand}" Margin="0,109,0,0" VerticalAlignment="Top" RenderTransformOrigin="-12.79,1.77" Content="SignOut" Click="Button_Click"/>
 
     </Grid>
 </Window>

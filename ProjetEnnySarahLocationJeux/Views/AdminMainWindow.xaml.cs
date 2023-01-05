@@ -1,4 +1,5 @@
 ﻿using ProjetEnnySarahLocationJeux.CustomControls;
+using ProjetEnnySarahLocationJeux.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ProjetEnnySarahLocationJeux.Views
@@ -31,6 +33,14 @@ namespace ProjetEnnySarahLocationJeux.Views
             var selected = adminsidebar.SelectedItem as NavButton;
 
             navFrame.Navigate(selected.NavLink);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //NavigationService.Navigate(new Uri("LoginWindow.xaml", UriKind.Relative));
+            //Frame.Navigate(new Uri("LoginWindow.xaml", UriKind.Relative));
+            new LoginWindow().Show();
+            this.Close();
         }
     }
 }

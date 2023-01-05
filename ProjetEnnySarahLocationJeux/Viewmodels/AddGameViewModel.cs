@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
-    internal class AddGameViewModel : ViewModelBase
+   public class AddGameViewModel : ViewModelBase
     {
         private Copy _game = new Copy(1,true);
         private List<ConsoleAndVersion> _consoles;
