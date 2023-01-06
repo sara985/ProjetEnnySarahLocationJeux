@@ -95,12 +95,52 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public bool Insert(Copy t)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Insert into dbo.copy values(@ownerid,@isAvail,@gameid)", connection);
+                cmd.Parameters.AddWithValue("ownerid", t.Owner.Id);
+                cmd.Parameters.AddWithValue("isAvail", t.IsAvailable);
+                cmd.Parameters.AddWithValue("gameid", t.Game.Id);
+                connection.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+            }
         }
+
 
         public List<Copy> List()
         {
-            throw new NotImplementedException();
+            PlayerDAO play = new PlayerDAO();
+            BookingDAO booking = new BookingDAO();
+            VideoGameDAO video = new VideoGameDAO();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Select * from dbo.copy", connection);
+                var list = new List<Copy>();
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Copy c = new Copy();
+                        c.Id = reader.GetInt32(0);
+                        c.Owner = new PlayerDAO().GetById(reader.GetInt32(1));
+                        c.IsAvailable = reader.GetBoolean(2);
+                        c.Game = video.GetById(reader.GetInt32(3));
+                        c.Bookings = booking.GetBookingsByCopyId(c.Id);
+                        list.Add(c);
+                    }
+                }
+                return list;
+            }
         }
 
         public void Update(Copy t)
@@ -111,10 +151,9 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 cmd.Parameters.AddWithValue("isAvail", t.IsAvailable);
                 cmd.Parameters.AddWithValue("id", t.Id);
                 connection.Open();
-                int i = 0;
                 try
                 {
-                    i = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
                 catch (Exception e)
                 {

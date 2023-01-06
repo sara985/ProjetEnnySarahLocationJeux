@@ -38,5 +38,16 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             return new CopyDAO().GetCopyWithLeastBookings(gameId);
         }
+
+        public void Insert()
+        {
+            new CopyDAO().Insert(this);
+        }
+        public static bool DoesPlayerOwnGame(Player player, VideoGame game)
+        {
+            List<Copy> list = new CopyDAO().List();
+            List<Copy> filteredList = list.Where(c => c.Owner.Id == player.Id && c.Game.Id == game.Id).ToList();
+            return filteredList.Count > 0;
+        }
     }
 }

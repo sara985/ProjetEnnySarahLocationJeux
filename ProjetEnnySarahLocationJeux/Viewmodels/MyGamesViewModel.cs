@@ -45,6 +45,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private void ExecuteEndLoan(object obj)
         {
             SelectedLoan.EndLoan();
+            //Refresh Loan list
+            RentedGames = Loan.GetOngoingLoansForUser(CurrentUser.Id);
         }
 
         private void ExecuteCancelBooking(object obj)
@@ -106,6 +108,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                 {
                     RentedGames = Loan.GetFinishedLoansForUser(CurrentUser.Id);
                 }
+                if(RentedGames.Count!=0)
                 SelectedLoan = RentedGames.First();
             }
         }

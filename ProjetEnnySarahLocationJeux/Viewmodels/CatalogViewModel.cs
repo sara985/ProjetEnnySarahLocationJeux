@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private ConsoleAndVersion _selectedConsole;
         private List<ConsoleAndVersion> _versions;
         private ConsoleAndVersion _selectedVersion;
+        private Player _currentUser;
 
         public List<VideoGame> AllVideoGames { 
             get => _allVideoGames;
@@ -100,7 +102,13 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public ICommand BookGameCommand { get; set; }
         public ICommand ResetGamesCommand { get; set; }
         public ICommand OwnTheGameCommand { get; set; }
-        
+        public Player CurrentUser { get => _currentUser;
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+            }
+        }
 
         public CatalogViewModel()
         {       
@@ -109,8 +117,10 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             Consoles = ConsoleAndVersion.GetAllConsoles();
             ResetGamesCommand = new ViewModelCommand(ExecuteResetGames);
             OwnTheGameCommand = new ViewModelCommand(ExecuteOwnThisGame);
+            //Both commands have the same same canExecute method because they can both have the same conditions to be executed.
             RentGameCommand = new ViewModelCommand(ExecuteRentThisGame, CanExecuteRentThisGame);
             BookGameCommand = new ViewModelCommand(ExecuteBookThisGame, CanExecuteRentThisGame);
+            CurrentUser = Player.GetPlayerByUsername(Thread.CurrentPrincipal.Identity.Name);
         }
 
         private void ExecuteBookThisGame(object obj)
@@ -121,7 +131,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private bool CanExecuteRentThisGame(object obj)
         {
-            if(SelectedVideoGame!=null && SelectedVideoGame.Copies.Count ==0 ) return false;
+            if((SelectedVideoGame!=null && SelectedVideoGame.Copies.Count ==0) || CurrentUser.Balance<=0) return false;
             return true;
         }
 
@@ -136,7 +146,23 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void ExecuteOwnThisGame(object obj)
         {
-            MessageBox.Show(obj.ToString());
+            //Verify the user doesn't already own the copy
+            if (Copy.DoesPlayerOwnGame(CurrentUser, SelectedVideoGame))
+            {
+                MessageBox.Show("You already own this game.");
+                return;
+            }
+            //Ask the user if they own this game
+            MessageBoxResult result = MessageBox.Show("Do you own "+SelectedVideoGame.Name+" ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                //If yes, add the copy to database
+                Copy c = new Copy();
+                c.Game = SelectedVideoGame;
+                c.Owner = CurrentUser;
+                c.IsAvailable = true;
+                c.Insert();
+            }
         }
 
         private void ExecuteResetGames(object obj)

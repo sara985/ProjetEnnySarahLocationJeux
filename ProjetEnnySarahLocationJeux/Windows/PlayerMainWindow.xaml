@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ProjetEnnySarahLocationJeux.Views"
         xmlns:viewmodel="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
         xmlns:customControls="clr-namespace:ProjetEnnySarahLocationJeux.CustomControls"
+        xmlns:converters="clr-namespace:ProjetEnnySarahLocationJeux.Converters"
         mc:Ignorable="d"
         Title="PlayerMainWindow" Height="450" Width="1000">
     
@@ -17,6 +18,7 @@
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="50"/>
         </Style>
+        <converters:NegativeNumberToVisibilityConverter x:Key="converter"/>
     </Window.Resources>
     
     <Grid>
@@ -32,7 +34,14 @@
             <customControls:NavButton ItemName="Add Game" NavLink="\Pages\AddGamePage.xaml" Width="98" Cursor="Hand"/>
         </ListBox>
         <StackPanel Grid.Column="1" Margin="20 5 15 5">
-            <TextBlock Text="{Binding CurrentPlayer.FirstName, StringFormat={}Hello {0}}" FontSize="24" Height="30" HorizontalAlignment="Right"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Your balance is negative, you can only loan your games to others until it is positive again" Style="{StaticResource Error}" FontSize="15" Visibility="{Binding Path=CurrentPlayer.Balance, Converter={StaticResource converter}}"/>
+                <TextBlock Text="{Binding CurrentPlayer.FirstName, StringFormat={}Hello {0}}" FontSize="24" Height="30" HorizontalAlignment="Right" Grid.Column="1"/>
+            </Grid>
             <Frame x:Name="navFrame" NavigationUIVisibility="Hidden"/>
         </StackPanel>
     </Grid>

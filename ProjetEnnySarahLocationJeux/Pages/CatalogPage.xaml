@@ -17,6 +17,7 @@
         <Grid.Resources>
             <converters:BoolToVisibilityConverter x:Key="converter"/>
             <converters:BoolToNoVisibilityConverter x:Key="converter2"/>
+            <converters:NegativeNumberToVisibilityConverter x:Key="converter3"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -30,7 +31,7 @@
             </Button>
             <Button Content="Book Me" Margin="5" Padding="7" Command="{Binding BookGameCommand}"
                                     Visibility="{Binding Path=SelectedVideoGame.HasCopiesAvailable, Converter={StaticResource converter2}}"/>
-            <Button Content="I own this game" Margin="5"/>
+            <Button Content="I own this game" Margin="5" Command="{Binding OwnTheGameCommand}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Console" Margin="5 5 0 5"/>

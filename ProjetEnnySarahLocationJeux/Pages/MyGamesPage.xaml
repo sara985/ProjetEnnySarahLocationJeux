@@ -33,7 +33,8 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel >
-                        <ListBox ItemsSource="{Binding RentedGames}" Background="Pink" AlternationCount="3" SelectedItem="{Binding SelectedLoan,Mode=TwoWay}">
+                        <ListBox ItemsSource="{Binding RentedGames}" Background="Pink" AlternationCount="3" SelectedItem="{Binding SelectedLoan,Mode=TwoWay}"
+                                 Visibility="{Binding Path=RentedGames, Converter={StaticResource converter}}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="4" Background="Transparent">
@@ -48,18 +49,17 @@
                                             <TextBlock Text="{Binding Copy.Owner.Username, StringFormat={}Owned by {0}}" FontSize="20"/>
                                             <TextBlock Text="{Binding StartDate, StringFormat={}Started on {0}}" FontSize="20"/>
                                             <TextBlock Text="{Binding PresumedEndDate, StringFormat={}Due on {0} included}" FontSize="20"/>
-                                            <TextBlock Text="{Binding EffectiveEndDate, StringFormat={}Given Back on {0}}" FontSize="20"/>
-                                            <TextBlock Text="{Binding Total, StringFormat={}-{0} credits}" FontSize="20"/>
-                                            <DockPanel>
-                                                <TextBlock Text="{Binding ConsoleAndVersion}" FontSize="20"/>
-                                            </DockPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding EffectiveEndDate, StringFormat={}Given Back on {0}}" FontSize="20"/>
+                                                <TextBlock Text="{Binding Total, StringFormat={}-{0} credits}" FontSize="20"/>
+                                            </StackPanel>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </StackPanel>
-                    <TextBlock Text="You did not rent any games yet" Style="{StaticResource Header}" Foreground="White" Visibility="{Binding Path=RentedGames, Converter={StaticResource converter2}}"/>
+                    <TextBlock Text="{Binding SelectedLoanStatus, StringFormat={}You do not have any {0} loan. }" Style="{StaticResource Header}" Foreground="White" Visibility="{Binding Path=RentedGames, Converter={StaticResource converter2}}"/>
                 </StackPanel>
             </TabItem>
             <!--<TabItem Header="My bookings">
