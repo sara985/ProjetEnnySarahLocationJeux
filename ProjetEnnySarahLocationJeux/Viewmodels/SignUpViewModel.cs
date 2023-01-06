@@ -41,9 +41,19 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         {
             //TODO add player to db and maybe redirect or do new command to redirect
             Player.BirthDate = DateOnly.FromDateTime(SelectedDate);
+            Player.SignUpDate = DateOnly.FromDateTime(DateTime.Now);
+            Player.Balance = 10;
             Player.CalculateSHA256();
-            MessageBox.Show("box "+DateOnly.FromDateTime(SelectedDate).ToShortDateString());
-
+            DateOnly birthdayThisYear = DateOnly.FromDateTime(new DateTime(DateTime.Now.Year, Player.BirthDate.Month, Player.BirthDate.Day));
+            //Comparer la signupdate et sa date d'anniversaire
+            if (birthdayThisYear.CompareTo(DateOnly.FromDateTime(DateTime.Now)) > 0) //Has not had birthday yet
+            {
+                Player.HadBirthdayCredit = false;
+            }
+            else
+            {
+                Player.HadBirthdayCredit = true;
+            }
             if (Player.Insert())
             {
                 MessageBox.Show("Your account was created succesfully. You can now login.");

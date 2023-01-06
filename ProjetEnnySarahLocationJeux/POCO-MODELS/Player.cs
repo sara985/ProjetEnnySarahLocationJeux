@@ -19,6 +19,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private DateOnly signUpDate;
         private string email;
         private int balance;
+        private bool _hadBirthdayCredit;
 
         //TODO ask question to teacher
         public Player(string username, string password)
@@ -39,6 +40,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public DateOnly SignUpDate { get => signUpDate; set => signUpDate = value; }
         public string Email { get => email; set => email = value; }
         public int Balance { get => balance; set => balance = value; }
+        public bool HadBirthdayCredit { get => _hadBirthdayCredit; set => _hadBirthdayCredit = value; }
 
         public override User Login(string email, string password)
         {

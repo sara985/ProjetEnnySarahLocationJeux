@@ -83,8 +83,18 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                     {
                         Thread.CurrentPrincipal = new GenericPrincipal(
                         new GenericIdentity(Username), null);
-                        //Create an App property to hold the Id value throughout the whole application
-                        App.Current.Properties["UserId"] = p.Id;
+                    //Verify if user has had his birthdayGift this year if not update his credit
+                    DateOnly birthdayThisYear = DateOnly.FromDateTime(new DateTime(DateTime.Now.Year, p.BirthDate.Month, p.BirthDate.Day));
+                    if (p.HadBirthdayCredit == false && birthdayThisYear<=DateOnly.FromDateTime(DateTime.Now))
+                    {
+                        p.Balance += 2;
+                        p.HadBirthdayCredit = true;
+                        p.Update();
+                        MessageBox.Show("Happy Birthday! You have been gifted 2 credits.");
+                    }
+
+                    //Create an App property to hold the Id value throughout the whole application
+                    App.Current.Properties["UserId"] = p.Id;
                         IsViewVisible = false;
                     }
                     else
