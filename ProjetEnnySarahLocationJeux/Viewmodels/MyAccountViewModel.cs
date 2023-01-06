@@ -11,6 +11,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
     internal class MyAccountViewModel : ViewModelBase
     {
         private Player _player;
+        private int nbrGameRented;
+        private int nbrGameImRtg;
        
 
         public Player Player { 
@@ -20,9 +22,16 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                 OnPropertyChanged("Player");
             }
         }
+        
+        public int NbrGameRented { get => nbrGameRented; set { nbrGameRented = value; OnPropertyChanged(nameof(NbrGameRented)); } }
+
+        public int NbrGameImRtg { get => nbrGameImRtg; set { nbrGameImRtg = value; OnPropertyChanged(nameof(NbrGameImRtg)); } }
 
         public MyAccountViewModel(){
             Player = Player.GetPlayerById(Int32.Parse(App.Current.Properties["UserId"].ToString()));
+            nbrGameRented = Player.NbrGamesRented();
+            nbrGameImRtg = Player.NbrGamesImRtng();
+            
         }
     }
 }

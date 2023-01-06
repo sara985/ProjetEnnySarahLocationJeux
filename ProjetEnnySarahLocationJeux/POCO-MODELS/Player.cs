@@ -19,6 +19,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private DateOnly signUpDate;
         private string email;
         private int balance;
+        private int nbr;
 
         //TODO ask question to teacher
         public Player(string username, string password)
@@ -39,6 +40,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public DateOnly SignUpDate { get => signUpDate; set => signUpDate = value; }
         public string Email { get => email; set => email = value; }
         public int Balance { get => balance; set => balance = value; }
+        public int Nbr { get => nbr; set => nbr = value; }
 
         public override User Login(string email, string password)
         {
@@ -67,6 +69,18 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             PlayerDAO dao = new PlayerDAO();
             return dao.GetById(id);
+        }
+
+        public int NbrGamesRented()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.NbrGamesBrwd(this);
+        }
+
+        public int NbrGamesImRtng()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.NbrGamesIamRenting(this);
         }
 
     }

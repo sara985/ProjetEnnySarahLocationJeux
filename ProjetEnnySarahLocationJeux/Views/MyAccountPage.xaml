@@ -15,8 +15,8 @@
 
     <StackPanel >
         <TextBlock Text="{Binding Player.Balance, StringFormat={}You currently have {0} credits on your account.}"/>
-        <TextBlock Text="You are curently renting x games."/>
-        <TextBlock Text="X people are renting your games."/>
+        <TextBlock Text="{Binding NbrGameImRtg, StringFormat={}You are curently renting {0} games.}"/>
+        <TextBlock Text="{Binding NbrGameRented, StringFormat={}{0} people renting your games.}"/>
         <TextBlock Text="Your email :"/>
         <TextBlock Text="{Binding Player.Email}"/>
         <TextBlock Text="Your Username : "/>

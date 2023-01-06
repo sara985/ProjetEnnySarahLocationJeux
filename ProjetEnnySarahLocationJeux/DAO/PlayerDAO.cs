@@ -155,5 +155,32 @@ namespace ProjetEnnySarahLocationJeux.DAO
             {
                 throw new NotImplementedException();
             }
+
+
+        public int NbrGamesBrwd(Player p)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from dbo.Copy where ownerId=@ownerid AND isAvailable=0", connection);
+                cmd.Parameters.AddWithValue("ownerid", p.Id);
+                connection.Open();
+                int result = (int)cmd.ExecuteScalar();
+                return result;            
+            }
+        }
+
+        public int NbrGamesIamRenting(Player p)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from dbo.Loan where borrowerId = @borrowerid AND effectiveEndDate>(SELECT CAST( GETDATE() AS Date ))", connection);
+                cmd.Parameters.AddWithValue("borrowerid", p.Id);
+                connection.Open ();
+                int result = (int)cmd.ExecuteScalar();
+                return result;
+            }
+        }
+
+        
     }
 }
