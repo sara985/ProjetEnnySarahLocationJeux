@@ -18,8 +18,11 @@
             <converters:BoolToVisibilityConverter x:Key="converter"/>
             <converters:BoolToNoVisibilityConverter x:Key="converter2"/>
             <converters:NegativeNumberToVisibilityConverter x:Key="converter3"/>
+            <converters:ListToVisibilityConverter x:Key="listTo"/>
+            <converters:ListToNoVisibilityConverter x:Key="listToNo"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -34,8 +37,10 @@
             <Button Content="I own this game" Margin="5" Command="{Binding OwnTheGameCommand}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Text="Search" Margin="5 5 0 5" />
+            <TextBox Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25"/>
             <TextBlock Text="Console" Margin="5 5 0 5"/>
-            <ComboBox Grid.Row="1" ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole}" Width="150" Foreground="Black" HorizontalAlignment="Left" Margin="5 5">
+            <ComboBox Grid.Row="1" ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole}" Width="150" Foreground="Black" HorizontalAlignment="Left" Margin="5 5" Height="25">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Console}" Foreground="Black"/>
@@ -43,7 +48,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Text="Version" Margin="5 5 0 5"/>
-            <ComboBox ItemsSource="{Binding Versions}" Width="150" HorizontalAlignment="Left" Margin="5 5" SelectedItem="{Binding SelectedVersion}">
+            <ComboBox ItemsSource="{Binding Versions}" Width="150" HorizontalAlignment="Left" Margin="5 5" SelectedItem="{Binding SelectedVersion}" Height="25">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Version}" Foreground="Black"/>
@@ -52,10 +57,7 @@
             </ComboBox>
             <Button Content="Reset" Width="60" Margin="10 4" Command="{Binding ResetGamesCommand}"/>
         </StackPanel>
-        <StackPanel Grid.Row="1"  Width="130" HorizontalAlignment="Left" Margin="5">
-            
-        </StackPanel>
-        <ListBox ItemsSource="{Binding FilteredList}" Background="Pink" AlternationCount="3" Grid.Row="2" SelectedItem="{Binding SelectedVideoGame,Mode=TwoWay}" SelectedIndex="0">
+        <ListBox ItemsSource="{Binding FilteredList}" Background="Pink" AlternationCount="3" Grid.Row="2" SelectedItem="{Binding SelectedVideoGame,Mode=TwoWay}" SelectedIndex="0" Visibility="{Binding Path=FilteredList, Converter={StaticResource listTo}}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <!--Make grid an image background of videogame-->
@@ -84,6 +86,8 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ListBox>
+        <TextBlock Text="Your search doesn't match any games." Grid.Row="3" FontSize="30" HorizontalAlignment="Center"
+                   Visibility="{Binding FilteredList,Converter={StaticResource listToNo}}"/>
     </Grid>
 
 

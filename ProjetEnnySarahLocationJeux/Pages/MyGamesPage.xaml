@@ -12,7 +12,19 @@
     <Page.DataContext>
         <viewmodels:MyGamesViewModel/>
     </Page.DataContext>
-    
+
+    <Page.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <!-- Mettre ici le contenu du modèle de données pour l'en-tête d'onglet -->
+                        <TextBlock Foreground="Black" Text="{Binding}"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.Resources>
             <converter:ListToVisibilityConverter x:Key="converter"/>

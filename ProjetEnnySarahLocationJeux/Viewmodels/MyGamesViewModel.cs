@@ -33,12 +33,19 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             BookedGames = Booking.GetBookedCopiesForUser(CurrentUser.Id);
             RentedGames = Loan.GetOngoingLoansForUser(CurrentUser.Id);
             Status = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
-            CancelBookingCommand = new ViewModelCommand(ExecuteCancelBooking);
+            CancelBookingCommand = new ViewModelCommand(ExecuteCancelBooking, CanEexecuteCancelBooking);
             EndLoanCommand = new ViewModelCommand(ExecuteEndLoan, CanExecuteEndLoan);
             LoanStatus = new List<string>() { "ongoing", "finished" };
             SelectedLoanStatus = LoanStatus.First();
             OwnedGames = Copy.GetAll().Where(c => c.Owner.Id == CurrentUser.Id).ToList();
             DeleteOwnedGame = new ViewModelCommand(ExecuteDeleteOwnedGame);
+        }
+
+        private bool CanEexecuteCancelBooking(object obj)
+        {
+            if (SelectedBooking == null) return false;
+            if(SelectedBooking.Status == POCO_MODELS.Status.Waiting) return true;
+            return false;
         }
 
         private void ExecuteDeleteOwnedGame(object obj)

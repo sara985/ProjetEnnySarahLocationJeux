@@ -39,7 +39,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="120"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Your balance is negative, you can only loan your games to others until it is positive again" Style="{StaticResource Error}" FontSize="15" Visibility="{Binding Path=CurrentPlayer.Balance, Converter={StaticResource converter}}" Margin="0 12"/>
                 <TextBlock Text="{Binding CurrentPlayer.FirstName, StringFormat={}Hello {0}}" FontSize="24" Height="30" HorizontalAlignment="Right" Grid.Column="1"/>

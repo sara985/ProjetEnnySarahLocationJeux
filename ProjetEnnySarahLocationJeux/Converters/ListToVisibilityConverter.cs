@@ -26,6 +26,11 @@ namespace ProjetEnnySarahLocationJeux.Converters
                 List<Loan> list = (List<Loan>)value;
                 count = list.Count;
             }
+            else if (value is List<VideoGame>)
+            {
+                List<VideoGame> list = (List<VideoGame>)value;
+                count = list.Count;
+            }
 
             if (count==0)
             {
