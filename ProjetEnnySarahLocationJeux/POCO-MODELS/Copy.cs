@@ -49,5 +49,15 @@ namespace ProjetEnnySarahLocationJeux.POCO
             List<Copy> filteredList = list.Where(c => c.Owner.Id == player.Id && c.Game.Id == game.Id).ToList();
             return filteredList.Count > 0;
         }
+
+        public static List<Copy> GetAll()
+        {
+            return new CopyDAO().List();
+        }
+
+        public void Delete()
+        {
+            new CopyDAO().Delete(this);
+        }
     }
 }

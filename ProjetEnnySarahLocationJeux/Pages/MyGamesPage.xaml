@@ -62,7 +62,7 @@
                     <TextBlock Text="{Binding SelectedLoanStatus, StringFormat={}You do not have any {0} loan. }" Style="{StaticResource Header}" Foreground="White" Visibility="{Binding Path=RentedGames, Converter={StaticResource converter2}}"/>
                 </StackPanel>
             </TabItem>
-            <!--<TabItem Header="My bookings">
+            <TabItem Header="My bookings">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Content="Cancel Booking" Command="{Binding CancelBookingCommand}"/>
@@ -87,7 +87,7 @@
                                  Width="Auto" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedBooking}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <UniformGrid Columns="5" Width="Auto">
+                                    <UniformGrid Columns="5" Width="Auto" Height="25">
                                         <TextBlock Text="{Binding Copy.Owner.Username}" HorizontalAlignment="Center" />
                                         <TextBlock Text="{Binding Copy.Game.Name}" HorizontalAlignment="Center" />
                                         <TextBlock Text="{Binding BookingDate}" HorizontalAlignment="Center"/>
@@ -100,9 +100,23 @@
                     </StackPanel>
                     <TextBlock Text="{Binding SelectedStatus, StringFormat= {}You dont have any {0} bookings}" Style="{StaticResource Header}" Foreground="White" Visibility="{Binding Path=BookedGames, Converter={StaticResource converter2}}"/>
                 </StackPanel>
-            </TabItem>-->
+            </TabItem>
             <TabItem Header="My games">
-                
+                <StackPanel>
+                    <Button Content="Delete this game" Background="Red" Command="{Binding DeleteOwnedGame}"/>
+                    <ListBox ItemsSource="{Binding OwnedGames}" SelectedItem="{Binding SelectedOwnedGame}" Background="SandyBrown">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Game.Name}" FontWeight="Bold" FontSize="20"/>
+                                    <TextBlock Text="{Binding Game.Cost, StringFormat= {}{0} Credits}" FontSize="20"/>
+                                    <TextBlock Text="{Binding Game.Year}" FontSize="20"/>
+                                    <TextBlock Text="{Binding Game.ConsoleAndVersion}" FontSize="20"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </Grid>

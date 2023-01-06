@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
@@ -16,7 +17,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         Player _currentUser;
         List<Loan> _rentedGames;
         List<Booking> _bookedGames;
-        List<VideoGame> _ownedGames;
+        List<Copy> _ownedGames;
+        Copy _selectedOwnedGame;
         List<Status> _status;
         Status _selectedStatus;
         Booking _selectedBooking;
@@ -33,7 +35,26 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             Status = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
             CancelBookingCommand = new ViewModelCommand(ExecuteCancelBooking);
             EndLoanCommand = new ViewModelCommand(ExecuteEndLoan, CanExecuteEndLoan);
-            LoanStatus = new List<string>() { "ongoing", "Finished" };
+            LoanStatus = new List<string>() { "ongoing", "finished" };
+            SelectedLoanStatus = LoanStatus.First();
+            OwnedGames = Copy.GetAll().Where(c => c.Owner.Id == CurrentUser.Id).ToList();
+            DeleteOwnedGame = new ViewModelCommand(ExecuteDeleteOwnedGame);
+        }
+
+        private void ExecuteDeleteOwnedGame(object obj)
+        {
+            //Verify if copy is booked or loaned
+            if (SelectedOwnedGame.Bookings.Where(b => b.Status==POCO_MODELS.Status.Waiting).Count() == 0 && SelectedOwnedGame.IsAvailable)
+            {
+                SelectedOwnedGame.Delete();
+                OwnedGames.Remove(SelectedOwnedGame);
+                MessageBox.Show("Your game was succesfully deleted.");
+            }
+            else
+            {
+                //Tell the user they can't delete their game
+                MessageBox.Show("Your game is currently booked or loaned. Please contact the administrator.");
+            }
         }
 
         private bool CanExecuteEndLoan(object obj)
@@ -76,6 +97,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         public ICommand CancelBookingCommand { get; set; }
         public ICommand EndLoanCommand { get; set; }
+        public ICommand DeleteOwnedGame { get; set; }
         public List<Booking> BookedGames
         {
             get => _bookedGames;
@@ -112,5 +134,20 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                 SelectedLoan = RentedGames.First();
             }
         }
+
+        public List<Copy> OwnedGames { get => _ownedGames;
+            set
+            {
+                _ownedGames = value;
+                OnPropertyChanged("OwnedGames");
+            }
+        }
+        public Copy SelectedOwnedGame { get => _selectedOwnedGame;
+            set
+            {
+                _selectedOwnedGame = value;
+                OnPropertyChanged("SelectedOwnedGame");
+            }
+                }
     }
 }

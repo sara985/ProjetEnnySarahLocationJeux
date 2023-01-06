@@ -161,5 +161,23 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 }
             }
         }
+
+        public void Delete(Copy t)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Delete from dbo.copy where id=@id", connection);
+                cmd.Parameters.AddWithValue("id", t.Id);
+                connection.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
     }
 }

@@ -73,10 +73,7 @@
                             <TextBlock Text="{Binding Name, StringFormat={}{0}}" FontWeight="Bold" Grid.Column="2" FontSize="20"/>
                             <TextBlock Text="{Binding Cost, StringFormat= {}{0} Credits}" FontSize="20"/>
                             <TextBlock Text="{Binding Year}" FontSize="20"/>
-                            <DockPanel>
-                                <TextBlock Text="{Binding ConsoleAndVersion}" FontSize="20"/>
-                            </DockPanel>
-                            
+                            <TextBlock Text="{Binding ConsoleAndVersion}" FontSize="20"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
