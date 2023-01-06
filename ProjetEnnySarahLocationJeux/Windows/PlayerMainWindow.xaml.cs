@@ -1,4 +1,5 @@
 ﻿using ProjetEnnySarahLocationJeux.CustomControls;
+using ProjetEnnySarahLocationJeux.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +24,18 @@ namespace ProjetEnnySarahLocationJeux.Views
         public PlayerMainWindow()
         {
             InitializeComponent();
+            Loaded += WindowLoaded;
         }
 
-        private void sidebar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            //cast selected item as NavButton
-            var selected = sidebar.SelectedItem as NavButton;
-
-            navFrame.Navigate(selected.NavLink);
+            if (DataContext is ICloseWindows vm)
+            {
+                vm.Close += () =>
+                {
+                    this.Close();
+                };
+            }
         }
     }
 }

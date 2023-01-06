@@ -17,6 +17,7 @@
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="50"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
         <converters:NegativeNumberToVisibilityConverter x:Key="converter"/>
     </Window.Resources>
@@ -27,7 +28,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ListBox x:Name="sidebar" SelectionChanged="sidebar_SelectionChanged" SelectionMode="Single" BorderThickness="0">
+        <ListBox x:Name="sidebar" SelectedItem="{Binding SelectedButton}" SelectionMode="Single" BorderThickness="0">
             <customControls:NavButton ItemName="My Account" NavLink="/Pages/MyAccountPage.xaml" Width="98" Cursor="Hand"/>
             <customControls:NavButton ItemName="Catalog" NavLink="/Pages/CatalogPage.xaml" Width="98"/>
             <customControls:NavButton ItemName="My Games" NavLink="/Pages/MyGamesPage.xaml" Width="98"/>
@@ -38,11 +39,13 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Your balance is negative, you can only loan your games to others until it is positive again" Style="{StaticResource Error}" FontSize="15" Visibility="{Binding Path=CurrentPlayer.Balance, Converter={StaticResource converter}}"/>
+                <TextBlock Text="Your balance is negative, you can only loan your games to others until it is positive again" Style="{StaticResource Error}" FontSize="15" Visibility="{Binding Path=CurrentPlayer.Balance, Converter={StaticResource converter}}" Margin="0 12"/>
                 <TextBlock Text="{Binding CurrentPlayer.FirstName, StringFormat={}Hello {0}}" FontSize="24" Height="30" HorizontalAlignment="Right" Grid.Column="1"/>
+                <Button Content="Sign out" Grid.Column="3" Margin="6" Background="YellowGreen" Command="{Binding LogoutCommand}"/>
             </Grid>
-            <Frame x:Name="navFrame" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="navFrame" NavigationUIVisibility="Hidden" Source="{Binding FrameSource}"/>
         </StackPanel>
     </Grid>
 </Window>
