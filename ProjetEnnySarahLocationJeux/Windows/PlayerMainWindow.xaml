@@ -32,7 +32,6 @@
             <customControls:NavButton ItemName="My Account" NavLink="/Pages/MyAccountPage.xaml" Width="98" Cursor="Hand"/>
             <customControls:NavButton ItemName="Catalog" NavLink="/Pages/CatalogPage.xaml" Width="98"/>
             <customControls:NavButton ItemName="My Games" NavLink="/Pages/MyGamesPage.xaml" Width="98"/>
-            <customControls:NavButton ItemName="Add Game" NavLink="\Pages\AddGamePage.xaml" Width="98" Cursor="Hand"/>
         </ListBox>
         <StackPanel Grid.Column="1" Margin="20 5 15 5">
             <Grid>
