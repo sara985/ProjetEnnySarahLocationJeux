@@ -213,6 +213,10 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             //        }
             //    }
             //    }
+            if (SelectedVideoGame.IsBooked(CurrentUser))
+            {
+                MessageBox.Show("You already have a reservation for this game.");
+            }
             Window window = new BookGameWindow(SelectedVideoGame);
             window.Show();
         }

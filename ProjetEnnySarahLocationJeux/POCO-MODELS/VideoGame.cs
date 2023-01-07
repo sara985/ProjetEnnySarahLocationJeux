@@ -104,6 +104,11 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             return Copies.First();
         }
+
+        public bool IsBooked(Player p)
+        {
+            return new BookingDAO().List().Where(b => b.Copy.Game.Id == this.Id && b.Booker.Id == p.Id).Any();
+        }
     }
 
 }
