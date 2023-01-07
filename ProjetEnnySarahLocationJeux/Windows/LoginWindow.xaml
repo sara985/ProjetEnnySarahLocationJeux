@@ -32,7 +32,7 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Welcome to Game Switch" HorizontalAlignment="Center" Style="{StaticResource Title}" VerticalAlignment="Bottom"/>
-        <TextBlock Text="Username/Email" Grid.Row="1" Width="200"/>
+        <TextBlock Text="Username" Grid.Row="1" Width="200"/>
         <TextBox x:Name="loginBox" Grid.Row="2" Width="200" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Text="Password" Grid.Row="3" Width="200"/>
         <!--Custom Control créé car on ne peut pas binder le password d'une passwordBox car champ sensible-->
