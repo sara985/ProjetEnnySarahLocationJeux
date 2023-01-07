@@ -53,6 +53,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));
             GoToSignupCommand = new ViewModelCommand(ExecuteGoToSignupCommand);
+            IsViewVisible = true;
         }
 
        

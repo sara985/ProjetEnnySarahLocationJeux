@@ -57,7 +57,8 @@
             </ComboBox>
             <Button Content="Reset" Width="60" Margin="10 4" Command="{Binding ResetGamesCommand}"/>
         </StackPanel>
-        <ListBox ItemsSource="{Binding FilteredList}" Background="Pink" AlternationCount="3" Grid.Row="2" SelectedItem="{Binding SelectedVideoGame,Mode=TwoWay}" SelectedIndex="0" Visibility="{Binding Path=FilteredList, Converter={StaticResource listTo}}">
+        <ListBox ItemsSource="{Binding FilteredList}" Background="Pink" AlternationCount="3" Grid.Row="2" SelectedItem="{Binding SelectedVideoGame,Mode=TwoWay}" SelectedIndex="0" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 Visibility="{Binding Path=FilteredList, Converter={StaticResource listTo}}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <!--Make grid an image background of videogame-->

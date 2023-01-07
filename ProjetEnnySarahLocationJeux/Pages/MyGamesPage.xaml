@@ -95,7 +95,7 @@
                         <TextBlock Text="Duration (in weeks)" HorizontalAlignment="Center"/>
                         <TextBlock Text="Status" HorizontalAlignment="Center"/>
                     </UniformGrid>
-                    <ListBox ItemsSource="{Binding BookedGames}" SelectedIndex="0" Background="{StaticResource clrPrimary}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    <ListBox ItemsSource="{Binding BookedGames}" Background="{StaticResource clrPrimary}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                  Width="Auto" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedBooking}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -114,21 +114,24 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="My games">
-                <StackPanel>
-                    <Button Content="Delete this game" Background="Red" Command="{Binding DeleteOwnedGame}"/>
-                    <ListBox ItemsSource="{Binding OwnedGames}" SelectedItem="{Binding SelectedOwnedGame}" Background="SandyBrown">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Game.Name}" FontWeight="Bold" FontSize="20"/>
-                                    <TextBlock Text="{Binding Game.Cost, StringFormat= {}{0} Credits}" FontSize="20"/>
-                                    <TextBlock Text="{Binding Game.Year}" FontSize="20"/>
-                                    <TextBlock Text="{Binding Game.ConsoleAndVersion}" FontSize="20"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </StackPanel>
+                <Grid>
+                    <StackPanel Visibility="{Binding Path=OwnedGames, Converter={StaticResource converter}}">
+                        <Button Content="Delete this game" Background="Red" Command="{Binding DeleteOwnedGame}"/>
+                        <ListBox ItemsSource="{Binding OwnedGames}" SelectedItem="{Binding SelectedOwnedGame}" Background="SandyBrown">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Game.Name}" FontWeight="Bold" FontSize="20"/>
+                                        <TextBlock Text="{Binding Game.Cost, StringFormat= {}{0} Credits}" FontSize="20"/>
+                                        <TextBlock Text="{Binding Game.Year}" FontSize="20"/>
+                                        <TextBlock Text="{Binding Game.ConsoleAndVersion}" FontSize="20"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    <TextBlock Text="You don't own any games yet" Visibility="{Binding Path=OwnedGames, Converter={StaticResource converter2}}" />
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

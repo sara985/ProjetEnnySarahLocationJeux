@@ -39,8 +39,11 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         Administrator a = new Administrator();
                         return a;
                     }
+                    connection.Close();
                     return null;
+
                 }
+                
             }
         }
 
@@ -62,6 +65,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         a.Email = reader.GetString(2);
                         return a;
                     }
+                    connection.Close();
                     return null;
                 }
             }

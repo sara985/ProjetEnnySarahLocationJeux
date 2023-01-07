@@ -31,6 +31,11 @@ namespace ProjetEnnySarahLocationJeux.Converters
                 List<VideoGame> list = (List<VideoGame>)value;
                 count = list.Count;
             }
+            else if (value is List<Copy>)
+            {
+                List<Copy> list = (List<Copy>)value;
+                count = list.Count;
+            }
 
             if (count==0)
             {

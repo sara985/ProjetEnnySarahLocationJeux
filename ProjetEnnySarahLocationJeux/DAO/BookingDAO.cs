@@ -28,7 +28,6 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 cmd.Parameters.AddWithValue("id", id);
                 connection.Open();
                 return (Booking)cmd.ExecuteScalar();
-
             }
         }
         /*    select c.id, count(*) as co from [GameSwitch].[dbo].[Copy] c join [GameSwitch].[dbo].[Booking] b on b.copyId = c.id

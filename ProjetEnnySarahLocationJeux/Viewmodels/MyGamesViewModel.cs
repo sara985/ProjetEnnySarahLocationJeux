@@ -4,9 +4,7 @@ using ProjetEnnySarahLocationJeux.POCO_MODELS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -30,7 +28,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         {
             CurrentUser = new PlayerDAO().GetByUsername(Thread.CurrentPrincipal.Identity.Name);
             RentedGames = new List<Loan>();
-            BookedGames = Booking.GetBookedCopiesForUser(CurrentUser.Id);
+            BookedGames = Booking.GetBookingsByStatusAndUser(SelectedStatus, CurrentUser.Username);
             RentedGames = Loan.GetOngoingLoansForUser(CurrentUser.Id);
             Status = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
             CancelBookingCommand = new ViewModelCommand(ExecuteCancelBooking, CanEexecuteCancelBooking);
@@ -54,7 +52,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             if (SelectedOwnedGame.Bookings.Where(b => b.Status==POCO_MODELS.Status.Waiting).Count() == 0 && SelectedOwnedGame.IsAvailable)
             {
                 SelectedOwnedGame.Delete();
-                OwnedGames.Remove(SelectedOwnedGame);
+                OwnedGames = Copy.GetAll().Where(c => c.Owner.Id == CurrentUser.Id).ToList();
                 MessageBox.Show("Your game was succesfully deleted.");
             }
             else
@@ -81,6 +79,9 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         {
             SelectedBooking.Status = POCO_MODELS.Status.Canceled;
             SelectedBooking.UpdateStatus();
+            BookedGames = Booking.GetBookingsByStatusAndUser(SelectedStatus, CurrentUser.Username);
+            SelectedBooking = BookedGames.FirstOrDefault();
+            MessageBox.Show("Your booking was succesfully canceled.");
         }
 
         public List<Loan> RentedGames { 
