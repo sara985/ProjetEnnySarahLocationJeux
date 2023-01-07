@@ -99,6 +99,11 @@ namespace ProjetEnnySarahLocationJeux.POCO
             //return new VideoGameDAO().unusedGames();
             
         }
+
+        public Copy GetFirstCopy()
+        {
+            return Copies.First();
+        }
     }
 
 }
