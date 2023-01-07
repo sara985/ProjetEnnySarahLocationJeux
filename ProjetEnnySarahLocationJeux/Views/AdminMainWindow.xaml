@@ -8,7 +8,7 @@
         xmlns:customControls="clr-namespace:ProjetEnnySarahLocationJeux.CustomControls"
         mc:Ignorable="d"
         Title="AdminMainWindow" Height="450" Width="800">
-    
+
     <Window.DataContext>
         <viewmodel:AdminViewModel/>
     </Window.DataContext>
@@ -28,9 +28,9 @@
             <customControls:NavButton ItemName="Add a Console" Width="98" NavLink="/Views/AdminAddConsolePage.xaml"/>
             <customControls:NavButton ItemName="Add a Version" Width="98" NavLink="/Views/AdminAddVersionPage.xaml"/>
             <customControls:NavButton ItemName="Update Credits" Width="98" NavLink="/Views/AdminEditCreditPage.xaml"/>
-            <customControls:NavButton ItemName="Delete Games" Width="98"/>
-            <customControls:NavButton ItemName="Sign Out" Width="98"/>
+            <customControls:NavButton ItemName="Delete Games" Width="98" NavLink="/Views/AdminDeleteGamePage.xaml"/>
         </ListBox>
+
 
         <StackPanel Grid.Column="1" Grid.RowSpan="2">
             <WrapPanel HorizontalAlignment="Right">
@@ -39,6 +39,7 @@
             </WrapPanel>
             <Frame x:Name="navFrame" NavigationUIVisibility="Hidden"/>
         </StackPanel>
+        <Button x:Name="btnLogout" HorizontalAlignment="Center" Command="{Binding SignOutCommand}" Margin="0,109,0,0" VerticalAlignment="Top" RenderTransformOrigin="-12.79,1.77" Content="SignOut" Click="Button_Click"/>
 
     </Grid>
 </Window>
