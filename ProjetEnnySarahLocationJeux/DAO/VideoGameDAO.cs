@@ -79,5 +79,55 @@ namespace ProjetEnnySarahLocationJeux.DAO
         {
             throw new NotImplementedException();
         }
+
+        public List<VideoGame> NonusedGames()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("select * from dbo.Game where not exists(select * from dbo.Copy where dbo.Game.id=dbo.Copy.gameId)", connection);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    List<VideoGame> list = new List<VideoGame>();
+                    while (reader.Read())
+                    {
+                        VideoGame goodtogo = new VideoGame();
+                        goodtogo.Id = reader.GetInt32(0);
+                        goodtogo.Name = reader.GetString(1);
+                        goodtogo.Year = reader.GetInt32(2);
+                        goodtogo.Cost = reader.GetInt32(3);
+                        goodtogo.ConsoleAndVersion = reader.GetString(4);
+                        list.Add(goodtogo);
+                    }
+                    return list;
+                }
+            }
+
+
+        }
+        public bool DeleteNonusedGame(VideoGame v)
+        {
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("delete from dbo.Game where id=@id", connection);
+                cmd.Parameters.AddWithValue("id", v.Id);
+                connection.Open();
+
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+                return false;
+            }
+
+
+        }
     }
 }

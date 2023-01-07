@@ -7,41 +7,31 @@ using System.Windows;
 using System.Windows.Input;
 using ProjetEnnySarahLocationJeux.POCO;
 
-
 namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
-    internal class EditCreditViewModel : ViewModelBase
+    public class DeleteGameViewModel: ViewModelBase
     {
         private VideoGame _game;
         private string _errorMessage;
         private List<VideoGame> _games;
         private VideoGame _selectedgame;
-       
 
-        public ICommand EditCreditCommand { get; set; }
+        public ICommand DeleteGameCommand { get; set; }
 
-        public EditCreditViewModel()
+        public DeleteGameViewModel()
         {
-
             _game = new VideoGame();
-            EditCreditCommand = new ViewModelCommand(EditCredit);
-            Games = VideoGame.GetAll();
+            DeleteGameCommand = new ViewModelCommand(DeleteGame);
+            Games = VideoGame.NonusedGames();
         }
 
-        private void EditCredit(object obj)
+        private void DeleteGame(object obj)
         {
-            int idG = getidgame();
-            Game.Id=idG;
-      
-            if (Game.UpdateCredit())
+            Game.Id=Selectedgame.Id;
+            if (Game.DeleteUnusedGame())
             {
-                MessageBox.Show("Cost has been modified");
+                MessageBox.Show("Game has been deleted");
             }
-        }
-
-        private int getidgame()
-        {
-            return Selectedgame.Id;
         }
 
         public VideoGame Game { get => _game; set { _game = value; OnPropertyChanged(nameof(Game)); } }
@@ -49,6 +39,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public List<VideoGame> Games { get => _games; set { _games = value; OnPropertyChanged(nameof(Games)); } }
         public VideoGame Selectedgame { get => _selectedgame; set { _selectedgame = value; OnPropertyChanged(nameof(Selectedgame)); } }
 
-        
+
+
     }
 }

@@ -84,6 +84,21 @@ namespace ProjetEnnySarahLocationJeux.POCO
             VideoGameDAO dao = new VideoGameDAO();
             return dao.UpdateCredit(this);
         }
+
+        public bool DeleteUnusedGame()
+        {
+            VideoGameDAO dao = new VideoGameDAO();
+            return dao.DeleteNonusedGame(this);
+        }
+
+        public static List<VideoGame> NonusedGames()
+        {
+            List<VideoGame> listnonusedGames =new VideoGameDAO().NonusedGames();
+            if (listnonusedGames.Count == 0) { return null; }
+            else { return listnonusedGames; }
+            //return new VideoGameDAO().unusedGames();
+            
+        }
     }
 
 }
