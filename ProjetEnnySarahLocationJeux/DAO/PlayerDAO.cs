@@ -51,6 +51,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         p.FirstName = reader.GetString(6);
                         p.LastName = reader.GetString(7);
                         p.Email = reader.GetString(8);
+                        p.HadBirthdayCredit = reader.GetBoolean(9);
                         return p;
                     }
                     return null;
@@ -79,6 +80,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         p.FirstName = reader.GetString(6);
                         p.LastName = reader.GetString(7);
                         p.Email = reader.GetString(8);
+                        p.HadBirthdayCredit = reader.GetBoolean(9);
                         return p;
                     }
                     return null;
@@ -107,6 +109,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         p.FirstName = reader.GetString(6);
                         p.LastName = reader.GetString(7);
                         p.Email = reader.GetString(8);
+                        p.HadBirthdayCredit = reader.GetBoolean(9);
                         return p;
                     }
                     return null;
@@ -121,13 +124,16 @@ namespace ProjetEnnySarahLocationJeux.DAO
             t.LastName = GlobalFunction.InitCap(t.LastName);
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,10,GETDATE(),@bdate,@fname,@lname,LOWER(@email))", connection);
+                SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,@balance,@signupDate,@bdate,@fname,@lname,LOWER(@email),@hadCredit)", connection);
                 cmd.Parameters.AddWithValue("user", t.Username);
                 cmd.Parameters.AddWithValue("pass", t.Password);
-                cmd.Parameters.AddWithValue("bdate", t.BirthDate.ToShortDateString());
+                cmd.Parameters.AddWithValue("balance", t.Balance);
+                cmd.Parameters.AddWithValue("signupdate", t.SignUpDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("bdate", t.BirthDate.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("fname", t.FirstName);
                 cmd.Parameters.AddWithValue("lname", t.LastName);
                 cmd.Parameters.AddWithValue("email", t.Email);
+                cmd.Parameters.AddWithValue("hadCredit", t.HadBirthdayCredit);
                 connection.Open();
                 int i = 0;
                 try
@@ -153,7 +159,22 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
             public void Update(Player t)
             {
-                throw new NotImplementedException();
-            }
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("Update dbo.player set balance=@balance, hadBirthdayCredit=@hadCredit where id=@id", connection);
+                    cmd.Parameters.AddWithValue("balance", t.Balance);
+                cmd.Parameters.AddWithValue("hadCredit", t.HadBirthdayCredit);
+                cmd.Parameters.AddWithValue("id", t.Id);
+                    connection.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
+                }
+        }
     }
 }

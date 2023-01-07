@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ProjetEnnySarahLocationJeux.Pages
 {
     /// <summary>
-    /// Logique d'interaction pour AddGamePage.xaml
+    /// Logique d'interaction pour MyGamesPage.xaml
     /// </summary>
-    public partial class AddGamePage : Page
+    public partial class MyGamesPage : Page
     {
-        public AddGamePage()
+        public MyGamesPage()
         {
             InitializeComponent();
         }

@@ -28,7 +28,6 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 cmd.Parameters.AddWithValue("id", id);
                 connection.Open();
                 return (Booking)cmd.ExecuteScalar();
-
             }
         }
         /*    select c.id, count(*) as co from [GameSwitch].[dbo].[Copy] c join [GameSwitch].[dbo].[Booking] b on b.copyId = c.id
@@ -62,7 +61,29 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public List<Booking> List()
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                PlayerDAO play = new PlayerDAO();
+                CopyDAO copyDAO = new CopyDAO();
+                SqlCommand cmd = new SqlCommand("select * from dbo.Booking", connection);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    List<Booking> list = new List<Booking>();
+                    while (reader.Read())
+                    {
+                        Booking b = new Booking();
+                        b.Id = reader.GetInt32(0);
+                        b.Booker = play.GetById(reader.GetInt32(1));
+                        b.Copy = copyDAO.GetById(reader.GetInt32(2));
+                        b.Status = (Status)Enum.Parse(typeof(Status), reader.GetString(3));
+                        b.Duration = reader.GetInt32(4);
+                        b.BookingDate = DateOnly.FromDateTime(reader.GetDateTime(5));
+                        list.Add(b);
+                    }
+                    return list;
+                }
+            }
         }
 
         public List<Booking> GetBookingsByCopyId(int copyid)
@@ -94,7 +115,21 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
         public void Update(Booking t)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Update dbo.booking set status=@status where id=@id", connection);
+                cmd.Parameters.AddWithValue("status", t.Status.ToString());
+                cmd.Parameters.AddWithValue("id", t.Id);
+                connection.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
         }
     }
 }

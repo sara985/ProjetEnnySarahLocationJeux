@@ -49,6 +49,7 @@
         <Style TargetType="Button">
             <Setter Property="Background" Value="{StaticResource mediumColor}"/>
             <Setter Property="Button.Content" Value="Black"/>
+            <Setter Property="Padding" Value="5"/>
             <Style.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="3"/>

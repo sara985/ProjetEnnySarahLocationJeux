@@ -19,6 +19,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private DateOnly signUpDate;
         private string email;
         private int balance;
+        private bool _hadBirthdayCredit;
 
         //TODO ask question to teacher
         public Player(string username, string password)
@@ -39,18 +40,13 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public DateOnly SignUpDate { get => signUpDate; set => signUpDate = value; }
         public string Email { get => email; set => email = value; }
         public int Balance { get => balance; set => balance = value; }
+        public bool HadBirthdayCredit { get => _hadBirthdayCredit; set => _hadBirthdayCredit = value; }
 
         public override User Login(string email, string password)
         {
             throw new NotImplementedException();
         }
 
-        //public static List<Player> GetPlayers()
-        //{
-        //    PlayerDAO dao = new PlayerDAO();
-        //    //return db.GetMovies();
-        //    // return dao.Get ;
-        //}
         public bool Insert()
         {
             PlayerDAO dao = new PlayerDAO();
@@ -67,6 +63,11 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             PlayerDAO dao = new PlayerDAO();
             return dao.GetById(id);
+        }
+
+        public void Update()
+        {
+            new PlayerDAO().Update(this);
         }
 
     }
