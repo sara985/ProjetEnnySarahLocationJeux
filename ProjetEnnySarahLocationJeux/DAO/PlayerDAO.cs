@@ -206,11 +206,6 @@ namespace ProjetEnnySarahLocationJeux.DAO
             throw new NotImplementedException();
         }
 
-        public void Update(Player t)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public int NbrGamesBrwd(Player p)
         {
@@ -309,27 +304,28 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 if (i == 1) { return true; }
                 return false;
             }
-        } 
+        }
 
 
 
-        //public
-        //        using (SqlConnection connection = new SqlConnection(connectionString))
-        //        {
-        //            SqlCommand cmd = new SqlCommand("Update dbo.player set balance=@balance, hadBirthdayCredit=@hadCredit where id=@id", connection);
-        //            cmd.Parameters.AddWithValue("balance", t.Balance);
-        //            cmd.Parameters.AddWithValue("hadCredit", t.HadBirthdayCredit);
-        //            cmd.Parameters.AddWithValue("id", t.Id);
-        //            connection.Open();
-        //            try
-        //            {
-        //                cmd.ExecuteNonQuery();
-        //            }
-        //            catch (Exception e)
-        //            {
-        //                MessageBox.Show(e.Message);
-        //            }
-        //        }
-        //}
+        public void Update(Player t)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Update dbo.player set balance=@balance, hadBirthdayCredit=@hadCredit where id=@id", connection);
+                cmd.Parameters.AddWithValue("balance", t.Balance);
+                cmd.Parameters.AddWithValue("hadCredit", t.HadBirthdayCredit);
+                cmd.Parameters.AddWithValue("id", t.Id);
+                connection.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
     }
 }
