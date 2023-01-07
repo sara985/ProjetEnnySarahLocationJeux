@@ -24,6 +24,38 @@ namespace ProjetEnnySarahLocationJeux.DAO
             this.connectionString = ConfigurationManager.ConnectionStrings["GameSwitchDB"].ConnectionString;
         }
 
+        public bool IsUsernameAvailable(string username)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT * FROM Player WHERE Username = @username", connection);
+                command.Parameters.AddWithValue("@username", username);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        public bool IsEmailAvailable(string email)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT * FROM Player WHERE Email = @email", connection);
+                command.Parameters.AddWithValue("@email", email);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
         public Player IsPlayer(string username, string pass)
         {
             //stack FIFO

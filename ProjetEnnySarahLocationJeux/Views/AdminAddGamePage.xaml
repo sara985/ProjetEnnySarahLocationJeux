@@ -51,7 +51,7 @@
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=yearTextBox}" Margin="10,0,0,0" Style="{StaticResource Error}"/>
+            <TextBlock Text="{Binding Path=(Validation.Errors)[0].ErrorContent, ElementName=yearTextBox}" Margin="10,0,0,0" Style="{StaticResource Error}"/>
         </StackPanel>
         <TextBlock Text="Cost (amount of credit)" Grid.Row="3" Margin="20,10,10,10" HorizontalAlignment="Right"/>
         <StackPanel  Grid.Row="3" Grid.Column="1">

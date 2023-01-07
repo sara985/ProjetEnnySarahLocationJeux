@@ -44,8 +44,26 @@
                 </TextBox.Text>
             </TextBox>
             <TextBlock Text="Username"/>
-            <TextBox Text="{Binding Player.Username, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
+            <TextBox  Name="usernameTextBox">
+                    <TextBox.Text>
+                    <Binding Path="Player.Username" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validationRules:ValidateUsername />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}" >
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="true">
+                                    <Setter Property="BorderBrush" Value="Red"/>
+                                    <Setter Property="Background" Value="LightYellow"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            <TextBlock Text="{Binding Path=(Validation.Errors)[0].ErrorContent, ElementName=usernameTextBox}" Style="{StaticResource Error}"/>
             <TextBlock Text="Birth Date"/>
             <DatePicker Text="{Binding Player.BirthDate, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
         </StackPanel>
@@ -56,7 +74,26 @@
             <TextBlock Text="Password"/>
             <customcontrols:BindablePasswordBox Password="{Binding Player.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Email"/>
-            <TextBox Text="{Binding Player.Email, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox  Name="emailTextBox">
+                <TextBox.Text>
+                    <Binding Path="Player.Email" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <validationRules:ValidateEmail />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}" >
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                                <Setter Property="Background" Value="LightYellow"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <TextBlock Text="{Binding Path=(Validation.Errors)[0].ErrorContent, ElementName=emailTextBox}" Style="{StaticResource Error}"/>
             <Button Content="Add" Style="{StaticResource firstBtnType}" Margin="0 15 0 0" Command="{Binding AddPlayerCommand}"/>
         </StackPanel>
     </Grid>
