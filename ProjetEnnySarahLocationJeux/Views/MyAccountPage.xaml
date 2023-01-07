@@ -13,15 +13,54 @@
         <viewModel:MyAccountViewModel/>
     </Page.DataContext>
 
-    <StackPanel >
-        <TextBlock Text="{Binding Player.Balance, StringFormat={}You currently have {0} credits on your account.}"/>
-        <TextBlock Text="{Binding NbrGameImRtg, StringFormat={}You are curently renting {0} games.}"/>
-        <TextBlock Text="{Binding NbrGameRented, StringFormat={}{0} people renting your games.}"/>
-        <TextBlock Text="Your email :"/>
-        <TextBlock Text="{Binding Player.Email}"/>
-        <TextBlock Text="Your Username : "/>
-        <TextBlock Text="{Binding Player.Username}"/>
-        <Button Content="Change Password" Width="150"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+    
+        <Label Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Your Current Data: </Label>
+        <TextBlock Grid.Row="1" Text="Number Of Credits" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
+        <TextBox Grid.Row="1" Grid.Column="1"  Text="{Binding Player.Balance, StringFormat={}{0} credits }" Foreground="Black" Margin="5" Width="200" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="2" Text="You are curently renting"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NbrGameImRtg, StringFormat={}{0} game(s)}" Foreground="Black" Margin="5" Width="200"  HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="3" Text="Number of Games Taken (Borrowed) "  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NbrGameRented, StringFormat={}{0} game(s)}" Foreground="Black" Margin="5" Width="200"  HorizontalAlignment="Left"/>
+        
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.ColumnSpan="3" Content="You can Modify your Data below" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+            <TextBlock Grid.Row="1" Text="Email" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <TextBox Grid.Row="2" Text="{Binding Player.Email}" Margin="5,5" Width="200" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Your Username : " VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Player.Username}" Margin="5,5" Width="180"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="Your Password : " VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Player.Password}" Margin="5,5" Width="200" HorizontalAlignment="Left"/>
+            <Button Grid.Row="2" Grid.Column="3"  Width="150" Content="Modify Your Data" Style="{StaticResource firstBtnType}" Height="38" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5"></Button>
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Width="450" Content="Delete your Account" Style="{StaticResource firstBtnType}" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5"></Button>
 
-    </StackPanel>
+        </Grid>
+
+    </Grid>
+
+
 </Page>
