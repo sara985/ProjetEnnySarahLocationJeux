@@ -32,29 +32,50 @@
         <TextBox Text="{Binding VideoGame.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left"/>
         <TextBlock Text="Year" Grid.Row="2" Margin="20,10,10,10" HorizontalAlignment="Right"/>
         <StackPanel  Grid.Row="2" Grid.Column="1">
-        <TextBox  Width="200" Margin="10 10 10 0" HorizontalAlignment="Left" Name="yearTextBox" Height="28">
-            <TextBox.Text>
-                <Binding Path="VideoGame.Year" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <validation:ValueRangeRule Max="2023" Min="1960"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-            <TextBox.Style>
-                <Style TargetType="{x:Type TextBox}" >
-                    <Style.Triggers>
-                        <Trigger Property="Validation.HasError" Value="true">
-                            <Setter Property="BorderBrush" Value="Red"/>
-                            <Setter Property="Background" Value="LightYellow"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
-        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=yearTextBox}" Margin="10,0,0,0" Style="{StaticResource Error}"/>
+            <TextBox  Width="200" Margin="10 10 10 0" HorizontalAlignment="Left" Name="yearTextBox" Height="28">
+                <TextBox.Text>
+                    <Binding Path="VideoGame.Year" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <validation:ValueRangeRule Max="2023" Min="1960"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}" >
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                                <Setter Property="Background" Value="LightYellow"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=yearTextBox}" Margin="10,0,0,0" Style="{StaticResource Error}"/>
         </StackPanel>
         <TextBlock Text="Cost (amount of credit)" Grid.Row="3" Margin="20,10,10,10" HorizontalAlignment="Right"/>
-        <TextBox Text="{Binding VideoGame.Cost, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left"/>
+        <StackPanel  Grid.Row="3" Grid.Column="1">
+            <TextBox Name="costTextBox" Width="200" Margin="10 10 10 0" HorizontalAlignment="Left" Height="28">
+                <TextBox.Text>
+                    <Binding Path="VideoGame.Cost" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <validation:ValueRangeRule Max="5" Min="1"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}" >
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                                <Setter Property="Background" Value="LightYellow"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=costTextBox}" Margin="10,0,0,0" Style="{StaticResource Error}"/>
+        </StackPanel>
         <TextBlock Text="Console" Grid.Row="4" Margin="20,10,10,10" HorizontalAlignment="Right"/>
         <ComboBox ItemsSource="{Binding Consoles}" SelectedItem="{Binding SelectedConsole, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Width="200" Margin="10" HorizontalAlignment="Left">
             <ComboBox.ItemTemplate>

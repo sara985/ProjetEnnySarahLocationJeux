@@ -29,7 +29,7 @@ namespace ProjetEnnySarahLocationJeux.ValidationRules
             }
             else
             {
-                return new ValidationResult(false, "Value must be an integer.");
+                return new ValidationResult(false, "Value must be a number.");
             }
         }
     }

@@ -35,7 +35,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
       
             if (Game.UpdateCredit())
             {
-                MessageBox.Show("Cost has been modivied");
+                MessageBox.Show("Cost has been modified");
             }
         }
 
