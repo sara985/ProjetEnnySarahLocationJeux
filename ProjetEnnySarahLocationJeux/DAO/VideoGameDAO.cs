@@ -42,6 +42,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     }
                     return v;
                 }
+                connection.Close();
             }
         }
 
@@ -65,7 +66,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     MessageBox.Show(e.Message); 
                     return false;
                 }
-                if(i == 1) { return true; }
+                connection.Close();
+                if (i == 1) { return true; }
                 
                 return false;
             }
@@ -93,6 +95,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         v.Copies = copyDAO.GetByGameId(reader.GetInt32(0));
                         list.Add(v);
                     }
+                    connection.Close();
                     return list;
                 }
             }
@@ -118,6 +121,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         v.ConsoleAndVersion = reader.GetString(4);
                         list.Add(v);
                     }
+                    connection.Close();
                     return list;
                 }
             }
@@ -145,9 +149,11 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     MessageBox.Show(e.Message);
                     return false;
                 }
-                if (i == 1) { return true; }
-
-                return false;
+                finally
+                {
+                    connection.Close();
+                }
+                return i == 1;
             }
         }
 
@@ -176,6 +182,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         goodtogo.ConsoleAndVersion = reader.GetString(4);
                         list.Add(goodtogo);
                     }
+                    connection.Close();
                     return list;
                 }
             }
@@ -200,11 +207,12 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     MessageBox.Show(e.Message);
                     return false;
                 }
-                if (i == 1) { return true; }
-                return false;
+                finally
+                {
+                    connection.Close();
+                }
+                return i == 1;
             }
-
-
         }
     }
 }

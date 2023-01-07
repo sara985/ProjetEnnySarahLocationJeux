@@ -22,20 +22,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
         }
         public Booking GetById(int id)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("Select * from dbo.Booking where id = @id", connection);
-                cmd.Parameters.AddWithValue("id", id);
-                connection.Open();
-                return (Booking)cmd.ExecuteScalar();
-
-            }
+            throw new NotImplementedException();
         }
-        /*    select c.id, count(*) as co from [GameSwitch].[dbo].[Copy] c join [GameSwitch].[dbo].[Booking] b on b.copyId = c.id
-              where (c.id=2 or c.id=3) and b.status='0'
-              group by c.id
-              order by co
-        */
         public bool Insert(Booking t)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -56,6 +44,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     MessageBox.Show(e.Message);
                     return false;
                 }
+                connection.Close();
                 return true;
             }
         }
@@ -88,7 +77,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
                             bookings.Add(b);
                         }
                     }
-                    return bookings;
+                connection.Close();
+                return bookings;
                 }              
         }
 

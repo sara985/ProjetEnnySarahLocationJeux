@@ -36,6 +36,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 {
                     return false;
                 }
+                connection.Close();
                 return true;
             }
         }
@@ -52,6 +53,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 {
                     return false;
                 }
+                connection.Close();
                 return true;
             }
         }
@@ -86,7 +88,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         return p;
                     }
                     return null;
-                }              
+                }
+                connection.Close();
             }
         }
 
@@ -115,6 +118,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     }
                     return null;
                 }
+                connection.Close();
             }
         }
 
@@ -143,6 +147,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     }
                     return null;
                 }
+                connection.Close();
             }
         }
 
@@ -170,6 +175,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     MessageBox.Show(e.Message);
                     return false;
                 }
+                connection.Close();
                 if (i == 1)
                 {
                     return true;

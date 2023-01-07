@@ -38,6 +38,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 try
                 {
                     cmd.ExecuteNonQuery();
+                    connection.Close();
                 }
                 catch (Exception e)
                 {
