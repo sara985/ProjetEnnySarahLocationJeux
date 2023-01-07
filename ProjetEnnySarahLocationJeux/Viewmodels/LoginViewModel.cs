@@ -47,9 +47,9 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         public LoginViewModel()
         {
-            //these methods are delegated to the command
             adminDAO = new AdminDao();
             playerDAO = new PlayerDAO();
+            //these methods are delegated to the command
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));
             GoToSignupCommand = new ViewModelCommand(ExecuteGoToSignupCommand);

@@ -8,13 +8,13 @@ namespace ProjetEnnySarahLocationJeux.ValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if(Regex.IsMatch(value.ToString(), "^[A-Za-z]*$"))
-            {
-                return ValidationResult.ValidResult;
-            }
-            if(value.ToString().Length==0)
+            if (value.ToString().Length == 0)
             {
                 return new ValidationResult(false, "empty");
+            }
+            if (Regex.IsMatch(value.ToString(), "^[A-Za-z]*$"))
+            {
+                return ValidationResult.ValidResult;
             }
             return new ValidationResult(false, "invalid");
         }
