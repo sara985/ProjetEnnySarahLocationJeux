@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjetEnnySarahLocationJeux.DAO
 {
@@ -72,6 +73,34 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     }
                     return list;
                 }
+            }
+        }
+
+        public bool UpdateCredit(VideoGame g)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                SqlCommand cmd = new SqlCommand("update dbo.Game set creditsValued=@cost where id=@id", connection);
+                cmd.Parameters.AddWithValue("cost", g.Cost);
+                cmd.Parameters.AddWithValue("id", g.Id);
+
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+
+                return false;
             }
         }
 
