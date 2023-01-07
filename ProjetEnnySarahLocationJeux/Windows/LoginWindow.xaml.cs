@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjetEnnySarahLocationJeux.Viewmodels;
+using ProjetEnnySarahLocationJeux.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,11 +24,33 @@ namespace ProjetEnnySarahLocationJeux.Windows
         public LoginWindow()
         {
             InitializeComponent();
-        }
+            DataContext = new LoginViewModel();
 
-        private void logInBtn_Click(object sender, RoutedEventArgs e)
-        {
+            IsVisibleChanged += (s, ev) =>
+            {
+                bool signup = ((LoginViewModel)DataContext).GoToSignup;
+                bool admin = ((LoginViewModel)DataContext).IsLoginasAdmin;
 
+
+                if (this.IsVisible == false && this.IsLoaded && signup == false && admin)
+                {
+                    var mainView = new AdminMainWindow();
+                    mainView.Show();
+                    this.Close();
+                }
+                else if (this.IsVisible == false && this.IsLoaded && signup == false)
+                {
+                    var mainView = new PlayerMainWindow();
+                    mainView.Show();
+                    this.Close();
+                }
+                else if (this.IsVisible == false && this.IsLoaded && signup == true)
+                {
+                    var mainView = new SignUpWindow();
+                    mainView.Show();
+                    this.Close();
+                }
+            };
         }
     }
 }

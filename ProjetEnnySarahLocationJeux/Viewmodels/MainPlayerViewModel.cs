@@ -38,6 +38,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             MessageBox.Show("You have succesfully been disconnected. You will now be redirected to the login form.");
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
+            //ApplicationStart();
             Close?.Invoke();
         }
 

@@ -29,8 +29,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("Insert into dbo.booking values (@borrowerid,@copyid,@status,@duration,@bookingDate)", connection);
-                cmd.Parameters.AddWithValue("copyid", t.Copy.Id);
                 cmd.Parameters.AddWithValue("borrowerid", t.Booker.Id);
+                cmd.Parameters.AddWithValue("copyid", t.Copy.Id);
                 cmd.Parameters.AddWithValue("status", t.Status.ToString());
                 cmd.Parameters.AddWithValue("duration", t.Duration);
                 cmd.Parameters.AddWithValue("bookingDate", t.BookingDate.ToShortDateString());

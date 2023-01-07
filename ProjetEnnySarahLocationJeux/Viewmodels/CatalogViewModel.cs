@@ -219,7 +219,9 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private bool CanExecuteRentThisGame(object obj)
         {
-            if ((SelectedVideoGame != null && SelectedVideoGame.Copies.Count == 0) || CurrentUser.Balance <= 0) return false;
+            if (SelectedVideoGame == null) return false;
+            //if (CurrentUser.Balance < SelectedVideoGame.Cost) return false; TODO
+            if (SelectedVideoGame.Copies.Count == 0) return false;
             return true;
         }
 

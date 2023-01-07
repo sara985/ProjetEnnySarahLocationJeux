@@ -29,6 +29,7 @@
         <Grid.Resources>
             <converter:ListToVisibilityConverter x:Key="converter"/>
             <converter:ListToNoVisibilityConverter x:Key="converter2"/>
+            <converter:NullToNoVisibilityConverter x:Key="nullConverter"/>
         </Grid.Resources>
         <TabControl Background="{StaticResource clrPrimary}">
             <TabItem Header="Rented Games">
@@ -61,7 +62,7 @@
                                             <TextBlock Text="{Binding Copy.Owner.Username, StringFormat={}Owned by {0}}" FontSize="20"/>
                                             <TextBlock Text="{Binding StartDate, StringFormat={}Started on {0}}" FontSize="20"/>
                                             <TextBlock Text="{Binding PresumedEndDate, StringFormat={}Due on {0} included}" FontSize="20"/>
-                                            <StackPanel>
+                                            <StackPanel Visibility="{Binding Path=Total, Converter={StaticResource nullConverter}}">
                                                 <TextBlock Text="{Binding EffectiveEndDate, StringFormat={}Given Back on {0}}" FontSize="20"/>
                                                 <TextBlock Text="{Binding Total, StringFormat={}-{0} credits}" FontSize="20"/>
                                             </StackPanel>

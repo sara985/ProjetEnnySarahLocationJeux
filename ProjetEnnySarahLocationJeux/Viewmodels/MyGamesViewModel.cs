@@ -3,9 +3,11 @@ using ProjetEnnySarahLocationJeux.POCO;
 using ProjetEnnySarahLocationJeux.POCO_MODELS;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
@@ -70,8 +72,25 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void ExecuteEndLoan(object obj)
         {
-            SelectedLoan.EndLoan();
-            //Refresh Loan list
+            Loan l = SelectedLoan;
+            //SelectedLoan.EndLoan();
+            if (l.Copy.GetWaitingBooking().Count() > 0)
+            {
+                if (l.Copy.GetWaitingBooking().Count() == 1)
+                {
+                    Booking b = l.Copy.GetWaitingBooking().First();
+                }
+                else {
+                    //Waiting bookings must be ordered by booker with the biggest balance, then by the oldest booking, then by the oldest user, then by the oldest user's birthday
+                    //If there are multiple bookings with the same booker, the one with the oldest booking date is chosen
+                    //If there are multiple bookings with the same booker and the same booking date, the one with the oldest user is chosen
+                    //If there are multiple bookings with the same booker, the same booking date and the same user, the one with the oldest user's birthday is chosen
+                    //If there are multiple bookings with the same booker, the same booking date, the same user and the same birthday, the one with the oldest id is chosen
+                    List<Booking> waitingBookings = l.Copy.GetWaitingBooking().ToList();
+                    waitingBookings.Sort((b1, b2) => b1.Booker.Balance.CompareTo(b2.Booker.Balance));
+                    waitingBookings.Reverse();  //Descending order
+                }
+            }
             RentedGames = Loan.GetOngoingLoansForUser(CurrentUser.Id);
         }
 
