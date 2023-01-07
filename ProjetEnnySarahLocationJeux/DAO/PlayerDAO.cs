@@ -59,6 +59,57 @@ namespace ProjetEnnySarahLocationJeux.DAO
             }
         }
 
+        internal bool UpdatePassword(Player player)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("update dbo.Player set password=@pass where id=@playerId", connection);
+                cmd.Parameters.AddWithValue("pass", player.Password);
+                cmd.Parameters.AddWithValue("playerId", player.Id);
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+
+                return false;
+            }
+        }
+
+        public bool DeleteCopy(int idreceived)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Copy where ownerId= @idreceived", connection);
+                cmd.Parameters.AddWithValue("idreceived", idreceived);
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+                return false;
+
+
+
+            }
+        }
+
         public Player GetById(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -159,6 +210,112 @@ namespace ProjetEnnySarahLocationJeux.DAO
 
             public void Update(Player t)
             {
+                throw new NotImplementedException();
+            }
+
+
+        public int NbrGamesBrwd(Player p)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from dbo.Copy where ownerId=@ownerid AND isAvailable=0", connection);
+                cmd.Parameters.AddWithValue("ownerid", p.Id);
+                connection.Open();
+                int result = (int)cmd.ExecuteScalar();
+                return result;            
+            }
+        }
+
+        public int NbrGamesIamRenting(Player p)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from dbo.Loan where borrowerId = @borrowerid AND effectiveEndDate>(SELECT CAST( GETDATE() AS Date ))", connection);
+                cmd.Parameters.AddWithValue("borrowerid", p.Id);
+                connection.Open ();
+                int result = (int)cmd.ExecuteScalar();
+                return result;
+            }
+        }
+
+
+        public bool UpdateEmail(Player p)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE dbo.player SET email=@email where id=@id", connection);
+                cmd.Parameters.AddWithValue("email", p.Email);
+                cmd.Parameters.AddWithValue("id", p.Id);
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+
+                return false;
+            }
+        }
+
+        public bool UpdateUserName(Player p)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE dbo.player SET username=@usname where id=@id", connection);
+                cmd.Parameters.AddWithValue("usname", p.Username);
+                cmd.Parameters.AddWithValue("id", p.Id);
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+
+                return false;
+            }
+        }
+
+
+        public bool DeletePlayer( Player p)
+        {
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Player WHERE id = @id AND NOT EXISTS (SELECT * FROM dbo.Booking WHERE borrowerId = id) AND NOT EXISTS (SELECT * FROM dbo.Copy WHERE ownerId = id AND isAvailable = 0) AND NOT EXISTS (SELECT * FROM dbo.Loan WHERE borrowerId = Player.id)", connection);
+                cmd.Parameters.AddWithValue("id",p.Id);
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+                return false;
+            }
+        }
+
+
+
+
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     SqlCommand cmd = new SqlCommand("Update dbo.player set balance=@balance, hadBirthdayCredit=@hadCredit where id=@id", connection);

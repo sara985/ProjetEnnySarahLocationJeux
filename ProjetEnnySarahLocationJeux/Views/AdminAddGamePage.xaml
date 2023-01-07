@@ -12,6 +12,14 @@
     <Page.DataContext>
         <viewmodels:AddNewGameViewModel/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Page.Resources>
+    <Page.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+    </Page.Visibility>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -24,8 +32,10 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            
         </Grid.RowDefinitions>
         <Label Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Style="{StaticResource TitleLable}" Content="Admin add-Game Page"/>
         <TextBlock Text="Game's name" Grid.Row="1" Margin="20,10,10,10" HorizontalAlignment="Right"/>
@@ -92,7 +102,8 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Grid.Row="6" Grid.Column="1" Width="200" Content="Add New Game" Style="{StaticResource firstBtnType}" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" Command="{Binding AddVideoGameCommand}"></Button>
+        <TextBlock Grid.Row="6" x:Name="errortxt" Style="{StaticResource Error}" HorizontalAlignment="Center" Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Grid.Row="7" Grid.Column="1" Width="200" Content="Add New Game" Style="{StaticResource firstBtnType}" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" Command="{Binding AddVideoGameCommand}"></Button>
 
     </Grid>
 </Page>
