@@ -47,7 +47,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         p.Password = string.Empty;
                         p.Balance = reader.GetInt32(3);
                         p.SignUpDate = DateOnly.FromDateTime(reader.GetDateTime(4));
-                        p.BirthDate = DateOnly.FromDateTime(reader.GetDateTime(5)); 
+                        p.BirthDate = DateOnly.FromDateTime(reader.GetDateTime(5));
                         p.FirstName = reader.GetString(6);
                         p.LastName = reader.GetString(7);
                         p.Email = reader.GetString(8);
@@ -55,7 +55,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         return p;
                     }
                     return null;
-                }              
+                }
             }
         }
 
@@ -104,8 +104,6 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 }
                 if (i == 1) { return true; }
                 return false;
-
-
 
             }
         }
@@ -190,7 +188,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 try
                 {
                     i = cmd.ExecuteNonQuery();
-                }catch(Exception e)
+                } catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
                     return false;
@@ -204,14 +202,14 @@ namespace ProjetEnnySarahLocationJeux.DAO
         }
 
         public List<Player> List()
-            {
-                throw new NotImplementedException();
-            }
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Update(Player t)
-            {
-                throw new NotImplementedException();
-            }
+        public void Update(Player t)
+        {
+            throw new NotImplementedException();
+        }
 
 
         public int NbrGamesBrwd(Player p)
@@ -222,7 +220,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 cmd.Parameters.AddWithValue("ownerid", p.Id);
                 connection.Open();
                 int result = (int)cmd.ExecuteScalar();
-                return result;            
+                return result;
             }
         }
 
@@ -232,7 +230,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
             {
                 SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from dbo.Loan where borrowerId = @borrowerid AND effectiveEndDate>(SELECT CAST( GETDATE() AS Date ))", connection);
                 cmd.Parameters.AddWithValue("borrowerid", p.Id);
-                connection.Open ();
+                connection.Open();
                 int result = (int)cmd.ExecuteScalar();
                 return result;
             }
@@ -290,12 +288,12 @@ namespace ProjetEnnySarahLocationJeux.DAO
         }
 
 
-        public bool DeletePlayer( Player p)
+        public bool DeletePlayer(Player p)
         {
-            using(SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Player WHERE id = @id AND NOT EXISTS (SELECT * FROM dbo.Booking WHERE borrowerId = id) AND NOT EXISTS (SELECT * FROM dbo.Copy WHERE ownerId = id AND isAvailable = 0) AND NOT EXISTS (SELECT * FROM dbo.Loan WHERE borrowerId = Player.id)", connection);
-                cmd.Parameters.AddWithValue("id",p.Id);
+                cmd.Parameters.AddWithValue("id", p.Id);
                 connection.Open();
                 int i = 0;
 
@@ -311,27 +309,27 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 if (i == 1) { return true; }
                 return false;
             }
-        }
+        } 
 
 
 
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("Update dbo.player set balance=@balance, hadBirthdayCredit=@hadCredit where id=@id", connection);
-                    cmd.Parameters.AddWithValue("balance", t.Balance);
-                cmd.Parameters.AddWithValue("hadCredit", t.HadBirthdayCredit);
-                cmd.Parameters.AddWithValue("id", t.Id);
-                    connection.Open();
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message);
-                    }
-                }
-        }
+        //public
+        //        using (SqlConnection connection = new SqlConnection(connectionString))
+        //        {
+        //            SqlCommand cmd = new SqlCommand("Update dbo.player set balance=@balance, hadBirthdayCredit=@hadCredit where id=@id", connection);
+        //            cmd.Parameters.AddWithValue("balance", t.Balance);
+        //            cmd.Parameters.AddWithValue("hadCredit", t.HadBirthdayCredit);
+        //            cmd.Parameters.AddWithValue("id", t.Id);
+        //            connection.Open();
+        //            try
+        //            {
+        //                cmd.ExecuteNonQuery();
+        //            }
+        //            catch (Exception e)
+        //            {
+        //                MessageBox.Show(e.Message);
+        //            }
+        //        }
+        //}
     }
 }
