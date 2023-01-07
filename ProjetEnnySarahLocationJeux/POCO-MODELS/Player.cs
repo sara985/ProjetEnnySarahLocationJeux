@@ -65,6 +65,18 @@ namespace ProjetEnnySarahLocationJeux.POCO
             return dao.GetByUsername(username);
         }
 
+        public bool IsPasswordUpdated()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.UpdatePassword(this);
+        }
+
+        public bool DeleteCopy(int idreceived)
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.DeleteCopy(idreceived);
+        }
+
         public static Player GetPlayerById(int id)
         {
             PlayerDAO dao = new PlayerDAO();
@@ -82,6 +94,27 @@ namespace ProjetEnnySarahLocationJeux.POCO
             PlayerDAO dao = new PlayerDAO();
             return dao.NbrGamesIamRenting(this);
         }
+
+        public bool IsEmailUpdated()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.UpdateEmail(this);
+            
+        }
+
+
+        public bool IsUserNameUpdated()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.UpdateUserName(this);
+        }
+
+        public bool DeletePlayer()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.DeletePlayer(this);
+        }
+
 
     }
 }

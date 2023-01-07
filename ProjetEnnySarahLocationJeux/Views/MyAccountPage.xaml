@@ -5,6 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjetEnnySarahLocationJeux.Views"
       xmlns:viewModel="clr-namespace:ProjetEnnySarahLocationJeux.Viewmodels"
+      xmlns:customcontrols="clr-namespace:ProjetEnnySarahLocationJeux.CustomControls"
+      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MyAccountPage">
@@ -25,21 +27,23 @@
             <RowDefinition Height="35"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-    
-        <Label Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Your Current Data: </Label>
+
+        <Label Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Your Current Data:</Label>
         <TextBlock Grid.Row="1" Text="Number Of Credits" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-        <TextBox Grid.Row="1" Grid.Column="1"  Text="{Binding Player.Balance, StringFormat={}{0} credits }" Foreground="Black" Margin="5" Width="200" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="1" Grid.Column="1"  Text="{Binding Player.Balance, StringFormat={}{0} credits }" Foreground="Black" Margin="5" Width="200" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
         <TextBlock Grid.Row="2" Text="You are curently renting"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NbrGameImRtg, StringFormat={}{0} game(s)}" Foreground="Black" Margin="5" Width="200"  HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NbrGameImRtg, StringFormat={}{0} game(s)}" Foreground="Black" Margin="5" Width="200"  HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
         <TextBlock Grid.Row="3" Text="Number of Games Taken (Borrowed) "  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NbrGameRented, StringFormat={}{0} game(s)}" Foreground="Black" Margin="5" Width="200"  HorizontalAlignment="Left"/>
-        
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NbrGameRented, StringFormat={}{0} game(s)}" Foreground="Black" Margin="5" Width="200"  HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
+
         <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -48,19 +52,17 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="55"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.ColumnSpan="3" Content="You can Modify your Data below" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+            <Label Grid.Column="0" Grid.ColumnSpan="6" Content="You can Modify your Data below" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
             <TextBlock Grid.Row="1" Text="Email" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-            <TextBox Grid.Row="2" Text="{Binding Player.Email}" Margin="5,5" Width="200" HorizontalAlignment="Right"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="Your Username : " VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Player.Username}" Margin="5,5" Width="180"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Text="Your Password : " VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Player.Password}" Margin="5,5" Width="200" HorizontalAlignment="Left"/>
-            <Button Grid.Row="2" Grid.Column="3"  Width="150" Content="Modify Your Data" Style="{StaticResource firstBtnType}" Height="38" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5"></Button>
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Width="450" Content="Delete your Account" Style="{StaticResource firstBtnType}" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5"></Button>
-
+            <TextBox Grid.Row="2" Text="{Binding Player.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="3,3,0,3" Width="165" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="Your Username : " VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Player.Username, UpdateSourceTrigger=PropertyChanged}" Margin="3,3,0,3" Width="165" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="1" Grid.Column="4" Text="Your Password : " VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <customcontrols:BindablePasswordBox Grid.Row="2" Grid.Column="4" Password="{Binding Player.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="3,3,0,3" Width="165" HorizontalAlignment="Right"/>
+            <Button Grid.Row="2" Grid.Column="1"  Width="70" Content="Modify" Style="{StaticResource firstBtnType}" Height="38" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,3,3,3" Command="{Binding ModifyEmailCommand}"></Button>
+            <Button Grid.Row="2" Grid.Column="3"  Width="70" Content="Modify" Style="{StaticResource firstBtnType}" Height="38" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,3,3,3" Command="{Binding ModifyUserNameCommand}"></Button>
+            <Button Grid.Row="2" Grid.Column="5"  Width="70" Content="Modify" Style="{StaticResource firstBtnType}" Height="38" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,3,3,3" Command="{Binding ModifyPasswordCommand}"></Button>
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Width="450" Content="Delete your Account" Style="{StaticResource firstBtnType}" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5" Command="{Binding DeletePlayerCommand, UpdateSourceTrigger=PropertyChanged}"></Button>
         </Grid>
-
     </Grid>
-
-
 </Page>

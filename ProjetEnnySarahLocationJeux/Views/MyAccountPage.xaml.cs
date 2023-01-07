@@ -24,6 +24,8 @@ namespace ProjetEnnySarahLocationJeux.Views
         public MyAccountPage()
         {
             InitializeComponent();
+            MyAccountViewModel vm = (MyAccountViewModel)DataContext;
+            vm.IsReadOnly=true;
         }
     }
 }
