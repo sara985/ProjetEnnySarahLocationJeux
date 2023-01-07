@@ -41,7 +41,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         //optional image, should go in videogame not copy
                     }
                 }
-            return c;
+                connection.Close();
+                return c;
             }
         }
 
@@ -67,6 +68,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         list.Add(c);
                     }                            
                 }
+                connection.Close();
                 return list;
             }
         }
@@ -89,6 +91,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         c = GetById(reader.GetInt32(0));
                     }
                 }
+                connection.Close();
                 return c;
             }
         }
@@ -177,6 +180,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 {
                     MessageBox.Show(e.Message);
                 }
+                connection.Close();
             }
         }
     }

@@ -22,19 +22,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
         }
         public Booking GetById(int id)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("Select * from dbo.Booking where id = @id", connection);
-                cmd.Parameters.AddWithValue("id", id);
-                connection.Open();
-                return (Booking)cmd.ExecuteScalar();
-            }
+            throw new NotImplementedException();
         }
-        /*    select c.id, count(*) as co from [GameSwitch].[dbo].[Copy] c join [GameSwitch].[dbo].[Booking] b on b.copyId = c.id
-              where (c.id=2 or c.id=3) and b.status='0'
-              group by c.id
-              order by co
-        */
         public bool Insert(Booking t)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -55,35 +44,14 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     MessageBox.Show(e.Message);
                     return false;
                 }
+                connection.Close();
                 return true;
             }
         }
 
         public List<Booking> List()
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                PlayerDAO play = new PlayerDAO();
-                CopyDAO copyDAO = new CopyDAO();
-                SqlCommand cmd = new SqlCommand("select * from dbo.Booking", connection);
-                connection.Open();
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    List<Booking> list = new List<Booking>();
-                    while (reader.Read())
-                    {
-                        Booking b = new Booking();
-                        b.Id = reader.GetInt32(0);
-                        b.Booker = play.GetById(reader.GetInt32(1));
-                        b.Copy = copyDAO.GetById(reader.GetInt32(2));
-                        b.Status = (Status)Enum.Parse(typeof(Status), reader.GetString(3));
-                        b.Duration = reader.GetInt32(4);
-                        b.BookingDate = DateOnly.FromDateTime(reader.GetDateTime(5));
-                        list.Add(b);
-                    }
-                    return list;
-                }
-            }
+            throw new NotImplementedException();
         }
 
         public List<Booking> GetBookingsByCopyId(int copyid)
@@ -109,27 +77,14 @@ namespace ProjetEnnySarahLocationJeux.DAO
                             bookings.Add(b);
                         }
                     }
-                    return bookings;
+                connection.Close();
+                return bookings;
                 }              
         }
 
         public void Update(Booking t)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("Update dbo.booking set status=@status where id=@id", connection);
-                cmd.Parameters.AddWithValue("status", t.Status.ToString());
-                cmd.Parameters.AddWithValue("id", t.Id);
-                connection.Open();
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-            }
+            throw new NotImplementedException();
         }
     }
 }
