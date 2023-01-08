@@ -30,6 +30,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         {
             LoadCurrentUserData();
             LogoutCommand = new ViewModelCommand(ExecuteLogout);
+            //FrameSource = new Uri("Pages/MyAccountPage.xaml", UriKind.Relative);
         }
 
         private void ExecuteLogout(object obj)

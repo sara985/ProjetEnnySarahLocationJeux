@@ -68,6 +68,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private bool CanExecuteEndLoan(object obj)
         {
+            if (SelectedLoan is null) return false;
             if (SelectedLoan is not null && SelectedLoan.EffectiveEndDate.HasValue) return false;
             return true;
         }

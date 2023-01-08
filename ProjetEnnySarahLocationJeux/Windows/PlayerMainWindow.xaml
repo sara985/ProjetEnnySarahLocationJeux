@@ -28,8 +28,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ListBox x:Name="sidebar" SelectedItem="{Binding SelectedButton}" SelectionMode="Single" BorderThickness="0">
-            <customControls:NavButton ItemName="My Account" NavLink="/Pages/MyAccountPage.xaml" Width="98" Cursor="Hand"/>
+        <ListBox x:Name="sidebar" SelectedItem="{Binding SelectedButton}" SelectionMode="Single" BorderThickness="0" SelectedIndex="0">
+            <customControls:NavButton ItemName="My Account" NavLink="/Pages/MyAccountPage.xaml" Width="98" Cursor="Hand" Selected="WindowLoaded"/>
             <customControls:NavButton ItemName="Catalog" NavLink="/Pages/CatalogPage.xaml" Width="98"/>
             <customControls:NavButton ItemName="My Games" NavLink="/Pages/MyGamesPage.xaml" Width="98"/>
         </ListBox>
