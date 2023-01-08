@@ -34,6 +34,10 @@ namespace ProjetEnnySarahLocationJeux.POCO
             return dao.GetByUsername(username);
         }
 
-
+        public void Delete()
+        {
+            this.Username="";
+            this.Password ="";
+        }
     }
 }

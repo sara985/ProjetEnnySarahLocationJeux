@@ -24,7 +24,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void SignOut(object obj)
         {
-            MessageBox.Show("SignOut");
+            _currentAdmin.Delete();
+
         }
 
         public Administrator CurrentAdmin

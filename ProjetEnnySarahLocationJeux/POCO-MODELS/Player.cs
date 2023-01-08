@@ -19,6 +19,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private DateOnly signUpDate;
         private string email;
         private int balance;
+        private int nbr;
         private bool _hadBirthdayCredit;
 
         public Player(string username, string password)
@@ -46,6 +47,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public DateOnly SignUpDate { get => signUpDate; set => signUpDate = value; }
         public string Email { get => email; set => email = value; }
         public int Balance { get => balance; set => balance = value; }
+        public int Nbr { get => nbr; set => nbr = value; }
         public bool HadBirthdayCredit { get => _hadBirthdayCredit; set => _hadBirthdayCredit = value; }
 
         public override User Login(string email, string password)
@@ -65,11 +67,56 @@ namespace ProjetEnnySarahLocationJeux.POCO
             return dao.GetByUsername(username);
         }
 
+        public bool IsPasswordUpdated()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.UpdatePassword(this);
+        }
+
+        public bool DeleteCopy(int idreceived)
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.DeleteCopy(idreceived);
+        }
+
         public static Player GetPlayerById(int id)
         {
             PlayerDAO dao = new PlayerDAO();
             return dao.GetById(id);
         }
+
+        public int NbrGamesRented()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.NbrGamesBrwd(this);
+        }
+
+        public int NbrGamesImRtng()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.NbrGamesIamRenting(this);
+        }
+
+        public bool IsEmailUpdated()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.UpdateEmail(this);
+            
+        }
+
+
+        public bool IsUserNameUpdated()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.UpdateUserName(this);
+        }
+
+        public bool DeletePlayer()
+        {
+            PlayerDAO dao = new PlayerDAO();
+            return dao.DeletePlayer(this);
+        }
+
 
         public void Update()
         {
