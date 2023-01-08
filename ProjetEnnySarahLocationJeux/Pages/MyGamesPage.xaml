@@ -46,11 +46,8 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel>
-                        <ScrollViewer>
-                            
-                        
                         <ListBox ItemsSource="{Binding RentedGames}" Background="Pink" AlternationCount="3" SelectedItem="{Binding SelectedLoan,Mode=TwoWay}"
-                                 Visibility="{Binding Path=RentedGames, Converter={StaticResource converter}}" ScrollViewer.CanContentScroll="True">
+                                 Visibility="{Binding Path=RentedGames, Converter={StaticResource converter}}" ScrollViewer.VerticalScrollBarVisibility="Auto" MaxHeight="800">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="4" Background="Transparent">
@@ -74,7 +71,6 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        </ScrollViewer>
                     </StackPanel>
                     <TextBlock Text="{Binding SelectedLoanStatus, StringFormat={}You do not have any {0} loan. }" Style="{StaticResource Header}" Foreground="White" Visibility="{Binding Path=RentedGames, Converter={StaticResource converter2}}"/>
                 </StackPanel>
