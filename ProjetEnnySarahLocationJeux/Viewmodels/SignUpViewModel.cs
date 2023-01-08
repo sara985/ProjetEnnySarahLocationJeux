@@ -58,6 +58,10 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                 MessageBox.Show("Your account was created succesfully. You can now login.");
                 IsViewVisible = false;
             }
+            else
+            {
+                MessageBox.Show("There's been a problem. Please fill out all fields.");
+            }
         }
 
         private bool VerifyUsername(object obj)

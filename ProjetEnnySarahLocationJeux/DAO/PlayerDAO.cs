@@ -202,8 +202,12 @@ namespace ProjetEnnySarahLocationJeux.DAO
         public bool Insert(Player t)
         {
             //make sure first and last name are "initcap" before submitting values since initcap function is not available on sql server
-            t.FirstName = GlobalFunction.InitCap(t.FirstName);
-            t.LastName = GlobalFunction.InitCap(t.LastName);
+            if(t.FirstName is not null && t.LastName is not null)
+            {
+                t.FirstName = GlobalFunction.InitCap(t.FirstName);
+                t.LastName = GlobalFunction.InitCap(t.LastName);
+            }
+            
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("Insert into dbo.player values (@user,@pass,@balance,@signupDate,@bdate,@fname,@lname,LOWER(@email),@hadCredit)", connection);
@@ -223,15 +227,10 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     i = cmd.ExecuteNonQuery();
                 } catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
                     return false;
                 }
                 connection.Close();
-                if (i == 1)
-                {
-                    return true;
-                }
-                return false;
+                return i == 1;
             }
         }
 
