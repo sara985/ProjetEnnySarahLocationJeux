@@ -21,7 +21,6 @@ namespace ProjetEnnySarahLocationJeux.POCO
         private int balance;
         private bool _hadBirthdayCredit;
 
-        //TODO ask question to teacher
         public Player(string username, string password)
         {
             base.Password = password;

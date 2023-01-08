@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace ProjetEnnySarahLocationJeux.POCO
 {
-    //TODO maybe add user,console and version list in VideoGame
     public class ConsoleAndVersion
     {
         private int idConsole;
@@ -74,7 +73,6 @@ namespace ProjetEnnySarahLocationJeux.POCO
             }
             return finalList;
         }
-        //todo: uncomment -> comment just to make the programme work
         public static List<ConsoleAndVersion> GetVersionsByConsole(int consoleId)
         {
             return new ConsoleAndVersionDAO().List().Where(x => x.IdConsole == consoleId).ToList();

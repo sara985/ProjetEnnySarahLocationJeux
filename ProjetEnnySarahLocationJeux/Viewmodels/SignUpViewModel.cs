@@ -39,7 +39,6 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void AddPlayer(object obj)
         {
-            //TODO add player to db and maybe redirect or do new command to redirect
             Player.BirthDate = DateOnly.FromDateTime(SelectedDate);
             Player.SignUpDate = DateOnly.FromDateTime(DateTime.Now);
             Player.Balance = 10;

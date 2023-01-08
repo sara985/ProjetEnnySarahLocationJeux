@@ -62,7 +62,6 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             {
                 _selectedConsole = value;
                 OnPropertyChanged(nameof(SelectedConsole));
-                //todo: uncomment -> add comment just to make progrdamme work
                 Versions = ConsoleAndVersion.GetVersionsByConsole(SelectedConsole.IdConsole);
                 //Filter list based on if the consoleandversion contains the console
                 FilteredList = Filter();
@@ -163,7 +162,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private bool CanExecuteRentThisGame(object obj)
         {
             if (SelectedVideoGame == null) return false;
-            //if (CurrentUser.Balance < SelectedVideoGame.Cost) return false; TODO
+            if (CurrentUser.Balance < SelectedVideoGame.Cost) return false;
             if (SelectedVideoGame.Copies.Count == 0) return false;
             return true;
         }

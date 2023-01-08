@@ -55,7 +55,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             SelectedNumberOfWeeks = 1;
         }
 
-        private void ExecuteRentGameCommand(object obj) //TODO satrtloan
+        private void ExecuteRentGameCommand(object obj)
         {
             Copy c = new Copy();
             c = RentedVideoGame.Copies.Where(c => c.IsAvailable == true).ToList().First();
