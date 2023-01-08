@@ -139,7 +139,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private void ExecuteBookThisGame(object obj)
         {
             //Verify the user's balance is equal or superior to the selectedGame credits
-            if (CurrentUser.Balance >= SelectedVideoGame.Cost)
+            if (CurrentUser.Balance <= SelectedVideoGame.Cost)
             {
                 MessageBox.Show("You don't have enough credit to book "+SelectedVideoGame.Name);
                 return;
