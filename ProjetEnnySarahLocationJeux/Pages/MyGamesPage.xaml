@@ -45,9 +45,12 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </StackPanel>
-                    <StackPanel >
+                    <StackPanel>
+                        <ScrollViewer>
+                            
+                        
                         <ListBox ItemsSource="{Binding RentedGames}" Background="Pink" AlternationCount="3" SelectedItem="{Binding SelectedLoan,Mode=TwoWay}"
-                                 Visibility="{Binding Path=RentedGames, Converter={StaticResource converter}}">
+                                 Visibility="{Binding Path=RentedGames, Converter={StaticResource converter}}" ScrollViewer.CanContentScroll="True">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="4" Background="Transparent">
@@ -61,7 +64,7 @@
                                             <TextBlock Text="{Binding Copy.Game.Cost, StringFormat= {}{0} Credits}" FontSize="20"/>
                                             <TextBlock Text="{Binding Copy.Owner.Username, StringFormat={}Owned by {0}}" FontSize="20"/>
                                             <TextBlock Text="{Binding StartDate, StringFormat={}Started on {0:d MMMM yyy}}" FontSize="20"/>
-                                            <TextBlock Text="{Binding PresumedEndDate, StringFormat={}Due on {0} included}" FontSize="20"/>
+                                            <TextBlock Text="{Binding PresumedEndDate, StringFormat={}Due on {0: d MMMM yyyy} included}" FontSize="20"/>
                                             <StackPanel Visibility="{Binding Path=Total, Converter={StaticResource nullConverter}}">
                                                 <TextBlock Text="{Binding EffectiveEndDate, StringFormat={}Given Back on {0:d MMMM yyy}}" FontSize="20"/>
                                                 <TextBlock Text="{Binding Total, StringFormat={}-{0} credits}" FontSize="20"/>
@@ -71,6 +74,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+                        </ScrollViewer>
                     </StackPanel>
                     <TextBlock Text="{Binding SelectedLoanStatus, StringFormat={}You do not have any {0} loan. }" Style="{StaticResource Header}" Foreground="White" Visibility="{Binding Path=RentedGames, Converter={StaticResource converter2}}"/>
                 </StackPanel>

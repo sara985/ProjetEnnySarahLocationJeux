@@ -53,8 +53,9 @@ namespace ProjetEnnySarahLocationJeux.POCO_MODELS
         }
 
         public override bool Equals(object? obj)
-        { 
+        {
             //A booking is equal to another one if the booker has the same birthday, the same balance and the same signupdate and also if the booking date is the same
+            if (obj is null || this == null) return false;
             if (obj is Booking b)
             {
                 return b.Booker.BirthDate.Equals(this.Booker.BirthDate) && b.Booker.Balance == this.Booker.Balance && b.Booker.SignUpDate.Equals(this.Booker.SignUpDate) && b.BookingDate.Equals(this.BookingDate);

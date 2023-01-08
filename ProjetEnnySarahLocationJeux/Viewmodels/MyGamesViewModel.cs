@@ -52,24 +52,24 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void ExecuteDeleteOwnedGame(object obj)
         {
-            //Verify if copy is booked or loaned
-            if (SelectedOwnedGame.Bookings.Where(b => b.Status==POCO_MODELS.Status.Waiting).Count() == 0 && SelectedOwnedGame.IsAvailable)
+            //Verify if copy is loaned
+            if (SelectedOwnedGame.IsOrHasBeenLoaned())
+            {
+                MessageBox.Show("Your game is currently booked or loaned. Please contact the administrator.");
+                return;            
+            }
+            else
             {
                 SelectedOwnedGame.Delete();
                 OwnedGames = Copy.GetAll().Where(c => c.Owner.Id == CurrentUser.Id).ToList();
                 MessageBox.Show("Your game was succesfully deleted.");
-            }
-            else
-            {
-                //Tell the user they can't delete their game
-                MessageBox.Show("Your game is currently booked or loaned. Please contact the administrator.");
             }
         }
 
         private bool CanExecuteEndLoan(object obj)
         {
             if (SelectedLoan is null) return false;
-            if (SelectedLoan is not null && SelectedLoan.EffectiveEndDate.HasValue) return false;
+            if (SelectedLoan.EffectiveEndDate.HasValue) return false;
             return true;
         }
 
@@ -84,7 +84,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                 Booking bookToLoan = new Booking();
                 // Waiting bookings must be ordered by booker with the biggest balance, then by the oldest booking, then by the longest user, then by the oldest user
                 books = books.OrderByDescending(b => b.Booker.Balance).ThenBy(b => b.BookingDate).ThenBy(b => b.Booker.SignUpDate).ThenBy(b => b.Booker.BirthDate).ToList();
-                if (books[0].Equals(books[1])) //At least two games could potentially have the place, we have to choose randomly
+                if (books.Count >1 && books[0].Equals(books[1])) //At least two games could potentially have the place, we have to choose randomly
                 {
                     books = books.Where(b => books[0].Equals(b)).ToList();
                     Random rnd = new Random();
@@ -102,7 +102,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                 bookToLoan.Status = POCO_MODELS.Status.Booked;
                 bookToLoan.UpdateStatus();                
                 MessageBox.Show("The loan was succesfully ended");
-        }
+            }
             //Update the view
             BookedGames = Booking.GetBookingsByStatusAndUser(SelectedStatus, CurrentUser.Username);
             RentedGames = Loan.GetOngoingLoansForUser(CurrentUser.Id);

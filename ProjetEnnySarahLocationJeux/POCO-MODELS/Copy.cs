@@ -64,5 +64,11 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             new CopyDAO().Update(this);
         }
+
+        internal bool IsOrHasBeenLoaned()
+        {
+            //That means the copy is in the loan table
+            return new LoanDAO().List().Where(l => l.Copy.Id == this.Id).ToList().Any();
+        }
     }
 }
