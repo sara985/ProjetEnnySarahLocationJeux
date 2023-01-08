@@ -61,9 +61,6 @@ namespace ProjetEnnySarahLocationJeux.DAO
         public Player IsPlayer(string username, string pass)
         {
             //stack FIFO
-            //static quand get
-            //Insert(this) pour inserer, delete et update
-            //pas besoin de updatesourcetrigger quand donnée ne change pas !
             //IOC Inversion of Control
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -120,7 +117,6 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     }
                     return null;
                 }
-                connection.Close();
             }
         }
 

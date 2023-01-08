@@ -139,84 +139,23 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private void ExecuteBookThisGame(object obj)
         {
             //Verify the user's balance is equal or superior to the selectedGame credits
-            //if (CurrentUser.Balance >= SelectedVideoGame.Cost)
-            //{
-            //    //Verify the user doesn't already own the game
-            //    if (!CurrentUser.OwnedGames.Contains(SelectedVideoGame))
-            //    {
-            //        //Verify the user doesn't already have a reservation for this game
-            //        if (!CurrentUser.ReservedGames.Contains(SelectedVideoGame))
-            //        {
-            //            //Verify the user doesn't already have a rental for this game
-            //            if (!CurrentUser.RentedGames.Contains(SelectedVideoGame))
-            //            {
-            //                //Verify the game is available
-            //                if (SelectedVideoGame.Available)
-            //                {
-            //                    //Verify the game is not already booked
-            //                    if (!SelectedVideoGame.Booked)
-            //                    {
-            //                        //Verify the game is not already rented
-            //                        if (!SelectedVideoGame.Rented)
-            //                        {
-            //                            //Verify the game is not already reserved
-            //                            if (!SelectedVideoGame.Reserved)
-            //                            {
-            //                                //Verify the game is not already owned
-            //                                if (!SelectedVideoGame.Owned)
-            //                                {
-            //                                    //Add the game to the basket
-            //                                    CurrentUser.Basket.Add(SelectedVideoGame);
-            //                                    //Update the user's credits
-            //                                    CurrentUser.Credits -= SelectedVideoGame.Credits;
-            //                                    //Update the game's status
-            //                                    SelectedVideoGame.Booked = true;
-            //                                    //Update the database
-            //                                    Player.UpdatePlayer(CurrentUser);
-            //                                    VideoGame.UpdateVideoGame(SelectedVideoGame);
-            //                                    //Display a message to the user
-            //                                    MessageBox.Show("The game has been added to your basket.");
-            //                                }
-            //                                else
-            //                                {
-            //                                    MessageBox.Show("You already own this game.");
-            //                                }
-            //                            }
-            //                            else
-            //                            {
-            //                                MessageBox.Show("The game is already reserved.");
-            //                            }
-            //                        }
-            //                        else
-            //                        {
-            //                            MessageBox.Show("The game is already rented.");
-            //                        }
-            //                    }
-            //                    else
-            //                    {
-            //                        MessageBox.Show("The game is already booked.");
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    MessageBox.Show("The game is not available.");
-            //                }
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("You already have a rental for this game.");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("You already have a reservation for this game.");
-            //        }
-            //    }
-            //    }
-            if (SelectedVideoGame.IsBooked(CurrentUser))
+            if (CurrentUser.Balance >= SelectedVideoGame.Cost)
             {
-                MessageBox.Show("You already have a reservation for this game.");
+                MessageBox.Show("You don't have enough credit to book "+SelectedVideoGame.Name);
+                return;
             }
+            if (SelectedVideoGame.IsBooked(CurrentUser)) //if the user already has a booking
+            {
+                MessageBox.Show("You already have a reservation for " + SelectedVideoGame.Name);
+                return;
+            }
+            //if the user is currently renting this game
+            if (SelectedVideoGame.IsRented(CurrentUser))
+            {
+                MessageBox.Show("You already have a rental for " + SelectedVideoGame.Name);
+                return;
+            }
+
             Window window = new BookGameWindow(SelectedVideoGame);
             window.Show();
         }
@@ -231,6 +170,12 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void ExecuteRentThisGame(object obj)
         {
+            if (SelectedVideoGame.IsRented(CurrentUser))
+            {
+                MessageBox.Show("You already have a rental for this game.");
+                return;
+            }
+
             Window window = new RentGameWindow(SelectedVideoGame);
             window.Show();
             //refresh sel videogame

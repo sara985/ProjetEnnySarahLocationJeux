@@ -71,11 +71,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             b.Booker = new PlayerDAO().GetByUsername(Thread.CurrentPrincipal.Identity.Name);
             //order the copies by the minimum amount of bookings so the user potentially waits less time
             //Ne fonctionne que s'il y a déjà des bookings, sinon n'est pas repris dans la requête
-            b.Copy = Copy.getCopyOfAGameWithLeastActiveBookings(BookedVideoGame.Id);
-            if (b.Copy.Id == 0)
-            {
-                b.Copy = BookedVideoGame.Copies.First();
-            }
+            b.Game = BookedVideoGame;
             bool succes = b.Insert();
             string message;
             if (succes)

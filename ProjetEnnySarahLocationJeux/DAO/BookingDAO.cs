@@ -28,9 +28,9 @@ namespace ProjetEnnySarahLocationJeux.DAO
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("Insert into dbo.booking values (@borrowerid,@copyid,@status,@duration,@bookingDate)", connection);
+                SqlCommand cmd = new SqlCommand("Insert into dbo.booking values (@borrowerid,@gameid,@status,@duration,@bookingDate)", connection);
                 cmd.Parameters.AddWithValue("borrowerid", t.Booker.Id);
-                cmd.Parameters.AddWithValue("copyid", t.Copy.Id);
+                cmd.Parameters.AddWithValue("gameid", t.Game.Id);
                 cmd.Parameters.AddWithValue("status", t.Status.ToString());
                 cmd.Parameters.AddWithValue("duration", t.Duration);
                 cmd.Parameters.AddWithValue("bookingDate", t.BookingDate.ToShortDateString());
@@ -54,7 +54,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 PlayerDAO play = new PlayerDAO();
-                CopyDAO copyDAO = new CopyDAO();
+                VideoGameDAO video = new VideoGameDAO();
                 SqlCommand cmd = new SqlCommand("select * from dbo.Booking", connection);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -65,7 +65,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         Booking b = new Booking();
                         b.Id = reader.GetInt32(0);
                         b.Booker = play.GetById(reader.GetInt32(1));
-                        b.Copy = copyDAO.GetById(reader.GetInt32(2));
+                        b.Game = video.GetById(reader.GetInt32(2));
                         b.Status = (Status)Enum.Parse(typeof(Status), reader.GetString(3));
                         b.Duration = reader.GetInt32(4);
                         b.BookingDate = DateOnly.FromDateTime(reader.GetDateTime(5));
@@ -93,7 +93,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                             Booking b = new Booking();
                             b.Id = reader.GetInt32(0);
                             b.Booker = play.GetById(reader.GetInt32(1));
-                            b.Copy = new Copy();
+                            b.Game = new VideoGame();
                             //b.Status = reader.GetString(3);
                             b.Duration = reader.GetInt32(4);
                             b.BookingDate = DateOnly.FromDateTime(reader.GetDateTime(5));

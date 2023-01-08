@@ -60,10 +60,10 @@
                                             <TextBlock Text="{Binding Copy.Game.Name}" FontWeight="Bold" Grid.Column="2" FontSize="20"/>
                                             <TextBlock Text="{Binding Copy.Game.Cost, StringFormat= {}{0} Credits}" FontSize="20"/>
                                             <TextBlock Text="{Binding Copy.Owner.Username, StringFormat={}Owned by {0}}" FontSize="20"/>
-                                            <TextBlock Text="{Binding StartDate, StringFormat={}Started on {0}}" FontSize="20"/>
+                                            <TextBlock Text="{Binding StartDate, StringFormat={}Started on {0:d MMMM yyy}}" FontSize="20"/>
                                             <TextBlock Text="{Binding PresumedEndDate, StringFormat={}Due on {0} included}" FontSize="20"/>
                                             <StackPanel Visibility="{Binding Path=Total, Converter={StaticResource nullConverter}}">
-                                                <TextBlock Text="{Binding EffectiveEndDate, StringFormat={}Given Back on {0}}" FontSize="20"/>
+                                                <TextBlock Text="{Binding EffectiveEndDate, StringFormat={}Given Back on {0:d MMMM yyy}}" FontSize="20"/>
                                                 <TextBlock Text="{Binding Total, StringFormat={}-{0} credits}" FontSize="20"/>
                                             </StackPanel>
                                         </StackPanel>
@@ -89,8 +89,7 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Visibility="{Binding Path=BookedGames, Converter={StaticResource converter}}">
-                        <UniformGrid Columns="5">
-                        <TextBlock Text="Game owner" HorizontalAlignment="Center"/>
+                        <UniformGrid Columns="4">
                         <TextBlock Text="Game" HorizontalAlignment="Center"/>
                         <TextBlock Text="Booking Date" HorizontalAlignment="Center"/>
                         <TextBlock Text="Duration (in weeks)" HorizontalAlignment="Center"/>
@@ -100,10 +99,9 @@
                                  Width="Auto" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedBooking}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <UniformGrid Columns="5" Width="Auto" Height="25">
-                                        <TextBlock Text="{Binding Copy.Owner.Username}" HorizontalAlignment="Center" />
-                                        <TextBlock Text="{Binding Copy.Game.Name}" HorizontalAlignment="Center" />
-                                        <TextBlock Text="{Binding BookingDate}" HorizontalAlignment="Center"/>
+                                    <UniformGrid Columns="4" Width="Auto" Height="25">
+                                        <TextBlock Text="{Binding Game.Name}" HorizontalAlignment="Center" />
+                                        <TextBlock Text="{Binding BookingDate, StringFormat=d MMMM yyyy}" HorizontalAlignment="Center"/>
                                         <TextBlock Text="{Binding Duration}" HorizontalAlignment="Center"/>
                                         <TextBlock Text="{Binding Status}" HorizontalAlignment="Center"/>
                                     </UniformGrid>

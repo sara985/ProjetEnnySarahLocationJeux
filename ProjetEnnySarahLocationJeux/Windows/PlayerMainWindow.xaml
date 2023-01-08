@@ -8,7 +8,7 @@
         xmlns:customControls="clr-namespace:ProjetEnnySarahLocationJeux.CustomControls"
         xmlns:converters="clr-namespace:ProjetEnnySarahLocationJeux.Converters"
         mc:Ignorable="d"
-        Title="PlayerMainWindow" Height="450" Width="1000">
+        Title="PlayerMainWindow" Height="450" Width="1000" MinWidth="1000">
     
 
     <Window.DataContext>

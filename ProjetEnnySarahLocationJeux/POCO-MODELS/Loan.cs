@@ -34,26 +34,20 @@ namespace ProjetEnnySarahLocationJeux.POCO
         public int CreditsValued { get => _creditsValued; set => _creditsValued = value; }
         public int? Total { get => _total; set => _total = value; }
 
-        public static bool StartLoan(VideoGame v,Player borrower, int durationInWeeks)
+        public static bool StartLoan(VideoGame v,Player borrower, int durationInWeeks, Copy c)
         {
             Loan l = new();
             l.VideoGame = v;
             l.Borrower = borrower;
-            //find first available copy of game
-            foreach (Copy c in v.Copies)
-            {
-                if (c.IsAvailable)
-                {
-                    l.Copy = c;
-                }
-            }
+            l.Copy = c;
             l.StartDate = DateOnly.FromDateTime(DateTime.Now);
             //The presumed end date is the startdate + the number of weeks 
             l.PresumedEndDate = DateOnly.FromDateTime(DateTime.Now.AddDays(7 * durationInWeeks));
-            l.CreditsValued = v.Cost;
+            //l.CreditsValued = v.Cost;
             l.Copy.IsAvailable = false;
             new CopyDAO().Update(l.Copy);
             return new LoanDAO().Insert(l);
+            return true;
         }
 
         public void EndLoan()

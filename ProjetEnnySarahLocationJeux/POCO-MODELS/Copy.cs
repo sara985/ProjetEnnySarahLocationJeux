@@ -60,9 +60,9 @@ namespace ProjetEnnySarahLocationJeux.POCO
             new CopyDAO().Delete(this);
         }
 
-        internal List<Booking> GetWaitingBooking()
+        public void Update()
         {
-            return new BookingDAO().List().Where(b => b.Copy.Id == this.Id && b.Status.Equals(Status.Waiting)).ToList();
+            new CopyDAO().Update(this);
         }
     }
 }
