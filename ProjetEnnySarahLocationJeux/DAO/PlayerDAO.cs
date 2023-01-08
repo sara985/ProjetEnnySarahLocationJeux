@@ -200,7 +200,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from dbo.Loan where borrowerId = @borrowerid AND effectiveEndDate>(SELECT CAST( GETDATE() AS Date ))", connection);
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from dbo.Loan where borrowerId = @borrowerid AND effectiveEndDate is NULL", connection);
                 cmd.Parameters.AddWithValue("borrowerid", p.Id);
                 connection.Open ();
                 int result = (int)cmd.ExecuteScalar();
