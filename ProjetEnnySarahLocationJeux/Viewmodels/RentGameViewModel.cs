@@ -55,10 +55,12 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             SelectedNumberOfWeeks = 1;
         }
 
-        private void ExecuteRentGameCommand(object obj)
+        private void ExecuteRentGameCommand(object obj) //TODO satrtloan
         {
+            Copy c = new Copy();
+            c = RentedVideoGame.Copies.Where(c => c.IsAvailable == true).ToList().First();
             bool succes = Loan.StartLoan(RentedVideoGame, new PlayerDAO().GetByUsername(Thread.CurrentPrincipal.Identity.Name),
-                SelectedNumberOfWeeks);
+                SelectedNumberOfWeeks, c);
             string message;
             if (succes)
             {

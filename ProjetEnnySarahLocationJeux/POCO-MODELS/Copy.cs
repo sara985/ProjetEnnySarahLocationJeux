@@ -59,5 +59,10 @@ namespace ProjetEnnySarahLocationJeux.POCO
         {
             new CopyDAO().Delete(this);
         }
+
+        public void Update()
+        {
+            new CopyDAO().Update(this);
+        }
     }
 }

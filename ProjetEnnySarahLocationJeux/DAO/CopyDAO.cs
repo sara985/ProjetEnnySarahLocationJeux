@@ -41,7 +41,8 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         //optional image, should go in videogame not copy
                     }
                 }
-            return c;
+                connection.Close();
+                return c;
             }
         }
 
@@ -63,10 +64,11 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         c.Id = reader.GetInt32(0);
                         c.Owner = new PlayerDAO().GetById(reader.GetInt32(1));
                         c.IsAvailable = reader.GetBoolean(2);
-                        c.Bookings = booking.GetBookingsByCopyId(c.Id);
+                        //c.Bookings = booking.GetBookingsByCopyId(c.Id);
                         list.Add(c);
                     }                            
                 }
+                connection.Close();
                 return list;
             }
         }
@@ -89,6 +91,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         c = GetById(reader.GetInt32(0));
                     }
                 }
+                connection.Close();
                 return c;
             }
         }
@@ -135,7 +138,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         c.Owner = new PlayerDAO().GetById(reader.GetInt32(1));
                         c.IsAvailable = reader.GetBoolean(2);
                         c.Game = video.GetById(reader.GetInt32(3));
-                        c.Bookings = booking.GetBookingsByCopyId(c.Id);
+                        //c.Bookings = booking.GetBookingsByCopyId(c.Id);
                         list.Add(c);
                     }
                 }
@@ -177,6 +180,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 {
                     MessageBox.Show(e.Message);
                 }
+                connection.Close();
             }
         }
     }

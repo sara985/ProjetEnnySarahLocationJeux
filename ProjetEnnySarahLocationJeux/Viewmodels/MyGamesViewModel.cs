@@ -1,11 +1,14 @@
-﻿using ProjetEnnySarahLocationJeux.DAO;
+﻿using MessagePack.Formatters;
+using ProjetEnnySarahLocationJeux.DAO;
 using ProjetEnnySarahLocationJeux.POCO;
 using ProjetEnnySarahLocationJeux.POCO_MODELS;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
@@ -37,6 +40,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             SelectedLoanStatus = LoanStatus.First();
             OwnedGames = Copy.GetAll().Where(c => c.Owner.Id == CurrentUser.Id).ToList();
             DeleteOwnedGame = new ViewModelCommand(ExecuteDeleteOwnedGame);
+            SelectedLoan = RentedGames.FirstOrDefault();
         }
 
         private bool CanEexecuteCancelBooking(object obj)
@@ -70,9 +74,39 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 
         private void ExecuteEndLoan(object obj)
         {
+            Loan oldLoan = SelectedLoan;
             SelectedLoan.EndLoan();
-            //Refresh Loan list
+            //The game is Available, check if someone is waiting for it
+            List<Booking> books = oldLoan.Copy.Game.GetWaitingBooking();
+            if (books.Any()) //There is a waiting booking, we need to create a new loan
+            {
+                Booking bookToLoan = new Booking();
+                // Waiting bookings must be ordered by booker with the biggest balance, then by the oldest booking, then by the longest user, then by the oldest user
+                books = books.OrderByDescending(b => b.Booker.Balance).ThenBy(b => b.BookingDate).ThenBy(b => b.Booker.SignUpDate).ThenBy(b => b.Booker.BirthDate).ToList();
+                if (books[0].Equals(books[1])) //At least two games could potentially have the place, we have to choose randomly
+                {
+                    books = books.Where(b => books[0].Equals(b)).ToList();
+                    Random rnd = new Random();
+                    int index = rnd.Next(0, books.Count); // Generate a random index between 0 and the number of elements in the list
+                    bookToLoan = books.ElementAt(index); // Select the element at the randomly generated index
+                }
+                else
+                { //sinon on prend le premier booking de la liste puisque la liste est triée
+                    bookToLoan = books[0];           
+                    
+                }
+                //insert new loan
+                Loan.StartLoan(bookToLoan.Game, bookToLoan.Booker, bookToLoan.Duration, oldLoan.Copy);
+                //Update the booking status
+                bookToLoan.Status = POCO_MODELS.Status.Booked;
+                bookToLoan.UpdateStatus();                
+                MessageBox.Show("The loan was succesfully ended");
+        }
+            //Update the view
+            BookedGames = Booking.GetBookingsByStatusAndUser(SelectedStatus, CurrentUser.Username);
             RentedGames = Loan.GetOngoingLoansForUser(CurrentUser.Id);
+            CurrentUser=new PlayerDAO().GetById(CurrentUser.Id);
+            MessageBox.Show("You gave back the game. Your current balance is now : "+CurrentUser.Balance);
         }
 
         private void ExecuteCancelBooking(object obj)

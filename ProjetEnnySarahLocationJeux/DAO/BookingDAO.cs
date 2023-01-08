@@ -22,26 +22,15 @@ namespace ProjetEnnySarahLocationJeux.DAO
         }
         public Booking GetById(int id)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("Select * from dbo.Booking where id = @id", connection);
-                cmd.Parameters.AddWithValue("id", id);
-                connection.Open();
-                return (Booking)cmd.ExecuteScalar();
-            }
+            throw new NotImplementedException();
         }
-        /*    select c.id, count(*) as co from [GameSwitch].[dbo].[Copy] c join [GameSwitch].[dbo].[Booking] b on b.copyId = c.id
-              where (c.id=2 or c.id=3) and b.status='0'
-              group by c.id
-              order by co
-        */
         public bool Insert(Booking t)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("Insert into dbo.booking values (@borrowerid,@copyid,@status,@duration,@bookingDate)", connection);
-                cmd.Parameters.AddWithValue("copyid", t.Copy.Id);
+                SqlCommand cmd = new SqlCommand("Insert into dbo.booking values (@borrowerid,@gameid,@status,@duration,@bookingDate)", connection);
                 cmd.Parameters.AddWithValue("borrowerid", t.Booker.Id);
+                cmd.Parameters.AddWithValue("gameid", t.Game.Id);
                 cmd.Parameters.AddWithValue("status", t.Status.ToString());
                 cmd.Parameters.AddWithValue("duration", t.Duration);
                 cmd.Parameters.AddWithValue("bookingDate", t.BookingDate.ToShortDateString());
@@ -55,6 +44,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     MessageBox.Show(e.Message);
                     return false;
                 }
+                connection.Close();
                 return true;
             }
         }
@@ -64,7 +54,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 PlayerDAO play = new PlayerDAO();
-                CopyDAO copyDAO = new CopyDAO();
+                VideoGameDAO video = new VideoGameDAO();
                 SqlCommand cmd = new SqlCommand("select * from dbo.Booking", connection);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -75,12 +65,13 @@ namespace ProjetEnnySarahLocationJeux.DAO
                         Booking b = new Booking();
                         b.Id = reader.GetInt32(0);
                         b.Booker = play.GetById(reader.GetInt32(1));
-                        b.Copy = copyDAO.GetById(reader.GetInt32(2));
+                        b.Game = video.GetById(reader.GetInt32(2));
                         b.Status = (Status)Enum.Parse(typeof(Status), reader.GetString(3));
                         b.Duration = reader.GetInt32(4);
                         b.BookingDate = DateOnly.FromDateTime(reader.GetDateTime(5));
                         list.Add(b);
                     }
+                    connection.Close();
                     return list;
                 }
             }
@@ -102,14 +93,15 @@ namespace ProjetEnnySarahLocationJeux.DAO
                             Booking b = new Booking();
                             b.Id = reader.GetInt32(0);
                             b.Booker = play.GetById(reader.GetInt32(1));
-                            b.Copy = new Copy();
+                            b.Game = new VideoGame();
                             //b.Status = reader.GetString(3);
                             b.Duration = reader.GetInt32(4);
                             b.BookingDate = DateOnly.FromDateTime(reader.GetDateTime(5));
                             bookings.Add(b);
                         }
                     }
-                    return bookings;
+                connection.Close();
+                return bookings;
                 }              
         }
 
@@ -128,6 +120,10 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
+                }
+                finally
+                {
+                    connection.Close();
                 }
             }
         }

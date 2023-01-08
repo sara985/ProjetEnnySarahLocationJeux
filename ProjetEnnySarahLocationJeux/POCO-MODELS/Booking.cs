@@ -12,19 +12,25 @@ namespace ProjetEnnySarahLocationJeux.POCO_MODELS
     {
         int _id;
         Player _booker;
-        Copy _copy;
+        VideoGame _game;
         Status status;
         int duration;
         DateOnly _bookingDate;
 
         public Booking() { }
 
+        public Booking(Player booker, DateOnly bookingDate)
+        {
+            _booker = booker;
+            _bookingDate = bookingDate;
+        }
+
         public int Id { get => _id; set => _id = value; }
         public Player Booker { get => _booker; set => _booker = value; }
-        public Copy Copy { get => _copy; set => _copy = value; }
         public Status Status { get => status; set => status = value; }
         public int Duration { get => duration; set => duration = value; }
         public DateOnly BookingDate { get => _bookingDate; set => _bookingDate = value; }
+        public VideoGame Game { get => _game; set => _game = value; }
 
         public bool Insert()
         {
@@ -44,6 +50,16 @@ namespace ProjetEnnySarahLocationJeux.POCO_MODELS
         public void UpdateStatus()
         {
             new BookingDAO().Update(this);
+        }
+
+        public override bool Equals(object? obj)
+        { 
+            //A booking is equal to another one if the booker has the same birthday, the same balance and the same signupdate and also if the booking date is the same
+            if (obj is Booking b)
+            {
+                return b.Booker.BirthDate.Equals(this.Booker.BirthDate) && b.Booker.Balance == this.Booker.Balance && b.Booker.SignUpDate.Equals(this.Booker.SignUpDate) && b.BookingDate.Equals(this.BookingDate);
+            }
+            return false;
         }
     }
 }

@@ -24,12 +24,43 @@ namespace ProjetEnnySarahLocationJeux.DAO
             this.connectionString = ConfigurationManager.ConnectionStrings["GameSwitchDB"].ConnectionString;
         }
 
+        public bool IsUsernameAvailable(string username)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT * FROM Player WHERE Username = @username", connection);
+                command.Parameters.AddWithValue("@username", username);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return false;
+                }
+                connection.Close();
+                return true;
+            }
+        }
+
+        public bool IsEmailAvailable(string email)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT * FROM Player WHERE Email = @email", connection);
+                command.Parameters.AddWithValue("@email", email);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return false;
+                }
+                connection.Close();
+                return true;
+            }
+        }
+
         public Player IsPlayer(string username, string pass)
         {
             //stack FIFO
-            //static quand get
-            //Insert(this) pour inserer, delete et update
-            //pas besoin de updatesourcetrigger quand donnée ne change pas !
             //IOC Inversion of Control
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -56,6 +87,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     }
                     return null;
                 }
+                connection.Close();
             }
         }
 
@@ -163,6 +195,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     }
                     return null;
                 }
+                connection.Close();
             }
         }
 
@@ -193,6 +226,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                     MessageBox.Show(e.Message);
                     return false;
                 }
+                connection.Close();
                 if (i == 1)
                 {
                     return true;

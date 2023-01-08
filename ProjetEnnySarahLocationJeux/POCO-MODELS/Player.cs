@@ -30,6 +30,13 @@ namespace ProjetEnnySarahLocationJeux.POCO
             base.CalculateSHA256();
         }
 
+        public Player(DateOnly birthDate, DateOnly signUpDate, int balance)
+        {
+            BirthDate = birthDate;
+            SignUpDate = signUpDate;
+            Balance = balance;
+        }
+
         public Player()
         {
         }

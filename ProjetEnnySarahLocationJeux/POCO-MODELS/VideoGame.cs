@@ -1,4 +1,5 @@
 ﻿using ProjetEnnySarahLocationJeux.DAO;
+using ProjetEnnySarahLocationJeux.POCO_MODELS;
 using ProjetEnnySarahLocationJeux.Viewmodels;
 using System;
 using System.Collections.Generic;
@@ -98,6 +99,26 @@ namespace ProjetEnnySarahLocationJeux.POCO
             else { return listnonusedGames; }
             //return new VideoGameDAO().unusedGames();
             
+        }
+
+        public Copy GetFirstCopy()
+        {
+            return Copies.First();
+        }
+
+        public bool IsBooked(Player p)
+        {
+            return new BookingDAO().List().Where(b => b.Game.Id == this.Id && b.Booker.Id == p.Id).Any();
+        }
+
+        internal List<Booking> GetWaitingBooking()
+        {
+            return new BookingDAO().List().Where(b => b.Game.Id == this.Id && b.Status.Equals(Status.Waiting)).ToList();
+        }
+
+        internal bool IsRented(Player currentUser)
+        {
+            return new LoanDAO().List().Where(l => l.Copy.Game.Id == this.Id && l.Borrower.Id == currentUser.Id && !l.EffectiveEndDate.HasValue).Any();
         }
     }
 

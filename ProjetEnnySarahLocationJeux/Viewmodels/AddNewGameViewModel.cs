@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.VisualBasic;
 using ProjetEnnySarahLocationJeux.POCO;
 
 namespace ProjetEnnySarahLocationJeux.Viewmodels
@@ -24,8 +25,21 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         public AddNewGameViewModel()
         {
             _videoGame = new VideoGame();
-            AddVideoGameCommand = new ViewModelCommand(AddGame);
+            AddVideoGameCommand = new ViewModelCommand(AddGame, CanAddGame);
             Consoles = ConsoleAndVersion.GetAllConsoles();
+        }
+        
+        private bool CanAddGame(object obj)
+        {
+            if (VideoGame.Cost < 1 || VideoGame.Cost > 5)
+            {
+               return false;
+            }
+            if(VideoGame.Year == 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         private void AddGame(object obj)
@@ -38,8 +52,15 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
             }
         }
 
+        public VideoGame VideoGame
+        {
+            get => _videoGame;
+            set { _videoGame = value; 
+                OnPropertyChanged("VideoGame"); }
+        }
+        public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); } }
         public VideoGame VideoGame { get => _videoGame;set { _videoGame = value; OnPropertyChanged(nameof(VideoGame)); }}
-        public string ErrorMessage { get => _errorMessage; set { _errorMessage = value; OnPropertyChanged("ErrorMessage"); } }
+     
         public List<ConsoleAndVersion> Consoles 
         { 
             get => _consoles; 
@@ -78,8 +99,6 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
                 
             }
         }
-
-
 
         private string getComboBoxesConsoleName()
         {

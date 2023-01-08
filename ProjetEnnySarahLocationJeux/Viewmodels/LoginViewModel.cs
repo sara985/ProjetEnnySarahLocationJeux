@@ -16,8 +16,8 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private string _username = "admin1";
-        private string _password = "admin1";
+        private string _username = "admin";
+        private string _password = "condorcet";
         private string _errorMessage;
         private bool _isViewVisible = true;
         private bool _goToSignup = false;
@@ -96,7 +96,7 @@ namespace ProjetEnnySarahLocationJeux.Viewmodels
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
-            if (string.IsNullOrWhiteSpace(_username) || Username.Length < 3 ||
+            if (string.IsNullOrWhiteSpace(_username) || Username.Length < 2 ||
                 Password == null || Password.Length < 3)
                 validData = false;
             else
