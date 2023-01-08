@@ -33,7 +33,7 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 cmd.Parameters.AddWithValue("gameid", t.Game.Id);
                 cmd.Parameters.AddWithValue("status", t.Status.ToString());
                 cmd.Parameters.AddWithValue("duration", t.Duration);
-                cmd.Parameters.AddWithValue("bookingDate", t.BookingDate.ToShortDateString());
+                cmd.Parameters.AddWithValue("bookingDate", t.BookingDate.ToDateTime(TimeOnly.Parse("10:00:00")));
                 connection.Open();
                 try
                 {

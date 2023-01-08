@@ -108,7 +108,7 @@ namespace ProjetEnnySarahLocationJeux.POCO
 
         public bool IsBooked(Player p)
         {
-            return new BookingDAO().List().Where(b => b.Game.Id == this.Id && b.Booker.Id == p.Id).Any();
+            return new BookingDAO().List().Where(b => b.Game.Id == this.Id && b.Booker.Id == p.Id && b.Status==Status.Waiting).Any();
         }
 
         internal List<Booking> GetWaitingBooking()
