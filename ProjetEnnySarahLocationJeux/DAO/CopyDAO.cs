@@ -183,5 +183,33 @@ namespace ProjetEnnySarahLocationJeux.DAO
                 connection.Close();
             }
         }
+
+
+        public bool DeleteCopy(int idreceived)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Copy where ownerId= @idreceived", connection);
+                cmd.Parameters.AddWithValue("idreceived", idreceived);
+                connection.Open();
+                int i = 0;
+
+                try
+                {
+                    i = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                if (i == 1) { return true; }
+                return false;
+            }
+        }
+
+
+
+
     }
 }
