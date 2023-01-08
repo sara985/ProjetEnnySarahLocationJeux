@@ -73,8 +73,8 @@ namespace ProjetEnnySarahLocationJeux.POCO
 
         public bool DeleteCopy(int idreceived)
         {
-            PlayerDAO dao = new PlayerDAO();
-            return dao.DeleteCopy(idreceived);
+            CopyDAO copyDAO = new CopyDAO();
+            return copyDAO.DeleteCopy(idreceived);
         }
 
         public static Player GetPlayerById(int id)
